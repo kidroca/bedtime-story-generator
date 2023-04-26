@@ -36,7 +36,7 @@ const addImages = async (story: Story, storyId: string) => {
   const tasks = story.parts.map(async (part, i) => {
     try {
       const response = await openai.createImage({
-        prompt: `A comic book cover of: ${part.illustration}`,
+        prompt: `${part.illustration}, children's book illustration`,
         n: 1,
         size: "1024x1024",
         response_format: "url",
@@ -51,7 +51,7 @@ const addImages = async (story: Story, storyId: string) => {
           const image = Buffer.from(ab);
           const storyDir = path.dirname(storyId);
           const name = part.illustration.split(' ').slice(0, 5).join('-');
-          const partImageUrl = `/uploads/stories/${storyDir}/${name}-${i}.png`;
+          const partImageUrl = `/uploads/stories/${storyDir}/${name}-${mark.startTime}.png`;
           part.img = partImageUrl;
 
           await saveFile(`./public/${partImageUrl}`, image);
@@ -60,7 +60,7 @@ const addImages = async (story: Story, storyId: string) => {
         }
       }
     } catch (err) {
-      console.error(err);
+      console.error((err as Error).message);
     }
   });
 
