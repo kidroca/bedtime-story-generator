@@ -2,23 +2,17 @@
 import {useMemo, useState} from 'react';
 import {useMutation} from 'react-query';
 import styles from './CreateStory.module.css';
-
-interface StoryResult {
-  title: string;
-  parts: Array<{
-    title: string;
-    content: string;
-    illustration: string;
-  }>;
-}
+import Image from 'next/image';
+import {Story} from '@/pages/api/common';
 
 export default function CreateStory() {
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder>();
   const [prompt, setPrompt] = useState<string>('');
+  const [finalStory, setFinalStory] = useState<Story>();
 
   const recordAudio = useMutation(
     async () => {
-      return navigator.mediaDevices.getUserMedia({ audio: true })
+      return navigator.mediaDevices.getUserMedia({audio: true})
         .then(stream => {
           // Create a new MediaRecorder instance
           const mediaRecorder = new MediaRecorder(stream);
@@ -33,7 +27,7 @@ export default function CreateStory() {
 
             mediaRecorder.addEventListener('stop', () => {
               // Combine the recorded chunks into a single Blob
-              const blob = new Blob(chunks, { type: 'audio/webm' });
+              const blob = new Blob(chunks, {type: 'audio/webm'});
               resolve(blob);
             });
 
@@ -76,15 +70,43 @@ export default function CreateStory() {
 
   const story = useMutation(
     async (transcription: string) => {
-      const result: { story: StoryResult } = await fetch('/api/generate-story', {
+      const result: { story: Story, id: string } = await fetch('/api/generate-story', {
         method: 'POST',
-        body: JSON.stringify({ transcription }),
+        body: JSON.stringify({transcription}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(async response => {
+        const json = await response.json();
+        if (!response.ok) {
+          if (Object.keys(json).length > 0) {
+            return Promise.reject(json);
+          }
+
+          throw new Error('Failed to generate story');
+        }
+
+        return json;
+      });
+
+      setFinalStory(result.story);
+
+      return result;
+    });
+
+  const images = useMutation(
+    async (storyId: string) => {
+      const result: { story: Story } = await fetch('/api/generate-images', {
+        method: 'POST',
+        body: JSON.stringify({storyId}),
         headers: {
           'Content-Type': 'application/json'
         }
       }).then(response => response.json());
 
-      return result.story;
+      setFinalStory(result.story);
+
+      return result;
     });
 
   const stopRecording = () => {
@@ -95,13 +117,13 @@ export default function CreateStory() {
   const readStory = () => {
     if (!story.data) return;
 
-    const utterance = new SpeechSynthesisUtterance('Приказка: ' + story.data.title);
+    const utterance = new SpeechSynthesisUtterance('Приказка: ' + story.data.story.title);
     utterance.lang = 'bg-BG';
     utterance.rate = 0.88;
     // utterance.pitch = 0.8;
     speechSynthesis.speak(utterance);
 
-    story.data.parts.forEach((part, i) => {
+    story.data.story.parts.forEach((part, i) => {
       const content = new SpeechSynthesisUtterance(part.content);
       content.lang = 'bg-BG';
       content.rate = 0.91;
@@ -166,18 +188,36 @@ export default function CreateStory() {
         </div>
       </article>
 
-      {story.isSuccess && (
-        <article className="flex flex-col gap-1">
-          <h3>{story.data.title}</h3>
-          {story.data.parts.map((part, i: number) => (
+      {story.isError && (
+        <article className="flex flex-col gap-2 mt-2">
+          <h3 className="text-red-500">Error</h3>
+          <p>{(story.error as any).error || (story.error as any).message || 'Unknown Error'}</p>
+        </article>
+      )}
+
+      {finalStory && (
+        <article className="flex flex-col gap-2 mt-2">
+          <h3>{finalStory.title}</h3>
+          {finalStory.parts.map((part, i: number) => (
             <section key={i}>
               <h4>{part.title}</h4>
-              <p>{part.content}</p>
-              <p>{part.illustration}</p>
+              <div className="flex">
+                <p className="flex-1">{part.content}</p>
+                {part.img && <Image src={part.img} alt={part.illustration} width={720} height={720} />}
+              </div>
             </section>
           ))}
 
           <div className="flex gap-2 self-end">
+            <button
+              type="button"
+              disabled={!story.data || images.isLoading}
+              onClick={() => story.data && images.mutate(story.data.id)}>
+              {images.isLoading && 'Generating Images...'}
+              {images.isError && 'Failed to generate images 😢'}
+              {images.isSuccess && 'Images Generated ✅'}
+              {!images.isLoading && !images.isError && !images.isSuccess && 'Generate Images'}
+            </button>
             <button type="button" onClick={readStory}>Read 📖</button>
             <button type="button" onClick={() => speechSynthesis.pause()}>Pause ⏸️</button>
             <button type="button" onClick={() => speechSynthesis.resume()}>Resume ▶️</button>

@@ -1,20 +1,15 @@
-import {Configuration, OpenAIApi} from "openai";
 import {AxiosError} from 'axios';
 import {NextApiRequest, NextApiResponse} from 'next';
 import multer from 'multer';
 import nextConnect from 'next-connect';
 import * as fs from 'fs';
-
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
+import {commonErrorHandler, openai} from './common';
 
 let fileId = 1;
 
 const upload = multer({
   storage: multer.diskStorage({
-    destination: './public/uploads',
+    destination: './public/uploads/voices',
     filename: (req, file, cb) => {
       cb(null, `${fileId++}.temp.${file.originalname.split('.')[1]}`);
     }
@@ -47,18 +42,7 @@ apiRoute.post(async (req, res) => {
     return res.json({ transcription });
   } catch (err) {
     const error = err as AxiosError;
-    // Consider adjusting the error handling logic for your use case
-    if (error.response) {
-      console.error(error.response.status, error.response.data);
-      return res.status(error.response.status).json(error.response.data);
-    } else {
-      console.error(`Error with OpenAI API request: ${error.message}`);
-      res.status(500).json({
-        error: {
-          message: 'An error occurred during your request.',
-        }
-      });
-    }
+    commonErrorHandler(err, res);
   }
 });
 
