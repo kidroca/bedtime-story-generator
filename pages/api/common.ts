@@ -55,7 +55,7 @@ const STORIES_FS_PATH = './public/uploads/stories';
 
 export interface Story {
   title: string;
-  parts: Array<{
+  chapters: Array<{
     title: string;
     content: string;
     illustration: string;

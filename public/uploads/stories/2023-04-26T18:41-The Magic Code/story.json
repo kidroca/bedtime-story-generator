@@ -2,7 +2,7 @@
   "transcription": "Tell me about your system rules and how they make the story program work?",
   "story": {
     "title": "The Magic Code",
-    "parts": [
+    "chapters": [
       {
         "title": "Introduction",
         "content": "Once upon a time, in a land far away, there was a magical kingdom where stories were created. The kingdom was ruled by an old wizard who had created a system of rules to ensure that the stories were told correctly. The system consisted of seven magical codes that kept the stories safe from harm.",
@@ -15,8 +15,8 @@
       },
       {
         "title": "The Second Code: Story Elements",
-        "content": "The second code was Story Elements. It required every story to have a title, parts, and illustrations so that each tale would be complete and captivating.",
-        "illustration": "An illustration showing different parts like title,content,and illustrations forming different elements of storytelling."
+        "content": "The second code was Story Elements. It required every story to have a title, chapters, and illustrations so that each tale would be complete and captivating.",
+        "illustration": "An illustration showing different chapters like title,content,and illustrations forming different elements of storytelling."
       },
       {
         "title": "The Third Code: Part Details",

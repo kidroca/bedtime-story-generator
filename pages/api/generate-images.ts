@@ -25,7 +25,7 @@ apiRoute.post(async (req, res) => {
 });
 
 /**
- * Generates and adds images for story parts based on the part's illustration description.
+ * Generates and adds images for story chapters based on the part's illustration description.
  * Mutates the passed story object.
  * @param story
  * @param storyId
@@ -33,10 +33,11 @@ apiRoute.post(async (req, res) => {
 const addImages = async (story: Story, storyId: string) => {
   const mark = performance.mark('addImages');
 
-  const tasks = story.parts.map(async (part, i) => {
+  // Todo: run sequentially to avoid rate limiting
+  const tasks = story.chapters.map(async (part, i) => {
     try {
       const response = await openai.createImage({
-        prompt: `${part.illustration}, children's book illustration`,
+        prompt: `${part.illustration}, children's book illustration in the style of Eric Carle`,
         n: 1,
         size: "1024x1024",
         response_format: "url",

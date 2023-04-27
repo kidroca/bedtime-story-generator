@@ -123,7 +123,7 @@ export default function CreateStory() {
     // utterance.pitch = 0.8;
     speechSynthesis.speak(utterance);
 
-    story.data.story.parts.forEach((part, i) => {
+    story.data.story.chapters.forEach((part, i) => {
       const content = new SpeechSynthesisUtterance(part.content);
       content.lang = 'bg-BG';
       content.rate = 0.91;
@@ -191,14 +191,14 @@ export default function CreateStory() {
       {story.isError && (
         <article className="flex flex-col gap-2 mt-2">
           <h3 className="text-red-500">Error</h3>
-          <p>{(story.error as any).error || (story.error as any).message || 'Unknown Error'}</p>
+          <p>{(story.error as any).error?.toString() || (story.error as any).message || 'Unknown Error'}</p>
         </article>
       )}
 
       {finalStory && (
         <article className="flex flex-col gap-2 mt-2">
           <h3>{finalStory.title}</h3>
-          {finalStory.parts.map((part, i: number) => (
+          {finalStory.chapters.map((part, i: number) => (
             <section key={i}>
               <h4>{part.title}</h4>
               <div className="flex">

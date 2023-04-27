@@ -1,7 +1,12 @@
 import {readdir} from 'fs/promises';
 import Link from 'next/link';
 
-async function getStoryLinks(): Promise<{ name: string; href: string }[]> {
+interface StoryLink {
+  name: string;
+  href: string;
+}
+
+async function getStoryLinks(): Promise<StoryLink[]> {
   const dir = await readdir('./public/uploads/stories');
   return dir.map(dirName => ({
     name: dirName.substring(17), // removes the ISO date prefix
@@ -21,6 +26,8 @@ export default async function Stories() {
             <Link href={link.href} className="visited:text-blue-500">{i + 1}. {link.name}</Link>
           </li>))}
       </ul>
+
+      <Link className="p-2 text-blue-700 underline" href="/">Назад</Link>
     </>
   );
 }
