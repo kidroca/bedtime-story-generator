@@ -1,0 +1,24 @@
+{
+  "transcription": "Разкажи ми спокойна история за лека нощ\nНека да бъде в стила на Питър Пан\nКогато децата заспиват идва фея и им оставя бонбонки в кутия",
+  "story": {
+    "title": "The Night Fairy",
+    "genre": "Children's Fantasy",
+    "chapters": [
+      {
+        "title": "Chapter 1: The Arrival of the Fairy",
+        "content": "Once upon a time, in a small town far away, there lived a fairy named Tilly. She was sassy and adventurous but also kindhearted. One night, as the children were tucked in bed sound asleep, Tilly flew into their room through an open window. She quietly landed on the windowsill and looked around to make sure no one was watching. Satisfied that she had gone unnoticed, she began to wave her wand and soon a box appeared.",
+        "illustration": "The picture shows Tilly landing on the windowsill with kids sleeping in their beds."
+      },
+      {
+        "title": "Chapter 2: The Magic Box",
+        "content": "Tilly opened the box to reveal an array of colorful candies with magical powers. Each one had a unique ability to help children sleep well and have sweet dreams. There were lollipops that made them feel safe and secure, gummies that helped them dream of happy places filled with love and kindness or even chocolate drops that brought peaceful thoughts.",
+        "illustration": "The picture depicts Tilly opening the box filled with vibrant candy."
+      },
+      {
+        "title": "Chapter 3: A Sweet Dream",
+        "content": "Tilly carefully placed some candies next to each child’s bed while they snored away happily in their sleep. She made sure they were comfortable then flew out of the window as silently as she came in.",
+        "illustration": "The illustration shows Tilly placing candies near each child's bed while they are sleeping peacefully."
+      }
+    ]
+  }
+}

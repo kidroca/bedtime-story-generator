@@ -37,7 +37,7 @@ const addImages = async (story: Story, storyId: string) => {
   const tasks = story.chapters.map(async (part, i) => {
     try {
       const response = await openai.createImage({
-        prompt: `${part.illustration}, children's book illustration in the style of Eric Carle`,
+        prompt: `${part.illustration}, children's book illustration in the style of Bea Jackson`,
         n: 1,
         size: "1024x1024",
         response_format: "url",
