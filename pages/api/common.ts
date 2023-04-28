@@ -60,6 +60,7 @@ export interface Story {
     title: string;
     content: string;
     illustration: string;
+    illustrationPrompt?: string;
     img?: string;
   }>;
 }

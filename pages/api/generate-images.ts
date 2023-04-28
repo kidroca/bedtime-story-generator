@@ -35,8 +35,9 @@ const addImages = async (story: Story, storyId: string) => {
 
   const tasks = story.chapters.map(async (part, i) => {
     try {
+      const prompt = `${part.illustration} A modern comic book illustration in color`;
       const response = await openai.createImage({
-        prompt: `${part.illustration} A modern Disney style book illustration in color`,
+        prompt,
         n: 1,
         size: "1024x1024",
         response_format: "url",
@@ -53,6 +54,7 @@ const addImages = async (story: Story, storyId: string) => {
           const name = part.illustration.split(' ').slice(0, 5).join('-');
           const partImageUrl = `/uploads/stories/${storyDir}/${name}-${mark.startTime}-${i}.png`;
           part.img = partImageUrl;
+          part.illustrationPrompt = prompt;
 
           await saveFile(`./public/${partImageUrl}`, image);
         } else {
