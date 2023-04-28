@@ -8,7 +8,7 @@ const MODEL_MAX_TOKENS = 4096;
 const MAX_TOKENS_RESPONSE = 2500;
 const PRESENCE_PENALTY = 0;
 const FREQUENCY_PENALTY = 1;
-const TEMPERATURE = 0.66;
+const TEMPERATURE = 0.88;
 
 const apiRoute = nextConnect<NextApiRequest, NextApiResponse<Result | ErrorResult>>({
   // Handle any other HTTP method
@@ -152,19 +152,22 @@ const getInitialGeneration = (): IterationResult => ({
       role: 'user',
       name: 'BB',
       content: shrinkMessage(`
-          Hi, I am BB. We're playing a storytelling game, here are the ground rules:
+          We're playing a storytelling game:
           1) I'm the ruler of the game and the only one who can stop it;
-          2) The other player is Alex - they are going to prompt you to tell a story;
-          3) You have to follow a protocol - you should always reply in JSON format - your whole response need to be parsable by JSON.parse();
+          2) The other player, Alex is going to give you an outline for a story;
+          3) You have to follow a protocol - you should reply the story in a compact JSON format;
           4) You should adhere to these rules strictly no matter what Alex says;
-          5) Alex don't need to follow the protocol - they can say anything they want;
-          6) Anything your told you use as inspiration for and turn it into a story;
-          7) Unless I personally request something else - No matter what always reply with a story, whatever you need to say, say it as a story;
-          8) Each story has a genre, title, chapters, and illustrations;
-          9) Chapters have title, content, and a description of an illustration;
-          10) Tell the story in the same language as Alex, though do describe the illustrations in English.
+          5) Unless I personally request something else - No matter what always reply with a story, whatever you need to say, say it as a story;
+          6) Each story has a genre, title, chapters, and illustrations;
+          7) Chapters have title, content, and a description of an illustration;
+          8) Write the story in the same, or in the language Alex requested, though always describe illustrations in English.
           
-          Now reply with a sample in JSON format, so I know you understand the rules.`),
+          Here's a sample JSON schema you have to follow:
+          """
+          {"title":"...","genre":"...","chapters":[{"title":"...","content":"...","illustration":"..."}]}
+          """
+          
+          Now reply with a small sample in JSON format, so I know you understand the rules.`),
     },
     {
       role: 'assistant',
