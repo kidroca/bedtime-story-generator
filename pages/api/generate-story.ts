@@ -94,7 +94,8 @@ const generateStory =
       // Todo: this is just a prove of concept for the iterative approach
       // we'll probably just let the user give feedback if a story should be regenerated with some more instructions on how to fix it
       // We'll try to recover for a few times
-      if (MODEL_MAX_TOKENS - iteration.tokensUsed - 35 < MAX_TOKENS_RESPONSE) {
+      const remainingTokens = MODEL_MAX_TOKENS - iteration.tokensUsed - 35;
+      if (remainingTokens > MAX_TOKENS_RESPONSE) {
         return tryRegenerateAfterBadJSON(iteration);
       } else {
         console.log('Not enough tokens left for a retry. Giving up.');
