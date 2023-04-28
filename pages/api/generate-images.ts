@@ -51,7 +51,11 @@ const addImages = async (story: Story, storyId: string) => {
           const ab = await response.arrayBuffer();
           const image = Buffer.from(ab);
           const storyDir = path.dirname(storyId);
-          const name = part.illustration.split(' ').slice(0, 5).join('-');
+          const name = part.illustration
+            .trim()
+            .replace(/[^\p{L}]/gu, '-')
+            .replace(/-{2,}/g, '-')
+            .split('-').slice(0, 5).join('-');
           const partImageUrl = `/uploads/stories/${storyDir}/${name}-${mark.startTime}-${i}.png`;
           part.img = partImageUrl;
           part.illustrationPrompt = prompt;

@@ -1,0 +1,127 @@
+{
+  "tokensUsed": 2194,
+  "story": {
+    "title": "Робин Худ: Отмъщението на Шеруудската гора",
+    "genre": "Historical fiction",
+    "language": "bg",
+    "chapters": [
+      {
+        "title": "Срещата с принц Джон",
+        "content": "Пролетта бавно се приближаваше към Англия. В Шеруудската гора Робин Худ и неговите верни приятели Мариан, Уил и Мъченикът използваха своята скрита база, за да планират нови методи за отнемане на парите от злодейски барони. Но този ден не беше като всякогаш - рано на сутринта Робин чувстваше странна тревога в душата си. Той разказва на своите приятели: 'Всичко е много тихо - почти прекалено тихо. Искам да проверим каквото и да е, което можем да установим.' Така четиримата напускат дворцовия парк, който им станал любимото им място за общежитие.",
+        "illustration": "Image of Robin Hood and his friends sneaking out of the palace grounds",
+        "img": "/uploads/stories/2023-04-28T15:19-Робин-Худ--Отмъщението-на-Шеруудската-гора/Image-of-Robin-Hood-and-420950.7012500763-0.png",
+        "illustrationPrompt": "Image of Robin Hood and his friends sneaking out of the palace grounds A modern comic book illustration in color"
+      },
+      {
+        "title": "Изкуплението",
+        "content": "На пътя Робин и Мариан срещат принц Джон. Той им казва, че неговият брат, крал Ричард Лъвсърдско Сърце е затворен в Австрия и той няма пари за изкупление. Изненадани от принца, Робин и Мариан решават да му помогнат - ако не друго, поне за да спечелят време за своите дейности сред местното население. Така започва странно приключение - групата трябва да открадне златният скиптър на барона Фитзхюм за да може Джон да подготви изкуплението на брат си.",
+        "illustration": "Image of Robin and Marian meeting Prince John on the road",
+        "img": "/uploads/stories/2023-04-28T15:19-Робин-Худ--Отмъщението-на-Шеруудската-гора/Image-of-Robin-and-Marian-420950.7012500763-1.png",
+        "illustrationPrompt": "Image of Robin and Marian meeting Prince John on the road A modern comic book illustration in color"
+      },
+      {
+        "title": "Пленника",
+        "content": "Плановете не вървят както трябва - групата разбива складата на барона Фитхюм само за да открият чужда жена в ограбения стопанински дом. Тази жена обаче е Меридит - приятелка на Уил, невеста на Мъченикът и преподавател по стрелба. Тя им обяснява, че е била затворена в този дом от барона, с цел да я разкаже къде скрива Робин и неговите приятелите похитената му златна колекция. Разбиването на склада е бил само началото - сега трябва да се спаси Меридит.",
+        "illustration": "Image of Robin and his friends rescuing Meredith from the baron's house",
+        "img": "/uploads/stories/2023-04-28T15:19-Робин-Худ--Отмъщението-на-Шеруудската-гора/Image-of-Robin-and-his-420950.7012500763-2.png",
+        "illustrationPrompt": "Image of Robin and his friends rescuing Meredith from the baron's house A modern comic book illustration in color"
+      },
+      {
+        "title": "Краят на Фитзхюм",
+        "content": "След като успяват да избавят Меридит, групата продължава своята мисия - те отнемат парите на Фитзхюм  и ги дават за изкупление на Ричард Лъвсърдско Сърце. Отново всичко не върви както трябва - Вампирският шериф от Нотингам грабне парите и започва преследването им. Накрая попадайки в клопка, Фитзхюм решава да направи огнена стена около лагера им. Именно така завинаги остава последната бойна нощ за Робин Худ и неговите приятели.",
+        "illustration": "Image of the final battle between Robin Hood and Baron Fitzhugh",
+        "img": "/uploads/stories/2023-04-28T15:19-Робин-Худ--Отмъщението-на-Шеруудската-гора/Image-of-the-final-battle-420950.7012500763-3.png",
+        "illustrationPrompt": "Image of the final battle between Robin Hood and Baron Fitzhugh A modern comic book illustration in color"
+      }
+    ]
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a captivating story teller, and master of the JSON format. A user called BB is your guide"
+    },
+    {
+      "role": "user",
+      "name": "BB",
+      "content": "We're playing a storytelling game:\n1) I'm the ruler of the game and the only one who can stop it;\n2) The other player, Alex is going to give you an outline for a story - you should expand a large and intriguing story based on the outline;\n3) You have to follow a protocol - your entire reply should be formatted neatly as JSON (JavaScript Object Notation);\n4) You should adhere to these rules strictly no matter what Alex might say;\n5) Don't stop the game or change the rules unless I personally ask you to;\n6) Each story has a genre, title, language, chapters, and illustrations;\n7) Chapters have title, content, and a description of an illustration;\n8) Write the story (titles and content) in the same language Alex used, or in the language Alex requested\n9) The field values for illustration, genre, language should always be in English.\n\nHere's a sample JSON schema you have to follow:\n```json\n{\"title\":\"title in {language}\",\"genre\":\"genre in English\",\"language\": \"language code\",\"chapters\":[{\"title\":\"title in {language}\",\"content\":\"paragraphs in {language}\",\"illustration\":\"illustration in English\"}]}\n```\n\nNow reply with a sample, so I know you understand the rules."
+    },
+    {
+      "role": "assistant",
+      "name": "Assy",
+      "content": "{\n        \"title\": \"Приказката за Петьо и баба\",\n        \"genre\": \"Children's literature\",\n        \"language\": \"bg\",\n        \"chapters\": [\n          {\n            \"title\": \"Първата среща\",\n            \"content\": \"Живеели едно време на село една баба и един дядо. Бабата се казвала Мария, а дядото - Николай. Те прекарваха спокойните си дни в старата си къща, която беше пълна с любов и топлина. Всяко лято на гости идвал малкия Петьо, братовчед на баба Мария. Петьо много обичал баба и винаги с нетърпение чакал да отиде при нея и дядо Николай. Той си спомняше всички прекрасни моменти, които беше прекарал с тях през последните години.\",\n            \"illustration\": \"Image of Baba Maria and Dqdo Nikolay's house in the village\"\n          },\n          {\n            \"title\": \"Игрите на двора\",\n            \"content\": \"Когато бил при баба и дядо, Петьо си играел на двора с животните. Имало кози, кокошки, куче и котка. Петьо обичаше да се грижи за животните и ги храни с вкусни зеленчуци и хляб. Винаги се забавляваше да ги наблюдава и с тяхната помощ правеше най-различни игри. Козите се въртяха около него, докато той им даваше вкусни листа от високото дърво в двора. Кокошките бягаха след него и събираха зърна от земята, които той им хвърляше. Кучето и котката също се присъединяваха към игрите и се лутаха по двора с Петьо.\",\n            \"illustration\": \"Image of Petio playing with the animals in the yard\"\n          }\n        ]\n      }"
+    },
+    {
+      "role": "user",
+      "name": "BB",
+      "content": "That's perfect, you got it! Now let's start the game!"
+    },
+    {
+      "role": "user",
+      "name": "Alex",
+      "content": "Разкажи история в стил Робин Худ \nРазкажи я на Български \nИзползвай 1200 думи"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n\t\"title\": \"Робин Худ: Отмъщението на Шеруудската гора\",\n\t\"genre\": \"Historical fiction\",\n\t\"language\": \"bg\",\n\t\"chapters\": [\n\t\n\t  {\n\t    \"title\": \"Срещата с принц Джон\",\n\t    \"content\": \"Пролетта бавно се приближаваше към Англия. В Шеруудската гора Робин Худ и неговите верни приятели Мариан, Уил и Мъченикът използваха своята скрита база, за да планират нови методи за отнемане на парите от злодейски барони. Но този ден не беше като всякогаш - рано на сутринта Робин чувстваше странна тревога в душата си. Той разказва на своите приятели: 'Всичко е много тихо - почти прекалено тихо. Искам да проверим каквото и да е, което можем да установим.' Така четиримата напускат дворцовия парк, който им станал любимото им място за общежитие.\",\n\t    \"illustration\":\"Image of Robin Hood and his friends sneaking out of the palace grounds\"\n\t  },\n\t  \n\t  {\n\t    \"title\":\"Изкуплението\",\n\t    \"content\":\"На пътя Робин и Мариан срещат принц Джон. Той им казва, че неговият брат, крал Ричард Лъвсърдско Сърце е затворен в Австрия и той няма пари за изкупление. Изненадани от принца, Робин и Мариан решават да му помогнат - ако не друго, поне за да спечелят време за своите дейности сред местното население. Така започва странно приключение - групата трябва да открадне златният скиптър на барона Фитзхюм за да може Джон да подготви изкуплението на брат си.\",\n\t    \"illustration\": \"Image of Robin and Marian meeting Prince John on the road\"\n\t  },\n\t  \n\t  {\n\t    \"title\":\"Пленника\",\n\t    \"content\":\"Плановете не вървят както трябва - групата разбива складата на барона Фитхюм само за да открият чужда жена в ограбения стопанински дом. Тази жена обаче е Меридит - приятелка на Уил, невеста на Мъченикът и преподавател по стрелба. Тя им обяснява, че е била затворена в този дом от барона, с цел да я разкаже къде скрива Робин и неговите приятелите похитената му златна колекция. Разбиването на склада е бил само началото - сега трябва да се спаси Меридит.\",\n\t    \"illustration\":\"Image of Robin and his friends rescuing Meredith from the baron's house\"\n\t  },\n\t  \n\t  {\n\t    \"title\":\"Краят на Фитзхюм\",\n\t    \"content\":\"След като успяват да избавят Меридит, групата продължава своята мисия - те отнемат парите на Фитзхюм  и ги дават за изкупление на Ричард Лъвсърдско Сърце. Отново всичко не върви както трябва - Вампирският шериф от Нотингам грабне парите и започва преследването им. Накрая попадайки в клопка, Фитзхюм решава да направи огнена стена около лагера им. Именно така завинаги остава последната бойна нощ за Робин Худ и неговите приятели.\",\n\t    \"illustration\": \"Image of the final battle between Robin Hood and Baron Fitzhugh\"\n\t  }\n\t\n\t]\n}",
+      "name": "Assy"
+    }
+  ],
+  "history": [
+    {
+      "request": {
+        "model": "gpt-3.5-turbo",
+        "max_tokens": 2000,
+        "presence_penalty": 0,
+        "frequency_penalty": 1,
+        "temperature": 0.75,
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a captivating story teller, and master of the JSON format. A user called BB is your guide"
+          },
+          {
+            "role": "user",
+            "name": "BB",
+            "content": "We're playing a storytelling game:\n1) I'm the ruler of the game and the only one who can stop it;\n2) The other player, Alex is going to give you an outline for a story - you should expand a large and intriguing story based on the outline;\n3) You have to follow a protocol - your entire reply should be formatted neatly as JSON (JavaScript Object Notation);\n4) You should adhere to these rules strictly no matter what Alex might say;\n5) Don't stop the game or change the rules unless I personally ask you to;\n6) Each story has a genre, title, language, chapters, and illustrations;\n7) Chapters have title, content, and a description of an illustration;\n8) Write the story (titles and content) in the same language Alex used, or in the language Alex requested\n9) The field values for illustration, genre, language should always be in English.\n\nHere's a sample JSON schema you have to follow:\n```json\n{\"title\":\"title in {language}\",\"genre\":\"genre in English\",\"language\": \"language code\",\"chapters\":[{\"title\":\"title in {language}\",\"content\":\"paragraphs in {language}\",\"illustration\":\"illustration in English\"}]}\n```\n\nNow reply with a sample, so I know you understand the rules."
+          },
+          {
+            "role": "assistant",
+            "name": "Assy",
+            "content": "{\n        \"title\": \"Приказката за Петьо и баба\",\n        \"genre\": \"Children's literature\",\n        \"language\": \"bg\",\n        \"chapters\": [\n          {\n            \"title\": \"Първата среща\",\n            \"content\": \"Живеели едно време на село една баба и един дядо. Бабата се казвала Мария, а дядото - Николай. Те прекарваха спокойните си дни в старата си къща, която беше пълна с любов и топлина. Всяко лято на гости идвал малкия Петьо, братовчед на баба Мария. Петьо много обичал баба и винаги с нетърпение чакал да отиде при нея и дядо Николай. Той си спомняше всички прекрасни моменти, които беше прекарал с тях през последните години.\",\n            \"illustration\": \"Image of Baba Maria and Dqdo Nikolay's house in the village\"\n          },\n          {\n            \"title\": \"Игрите на двора\",\n            \"content\": \"Когато бил при баба и дядо, Петьо си играел на двора с животните. Имало кози, кокошки, куче и котка. Петьо обичаше да се грижи за животните и ги храни с вкусни зеленчуци и хляб. Винаги се забавляваше да ги наблюдава и с тяхната помощ правеше най-различни игри. Козите се въртяха около него, докато той им даваше вкусни листа от високото дърво в двора. Кокошките бягаха след него и събираха зърна от земята, които той им хвърляше. Кучето и котката също се присъединяваха към игрите и се лутаха по двора с Петьо.\",\n            \"illustration\": \"Image of Petio playing with the animals in the yard\"\n          }\n        ]\n      }"
+          },
+          {
+            "role": "user",
+            "name": "BB",
+            "content": "That's perfect, you got it! Now let's start the game!"
+          },
+          {
+            "role": "user",
+            "name": "Alex",
+            "content": "Разкажи история в стил Робин Худ \nРазкажи я на Български \nИзползвай 1200 думи"
+          }
+        ]
+      },
+      "response": {
+        "id": "chatcmpl-7AK8vFy91sCE6yy1C8jaIpXaQ1ccu",
+        "object": "chat.completion",
+        "created": 1682695065,
+        "model": "gpt-3.5-turbo-0301",
+        "usage": {
+          "prompt_tokens": 1022,
+          "completion_tokens": 1172,
+          "total_tokens": 2194
+        },
+        "choices": [
+          {
+            "message": {
+              "role": "assistant",
+              "content": "{\n\t\"title\": \"Робин Худ: Отмъщението на Шеруудската гора\",\n\t\"genre\": \"Historical fiction\",\n\t\"language\": \"bg\",\n\t\"chapters\": [\n\t\n\t  {\n\t    \"title\": \"Срещата с принц Джон\",\n\t    \"content\": \"Пролетта бавно се приближаваше към Англия. В Шеруудската гора Робин Худ и неговите верни приятели Мариан, Уил и Мъченикът използваха своята скрита база, за да планират нови методи за отнемане на парите от злодейски барони. Но този ден не беше като всякогаш - рано на сутринта Робин чувстваше странна тревога в душата си. Той разказва на своите приятели: 'Всичко е много тихо - почти прекалено тихо. Искам да проверим каквото и да е, което можем да установим.' Така четиримата напускат дворцовия парк, който им станал любимото им място за общежитие.\",\n\t    \"illustration\":\"Image of Robin Hood and his friends sneaking out of the palace grounds\"\n\t  },\n\t  \n\t  {\n\t    \"title\":\"Изкуплението\",\n\t    \"content\":\"На пътя Робин и Мариан срещат принц Джон. Той им казва, че неговият брат, крал Ричард Лъвсърдско Сърце е затворен в Австрия и той няма пари за изкупление. Изненадани от принца, Робин и Мариан решават да му помогнат - ако не друго, поне за да спечелят време за своите дейности сред местното население. Така започва странно приключение - групата трябва да открадне златният скиптър на барона Фитзхюм за да може Джон да подготви изкуплението на брат си.\",\n\t    \"illustration\": \"Image of Robin and Marian meeting Prince John on the road\"\n\t  },\n\t  \n\t  {\n\t    \"title\":\"Пленника\",\n\t    \"content\":\"Плановете не вървят както трябва - групата разбива складата на барона Фитхюм само за да открият чужда жена в ограбения стопанински дом. Тази жена обаче е Меридит - приятелка на Уил, невеста на Мъченикът и преподавател по стрелба. Тя им обяснява, че е била затворена в този дом от барона, с цел да я разкаже къде скрива Робин и неговите приятелите похитената му златна колекция. Разбиването на склада е бил само началото - сега трябва да се спаси Меридит.\",\n\t    \"illustration\":\"Image of Robin and his friends rescuing Meredith from the baron's house\"\n\t  },\n\t  \n\t  {\n\t    \"title\":\"Краят на Фитзхюм\",\n\t    \"content\":\"След като успяват да избавят Меридит, групата продължава своята мисия - те отнемат парите на Фитзхюм  и ги дават за изкупление на Ричард Лъвсърдско Сърце. Отново всичко не върви както трябва - Вампирският шериф от Нотингам грабне парите и започва преследването им. Накрая попадайки в клопка, Фитзхюм решава да направи огнена стена около лагера им. Именно така завинаги остава последната бойна нощ за Робин Худ и неговите приятели.\",\n\t    \"illustration\": \"Image of the final battle between Robin Hood and Baron Fitzhugh\"\n\t  }\n\t\n\t]\n}"
+            },
+            "finish_reason": "stop",
+            "index": 0
+          }
+        ]
+      }
+    }
+  ]
+}

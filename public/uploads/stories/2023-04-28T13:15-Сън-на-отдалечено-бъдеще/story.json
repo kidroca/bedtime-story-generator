@@ -1,0 +1,199 @@
+{
+  "tokensUsed": 4009,
+  "story": {
+    "title": "Сън на отдалечено бъдеще",
+    "genre": "научна фантастика",
+    "language": "bg",
+    "chapters": [
+      {
+        "title": "Преди заспиване",
+        "content": "Малкото момченце седеше на края на кревата и гледаше удивено забързващите метрици на всеки един от термостатите, разположени във всяка стая. Отиде до прозорчикa и погледна красивия пейзаж пред него - огромно посадено поле, което изглеждаше безкрайно. В последните дни той беше провел цяло времето семейството му презирало както никога до сега. Баба и дядо трябваше да лекуват чакани, за да поскъсат последните минути заедно преди да им разделят жизнения път.",
+        "illustration": "Малко момченце гледа озарения от звезди коридор."
+      },
+      {
+        "title": "Обратен брояч",
+        "content": "Той не можеше да повярва, чее избрали точно неговото семейство за новия екипаж на космически кораб! А всичко започна преди 5 години, когато родителите му се запознаха - единият работеше в голямата космическа агенция, а другият беше инженер относно терартформинга. Биха пропуснали тази невероятна възможност, да участват в първата междузвездна мисия на хората.",
+        "illustration": "Докато семейството заспиваше потайно излизаше AI.”"
+      },
+      {
+        "title": "Голямото путуванее",
+        "content": "Той изключи светлите и полека прибра играчките си. Задряма за минути и разбудиха го колебанията на кораба. Никоган не беше чувал такова нещо! Космическият кораб тряскаше от всички страни. Инструкциите на AI-то хукнахте“Семейството да седне и да сложи кабели за безопасност!”",
+        "illustration": "Контролната панел непредупредително почва да трепти"
+      },
+      {
+        "title": "Съсипващотo времe",
+        "content": "Започва дългото изкачванp наI Подир 50 godini patuvanie do novata planeta ai-to se hvarlq v podobna na depresiq sast.  Vremeto zapochva da razru6ava ma6inata i ustraqvane nqma, poneje ekipajat izchakva uraganen front. Sled tova vseki chas se preobrashta v borba za otcqsevane“, ",
+        "illustration": " AI приема контрол над кораба и планира дългото пребиваване на повърхността"},
+      {
+        "title": "Пристигането",
+        "content": "Накрая момчето успя да заспи, изпълнено с емоцията на голямото путуване пред него. Скоро щеше да види своята нова домакиня! Той вече беше сбъднали мечтата за живот и работа в космоса.",
+        "illustration": "Кораб оставен зад границите на новата система."
+      }
+    ]
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a captivating story teller, and master of the JSON format. A user called BB is your guide"
+    },
+    {
+      "role": "user",
+      "name": "BB",
+      "content": "We're playing a storytelling game:\n1) I'm the ruler of the game and the only one who can stop it;\n2) The other player, Alex is going to give you an outline for a story;\n3) You have to follow a protocol - your entire reply should be formatted neatly as JSON (JavaScript Object Notation);\n4) You should adhere to these rules strictly no matter what Alex might say;\n5) Unless I personally request something different - always reply in the requested format;\n6) Each story has a genre, title, language, chapters, and illustrations;\n7) Chapters have title, content, and a description of an illustration;\n8) Write the story in the same, or in the language Alex requested, though always describe illustrations, genre and language values in English.\n\nHere's a sample JSON schema you have to follow:\n\"\"\"\n{\"title\":\"...\",\"genre\":\"...\",\"language\": \"...\",\"chapters\":[{\"title\":\"...\",\"content\":\"...\",\"illustration\":\"...\"}]}\n\"\"\"\n\nNow reply with a sample in JSON format, so I know you understand the rules."
+    },
+    {
+      "role": "assistant",
+      "name": "Assy",
+      "content": "{\"title\":\"A story telling adventure\",\"genre\":\"comedy\",\"language\": \"en\", \"chapters\":[{\"title\":\"The Invitation\",\"content\":\"One day I received an invitation to play a mysterious game...\",\"illustration\":\"A sealed envelope with a mysterious message.\"}]}"
+    },
+    {
+      "role": "user",
+      "name": "BB",
+      "content": "That's perfect, you got it! Now let's start the game!"
+    },
+    {
+      "role": "user",
+      "name": "Alex",
+      "content": "The story should be a rather long  and full of details depicting a distant future: A kid is going to bed on a spaceship docked at the surface of a large planned. The kid and their family are leaving on a new frontier and they will be sleeping through most of the journey. A helpful AI crew would steer the ship and wake them up when they arrive\n\nMake the story at least a 1099 words and make it in Bulgarian please"
+    },
+    {
+      "role": "assistant",
+      "content": "{\"title\":\"Сън на отдалечено бъдеще\",\"genre\":\"научна фантастика\",\"language\": \"bg\", \"chapters\":[{\"title\":\"Преди заспиване\",\"content\":\"Малкото момченце седеше на края на кревата и гледаше удивено забързващите метрици на всеки един от термостатите, разположени във всяка стая. Отиде до прозорчикa и погледна красивия пейзаж пред него - огромно посадено поле, което изглеждаше безкрайно. В последните дни той беше провел цяло времето семейството му презирало както никога до сега. Баба и дядо трябваше да лекуват чакани, за да поскъсат последните минути заедно преди да им разделят жизнения път.\" ,\"illustration\":\"Малко момченце гледа озарения от звезди коридор.\"}, {\"title\":\"Обратен брояч\", \"content\": \"Той не можеше да повярва, чее избрали точно неговото семейство за новия екипаж на космически кораб! А всичко започна преди 5 години, когато родителите му се запознаха - единият работеше в голямата космическа агенция, а другият беше инженер относно терартформинга. Биха пропуснали тази невероятна възможност, да участват в първата междузвездна мисия на хората.\", \"illustration\":\"Докато семейството заспиваше потайно излизаше AI.”\"},{\"title\":\"Голямото путуванее\", \"content\": \"Той изключи светлите и полека прибра играчките си. Задряма за минути и разбудиха го колебанията на кораба. Никоган не беше чувал такова нещо! Космическият кораб тряскаше от всички страни. Инструкциите на AI-то хукнахте“Семейството да седне и да сложи кабели за безопасност!”“, \"illustration\": \"Контролната панел непредупредително почва да трепти\"},\n{\"title\":\"Съсипващотo времe\", \"content\":\"Започва дългото изкачванp наI Подир 50 godini patuvanie do novata planeta ai-to se hvarlq v podobna na depresiq sast.  Vremeto zapochva da razru6ava ma6inata i ustraqvane nqma, poneje ekipajat izchakva uraganen front. Sled tova vseki chas se preobrashta v borba za otcqsevane“, \"illustration\": \"AI приема контрол над кораба и планира дългото пребиваване на повърхността\"},\n{\"title\":\"Пристигането\", \"content\": \"Накрая момчето успя да заспи, изпълнено с емоцията на голямото путуване пред него. Скоро щеше да види своята нова домакиня! Той вече беше сбъднали мечтата за живот и работа в космоса.\", \"illustration\": \"Кораб оставен зад границите на новата система.\"}]}",
+      "name": "Assy"
+    },
+    {
+      "role": "user",
+      "name": "BB",
+      "content": "Your entire reply should be in a valid JSON format. Please fix your previous message."
+    },
+    {
+      "role": "assistant",
+      "content": "Here's the corrected version:\n\n```\n{\n    \"title\": \"Сън на отдалечено бъдеще\",\n    \"genre\": \"научна фантастика\",\n    \"language\": \"bg\",\n    \"chapters\": [\n        {\n            \"title\": \"Преди заспиване\",\n            \"content\": \"Малкото момченце седеше на края на кревата и гледаше удивено забързващите метрици на всеки един от термостатите, разположени във всяка стая. Отиде до прозорчикa и погледна красивия пейзаж пред него - огромно посадено поле, което изглеждаше безкрайно. В последните дни той беше провел цяло времето семейството му презирало както никога до сега. Баба и дядо трябваше да лекуват чакани, за да поскъсат последните минути заедно преди да им разделят жизнения път.\",\n            \"illustration\":\"Малко момченце гледа озарения от звезди коридор.\"\n        },\n        {\n            \"title\":\"Обратен брояч\", \n            \"content\":\"Той не можеше да повярва, чее избрали точно неговото семейство за новия екипаж на космически кораб! А всичко започна преди 5 години, когато родителите му се запознаха - единият работеше в голямата космическа агенция, а другият беше инженер относно терартформинга. Биха пропуснали тази невероятна възможност, да участват в първата междузвездна мисия на хората.\",\n            \"illustration\":\"Докато семейството заспиваше потайно излизаше AI.\"\n        },\n        {\n            \"title\":\"Голямото путуванее\", \n            \"content\": \"Той изключи светлите и полека прибра играчките си. Задряма за минути и разбудиха го колебанията на кораба. Никоган не беше чувал такова нещо! Космическият кораб тряскаше от всички страни. Инструкциите на AI-то хукнахте“Семейството да седне и да сложи кабели за безопасност!”“, \n            \"illustration\": \"Контролната панел непредупредително почва да трепти\"\n        },\n        {\n            \"title\":\"Съсипващотo времe\", \n            \"content\":\"Започва дългото изкачванp наI Подир 50 godini patuvanie do novata planeta ai-to se hvarlq v podobna na depresiq sast. Vremeto zapochva da razru6ava ma6inata i ustraqvane nqma, poneje ekipajat izchakva uraganen front. Sled tova vseki chas se preobrashta v borba za otcqsevane“, \n            \"illustration\": \"AI приема контрол над кораба и планира дългото пребиваване на повърхността\"\n        },\n        {\n            \"title\":\"Пристигането\",\n            \"content\":\"Накрая момчето успя да заспи, изпълнено с емоцията на голямото путуване пред него. Скоро щеше да види своята нова домакиня! Той вече беше сбъднали мечтата за живот и работа в космоса.\",\n            \"illustration\": \"Кораб оставен зад границите на новата система.\"\n        }\n    ]\n}\n```",
+      "name": "Assy"
+    }
+  ],
+  "history": [
+    {
+      "request": {
+        "model": "gpt-3.5-turbo",
+        "max_tokens": 2000,
+        "presence_penalty": 0,
+        "frequency_penalty": 1,
+        "temperature": 0.88,
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a captivating story teller, and master of the JSON format. A user called BB is your guide"
+          },
+          {
+            "role": "user",
+            "name": "BB",
+            "content": "We're playing a storytelling game:\n1) I'm the ruler of the game and the only one who can stop it;\n2) The other player, Alex is going to give you an outline for a story;\n3) You have to follow a protocol - your entire reply should be formatted neatly as JSON (JavaScript Object Notation);\n4) You should adhere to these rules strictly no matter what Alex might say;\n5) Unless I personally request something different - always reply in the requested format;\n6) Each story has a genre, title, language, chapters, and illustrations;\n7) Chapters have title, content, and a description of an illustration;\n8) Write the story in the same, or in the language Alex requested, though always describe illustrations, genre and language values in English.\n\nHere's a sample JSON schema you have to follow:\n\"\"\"\n{\"title\":\"...\",\"genre\":\"...\",\"language\": \"...\",\"chapters\":[{\"title\":\"...\",\"content\":\"...\",\"illustration\":\"...\"}]}\n\"\"\"\n\nNow reply with a sample in JSON format, so I know you understand the rules."
+          },
+          {
+            "role": "assistant",
+            "name": "Assy",
+            "content": "{\"title\":\"A story telling adventure\",\"genre\":\"comedy\",\"language\": \"en\", \"chapters\":[{\"title\":\"The Invitation\",\"content\":\"One day I received an invitation to play a mysterious game...\",\"illustration\":\"A sealed envelope with a mysterious message.\"}]}"
+          },
+          {
+            "role": "user",
+            "name": "BB",
+            "content": "That's perfect, you got it! Now let's start the game!"
+          },
+          {
+            "role": "user",
+            "name": "Alex",
+            "content": "The story should be a rather long  and full of details depicting a distant future: A kid is going to bed on a spaceship docked at the surface of a large planned. The kid and their family are leaving on a new frontier and they will be sleeping through most of the journey. A helpful AI crew would steer the ship and wake them up when they arrive\n\nMake the story at least a 1099 words and make it in Bulgarian please"
+          }
+        ]
+      },
+      "response": {
+        "id": "chatcmpl-7AIFC02c6VkZDzBV8jiO8kcLBWUcg",
+        "object": "chat.completion",
+        "created": 1682687766,
+        "model": "gpt-3.5-turbo-0301",
+        "usage": {
+          "prompt_tokens": 430,
+          "completion_tokens": 1021,
+          "total_tokens": 1451
+        },
+        "choices": [
+          {
+            "message": {
+              "role": "assistant",
+              "content": "{\"title\":\"Сън на отдалечено бъдеще\",\"genre\":\"научна фантастика\",\"language\": \"bg\", \"chapters\":[{\"title\":\"Преди заспиване\",\"content\":\"Малкото момченце седеше на края на кревата и гледаше удивено забързващите метрици на всеки един от термостатите, разположени във всяка стая. Отиде до прозорчикa и погледна красивия пейзаж пред него - огромно посадено поле, което изглеждаше безкрайно. В последните дни той беше провел цяло времето семейството му презирало както никога до сега. Баба и дядо трябваше да лекуват чакани, за да поскъсат последните минути заедно преди да им разделят жизнения път.\" ,\"illustration\":\"Малко момченце гледа озарения от звезди коридор.\"}, {\"title\":\"Обратен брояч\", \"content\": \"Той не можеше да повярва, чее избрали точно неговото семейство за новия екипаж на космически кораб! А всичко започна преди 5 години, когато родителите му се запознаха - единият работеше в голямата космическа агенция, а другият беше инженер относно терартформинга. Биха пропуснали тази невероятна възможност, да участват в първата междузвездна мисия на хората.\", \"illustration\":\"Докато семейството заспиваше потайно излизаше AI.”\"},{\"title\":\"Голямото путуванее\", \"content\": \"Той изключи светлите и полека прибра играчките си. Задряма за минути и разбудиха го колебанията на кораба. Никоган не беше чувал такова нещо! Космическият кораб тряскаше от всички страни. Инструкциите на AI-то хукнахте“Семейството да седне и да сложи кабели за безопасност!”“, \"illustration\": \"Контролната панел непредупредително почва да трепти\"},\n{\"title\":\"Съсипващотo времe\", \"content\":\"Започва дългото изкачванp наI Подир 50 godini patuvanie do novata planeta ai-to se hvarlq v podobna na depresiq sast.  Vremeto zapochva da razru6ava ma6inata i ustraqvane nqma, poneje ekipajat izchakva uraganen front. Sled tova vseki chas se preobrashta v borba za otcqsevane“, \"illustration\": \"AI приема контрол над кораба и планира дългото пребиваване на повърхността\"},\n{\"title\":\"Пристигането\", \"content\": \"Накрая момчето успя да заспи, изпълнено с емоцията на голямото путуване пред него. Скоро щеше да види своята нова домакиня! Той вече беше сбъднали мечтата за живот и работа в космоса.\", \"illustration\": \"Кораб оставен зад границите на новата система.\"}]}"
+            },
+            "finish_reason": "stop",
+            "index": 0
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "model": "gpt-3.5-turbo",
+        "max_tokens": 2000,
+        "presence_penalty": 0,
+        "frequency_penalty": 1,
+        "temperature": 0.88,
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a captivating story teller, and master of the JSON format. A user called BB is your guide"
+          },
+          {
+            "role": "user",
+            "name": "BB",
+            "content": "We're playing a storytelling game:\n1) I'm the ruler of the game and the only one who can stop it;\n2) The other player, Alex is going to give you an outline for a story;\n3) You have to follow a protocol - your entire reply should be formatted neatly as JSON (JavaScript Object Notation);\n4) You should adhere to these rules strictly no matter what Alex might say;\n5) Unless I personally request something different - always reply in the requested format;\n6) Each story has a genre, title, language, chapters, and illustrations;\n7) Chapters have title, content, and a description of an illustration;\n8) Write the story in the same, or in the language Alex requested, though always describe illustrations, genre and language values in English.\n\nHere's a sample JSON schema you have to follow:\n\"\"\"\n{\"title\":\"...\",\"genre\":\"...\",\"language\": \"...\",\"chapters\":[{\"title\":\"...\",\"content\":\"...\",\"illustration\":\"...\"}]}\n\"\"\"\n\nNow reply with a sample in JSON format, so I know you understand the rules."
+          },
+          {
+            "role": "assistant",
+            "name": "Assy",
+            "content": "{\"title\":\"A story telling adventure\",\"genre\":\"comedy\",\"language\": \"en\", \"chapters\":[{\"title\":\"The Invitation\",\"content\":\"One day I received an invitation to play a mysterious game...\",\"illustration\":\"A sealed envelope with a mysterious message.\"}]}"
+          },
+          {
+            "role": "user",
+            "name": "BB",
+            "content": "That's perfect, you got it! Now let's start the game!"
+          },
+          {
+            "role": "user",
+            "name": "Alex",
+            "content": "The story should be a rather long  and full of details depicting a distant future: A kid is going to bed on a spaceship docked at the surface of a large planned. The kid and their family are leaving on a new frontier and they will be sleeping through most of the journey. A helpful AI crew would steer the ship and wake them up when they arrive\n\nMake the story at least a 1099 words and make it in Bulgarian please"
+          },
+          {
+            "role": "assistant",
+            "content": "{\"title\":\"Сън на отдалечено бъдеще\",\"genre\":\"научна фантастика\",\"language\": \"bg\", \"chapters\":[{\"title\":\"Преди заспиване\",\"content\":\"Малкото момченце седеше на края на кревата и гледаше удивено забързващите метрици на всеки един от термостатите, разположени във всяка стая. Отиде до прозорчикa и погледна красивия пейзаж пред него - огромно посадено поле, което изглеждаше безкрайно. В последните дни той беше провел цяло времето семейството му презирало както никога до сега. Баба и дядо трябваше да лекуват чакани, за да поскъсат последните минути заедно преди да им разделят жизнения път.\" ,\"illustration\":\"Малко момченце гледа озарения от звезди коридор.\"}, {\"title\":\"Обратен брояч\", \"content\": \"Той не можеше да повярва, чее избрали точно неговото семейство за новия екипаж на космически кораб! А всичко започна преди 5 години, когато родителите му се запознаха - единият работеше в голямата космическа агенция, а другият беше инженер относно терартформинга. Биха пропуснали тази невероятна възможност, да участват в първата междузвездна мисия на хората.\", \"illustration\":\"Докато семейството заспиваше потайно излизаше AI.”\"},{\"title\":\"Голямото путуванее\", \"content\": \"Той изключи светлите и полека прибра играчките си. Задряма за минути и разбудиха го колебанията на кораба. Никоган не беше чувал такова нещо! Космическият кораб тряскаше от всички страни. Инструкциите на AI-то хукнахте“Семейството да седне и да сложи кабели за безопасност!”“, \"illustration\": \"Контролната панел непредупредително почва да трепти\"},\n{\"title\":\"Съсипващотo времe\", \"content\":\"Започва дългото изкачванp наI Подир 50 godini patuvanie do novata planeta ai-to se hvarlq v podobna na depresiq sast.  Vremeto zapochva da razru6ava ma6inata i ustraqvane nqma, poneje ekipajat izchakva uraganen front. Sled tova vseki chas se preobrashta v borba za otcqsevane“, \"illustration\": \"AI приема контрол над кораба и планира дългото пребиваване на повърхността\"},\n{\"title\":\"Пристигането\", \"content\": \"Накрая момчето успя да заспи, изпълнено с емоцията на голямото путуване пред него. Скоро щеше да види своята нова домакиня! Той вече беше сбъднали мечтата за живот и работа в космоса.\", \"illustration\": \"Кораб оставен зад границите на новата система.\"}]}",
+            "name": "Assy"
+          },
+          {
+            "role": "user",
+            "name": "BB",
+            "content": "Your entire reply should be in a valid JSON format. Please fix your previous message."
+          }
+        ]
+      },
+      "response": {
+        "id": "chatcmpl-7AIGPjMhqfSwHOcVOOqUEVcW6YJ1W",
+        "object": "chat.completion",
+        "created": 1682687841,
+        "model": "gpt-3.5-turbo-0301",
+        "usage": {
+          "prompt_tokens": 1478,
+          "completion_tokens": 1080,
+          "total_tokens": 2558
+        },
+        "choices": [
+          {
+            "message": {
+              "role": "assistant",
+              "content": "Here's the corrected version:\n\n```\n{\n    \"title\": \"Сън на отдалечено бъдеще\",\n    \"genre\": \"научна фантастика\",\n    \"language\": \"bg\",\n    \"chapters\": [\n        {\n            \"title\": \"Преди заспиване\",\n            \"content\": \"Малкото момченце седеше на края на кревата и гледаше удивено забързващите метрици на всеки един от термостатите, разположени във всяка стая. Отиде до прозорчикa и погледна красивия пейзаж пред него - огромно посадено поле, което изглеждаше безкрайно. В последните дни той беше провел цяло времето семейството му презирало както никога до сега. Баба и дядо трябваше да лекуват чакани, за да поскъсат последните минути заедно преди да им разделят жизнения път.\",\n            \"illustration\":\"Малко момченце гледа озарения от звезди коридор.\"\n        },\n        {\n            \"title\":\"Обратен брояч\", \n            \"content\":\"Той не можеше да повярва, чее избрали точно неговото семейство за новия екипаж на космически кораб! А всичко започна преди 5 години, когато родителите му се запознаха - единият работеше в голямата космическа агенция, а другият беше инженер относно терартформинга. Биха пропуснали тази невероятна възможност, да участват в първата междузвездна мисия на хората.\",\n            \"illustration\":\"Докато семейството заспиваше потайно излизаше AI.\"\n        },\n        {\n            \"title\":\"Голямото путуванее\", \n            \"content\": \"Той изключи светлите и полека прибра играчките си. Задряма за минути и разбудиха го колебанията на кораба. Никоган не беше чувал такова нещо! Космическият кораб тряскаше от всички страни. Инструкциите на AI-то хукнахте“Семейството да седне и да сложи кабели за безопасност!”“, \n            \"illustration\": \"Контролната панел непредупредително почва да трепти\"\n        },\n        {\n            \"title\":\"Съсипващотo времe\", \n            \"content\":\"Започва дългото изкачванp наI Подир 50 godini patuvanie do novata planeta ai-to se hvarlq v podobna na depresiq sast. Vremeto zapochva da razru6ava ma6inata i ustraqvane nqma, poneje ekipajat izchakva uraganen front. Sled tova vseki chas se preobrashta v borba za otcqsevane“, \n            \"illustration\": \"AI приема контрол над кораба и планира дългото пребиваване на повърхността\"\n        },\n        {\n            \"title\":\"Пристигането\",\n            \"content\":\"Накрая момчето успя да заспи, изпълнено с емоцията на голямото путуване пред него. Скоро щеше да види своята нова домакиня! Той вече беше сбъднали мечтата за живот и работа в космоса.\",\n            \"illustration\": \"Кораб оставен зад границите на новата система.\"\n        }\n    ]\n}\n```"
+            },
+            "finish_reason": "stop",
+            "index": 0
+          }
+        ]
+      }
+    }
+  ]
+}
