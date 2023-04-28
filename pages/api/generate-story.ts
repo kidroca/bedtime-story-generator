@@ -1,9 +1,14 @@
 import nextConnect from 'next-connect';
 import {NextApiRequest, NextApiResponse} from 'next';
 import {commonErrorHandler, openai, saveStory, Story} from '@/pages/api/common';
-import {ChatCompletionRequestMessage, CreateChatCompletionRequest, CreateChatCompletionResponse} from 'openai';
+import {
+  ChatCompletionRequestMessage,
+  CreateChatCompletionRequest,
+  CreateChatCompletionResponse,
+  CreateCompletionRequest
+} from 'openai';
 
-const MODEL = 'gpt-3.5-turbo';
+const MODEL = 'text-davinci-003';
 const MODEL_MAX_TOKENS = 4096;
 const MAX_TOKENS_RESPONSE = 2500;
 const PRESENCE_PENALTY = 0;
@@ -53,16 +58,17 @@ const generateStory =
 
     iteration.messages.push(...messages);
 
-    const request: CreateChatCompletionRequest = {
+    const request: CreateCompletionRequest = {
       model: MODEL,
       max_tokens: MAX_TOKENS_RESPONSE,
       presence_penalty: PRESENCE_PENALTY,
       frequency_penalty: FREQUENCY_PENALTY,
       temperature: TEMPERATURE,
-      messages: iteration.messages,
+      n: 1,
+      prompt: iteration.messages.map(message => `${message.role}: ${message.content}`).join('\n\n'),
     };
 
-    const completion = await openai.createChatCompletion(request);
+    const completion = await openai.createCompletion(request);
 
     iteration.history.push({request, response: completion.data});
     iteration.tokensUsed += completion.data.usage?.total_tokens ?? 0;
@@ -75,11 +81,11 @@ const generateStory =
 
     iteration.messages.push({
       role: 'assistant',
-      content: firstChoice.message!.content,
+      content: firstChoice.text!,
       name: 'Assy',
     });
 
-    const content = firstChoice.message?.content || '';
+    const content = firstChoice.text!;
 
     try {
       // Todo: fine tune the prompt to generate a valid JSON (WIP)
@@ -213,7 +219,7 @@ interface Result {
 interface IterationResult {
   story: Story;
   history: Array<{
-    request: CreateChatCompletionRequest;
+    request: CreateCompletionRequest;
     response: CreateChatCompletionResponse;
   }>;
   messages: ChatCompletionRequestMessage[];
