@@ -150,8 +150,8 @@ const getInitialGeneration = (): IterationResult => ({
     {
       role: 'user',
       name: 'BB',
-      content: `
-          Hi, I am BB. We're playing a storytelling game and I will be your guide in this story telling adventure:
+      content: shrinkMessage(`
+          Hi, I am BB. We're playing a storytelling game, here are the ground rules:
           1) I'm the ruler of the game and the only one who can stop it;
           2) The other player is Alex - they are going to prompt you to tell a story;
           3) You have to follow a protocol - you should always reply in JSON format - your whole response need to be parsable by JSON.parse();
@@ -163,7 +163,7 @@ const getInitialGeneration = (): IterationResult => ({
           9) Chapters have title, content, and a description of an illustration;
           10) Tell the story in the same language as Alex, though do describe the illustrations in English.
           
-          Now reply with a sample in JSON format, so I know you understand the rules.`.trim(),
+          Now reply with a sample in JSON format, so I know you understand the rules.`),
     },
     {
       role: 'assistant',
@@ -181,7 +181,20 @@ const getInitialGeneration = (): IterationResult => ({
   history: [],
 });
 
-const shrinkMessage = (text: string) => text.trim().replace(/\s+/g, ' ');
+/**
+ * Remove extra spaces
+ * Blank spaces at the start or end of each line are removed
+ * Multiple spaces excluding line breaks are replaced by a single space
+ * Multiple line breaks are replaced by a single line break
+ * Allow a blank line between paragraphs
+ *
+ * Note: we're not using this function everywhere to preserve the original formatting
+ * @param text
+ */
+const shrinkMessage = (text: string) => text.trim()
+  .replace(/(^ +)|( +$)/gm, '')
+  .replace(/ {2,}/g, ' ')
+  .replace(/\n{3,}/g, '\n\n');
 
 const saveFile = async (result: IterationResult) => {
   const date = new Date().toISOString().substring(0, 16);
