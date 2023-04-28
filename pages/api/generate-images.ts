@@ -33,7 +33,6 @@ apiRoute.post(async (req, res) => {
 const addImages = async (story: Story, storyId: string) => {
   const mark = performance.mark('addImages');
 
-  // Todo: run sequentially to avoid rate limiting
   const tasks = story.chapters.map(async (part, i) => {
     try {
       const response = await openai.createImage({
@@ -52,7 +51,7 @@ const addImages = async (story: Story, storyId: string) => {
           const image = Buffer.from(ab);
           const storyDir = path.dirname(storyId);
           const name = part.illustration.split(' ').slice(0, 5).join('-');
-          const partImageUrl = `/uploads/stories/${storyDir}/${name}-${mark.startTime}.png`;
+          const partImageUrl = `/uploads/stories/${storyDir}/${name}-${mark.startTime}-${i}.png`;
           part.img = partImageUrl;
 
           await saveFile(`./public/${partImageUrl}`, image);
