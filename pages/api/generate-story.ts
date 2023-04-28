@@ -59,7 +59,7 @@ const generateStory =
       presence_penalty: PRESENCE_PENALTY,
       frequency_penalty: FREQUENCY_PENALTY,
       temperature: TEMPERATURE,
-      messages: iteration.messages,
+      messages: iteration.messages.slice(),
     };
 
     const completion = await openai.createChatCompletion(request);
