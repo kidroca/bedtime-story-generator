@@ -48,10 +48,10 @@ const generateStory =
 
     const request: CreateChatCompletionRequest = {
       model: 'gpt-3.5-turbo',
-      // max_tokens: 3000,
+      max_tokens: 2500,
       presence_penalty: 0,
       frequency_penalty: 1,
-      temperature: 0.9,
+      temperature: 0.66,
       messages: iteration.messages,
     };
 
@@ -123,6 +123,12 @@ const tryToRecover = async (iteration: IterationResult) => {
  * Configure the initial parameters for the prompt.
  */
 const getInitialGeneration = (): IterationResult => ({
+  tokensUsed: 0,
+  story: {
+    title: '',
+    genre: '',
+    chapters: [],
+  },
   messages: [
     {
       role: 'system',
@@ -159,13 +165,7 @@ const getInitialGeneration = (): IterationResult => ({
       content: `That's perfect, you got it! Now let's start the game!`,
     }
   ],
-  story: {
-    title: '',
-    genre: '',
-    chapters: [],
-  },
   history: [],
-  tokensUsed: 0,
 });
 
 const shrinkMessage = (text: string) => text.trim().replace(/\s+/g, ' ');
