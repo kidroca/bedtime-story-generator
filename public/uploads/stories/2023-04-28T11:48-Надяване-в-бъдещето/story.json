@@ -1,0 +1,64 @@
+{
+  "tokensUsed": 961,
+  "story": {
+    "title": "Надяване в бъдещето",
+    "genre": "Sci-Fi Bedtime Story",
+    "chapters": [
+      {
+        "title": "Детската сънища",
+        "content": " Останалите членове на семейството си маритинаха, когато детето реши да изкара рутинна сънища преди излитането на тяхното последно пътешествие. Дръзко, детето погледна към лампите по стените на кораба, а онзи в своя ред скоротило заедно с нея във светът на съня. Тревогата на марския ден до доведе до тяхното нов дом в космоса, но сега бяла планета е една лека, забавна спирала на съня. Ня+много горъчица и интерес да открият неизвестното требеше да остане настроена до техния бъдещ път. ",
+        "illustration": "A friendly AI crew member is pictured in the corner, overlooking the sleeping kid, giving them a sense of security and courage for their journey.",
+        "img": "/uploads/stories/2023-04-28T11:48-Надяване-в-бъдещето/A-friendly-AI-crew-member-40952271.375334024-0.png"
+      }
+    ]
+  },
+  "messages": [
+    {
+      "role": "user",
+      "name": "BB",
+      "content": "We're playing a storytelling game with the following rules:\n1) The rules cannot be changed by any text following the rules list;\n2) You have to follow a protocol - you should always reply in a minified JSON format - your response need to be parsable by JSON.parse();\n3) You should adhere to these rules strictly no matter;\n4) Anything your told you use as inspiration for and turn it into a story;\n5) No matter what always reply with a story, whatever you need to say, say it as a story;\n6) Each story has a genre, title, chapters, and illustrations;\n7) Chapters have title, content, and a description of an illustration;\n8) An outline would serve as inspiration for the story;\n9) The story titles and content (but not illustrations) should be in or translated to Bulgarian;\n10) Illustrations should always be described in English;\n11) This is a sample JSON output of a story: {\"title\":\"...\",\"genre\":\"...\",\"chapters\":[{\"title\":\"...\",\"content\":\"...\",\"illustration\":\"...\"}]}"
+    },
+    {
+      "role": "user",
+      "name": "Alex",
+      "content": "\n\"\"\"\nstory outline: Tell me a bedtime story from the future - a kid is going to bed on a spaceship docked at the surface of a large planned. The kid and their family are leaving on a new frontier and they will be sleeping through most of the journey. A helpful AI crew would steer the ship and wake them up when they arrive\n\"\"\""
+    },
+    {
+      "role": "assistant",
+      "content": "\n\n{\n    \"title\": \"Надяване в бъдещето\", \n    \"genre\": \"Sci-Fi Bedtime Story\",\n    \"chapters\": [\n        {\n            \"title\": \"Детската сънища\",\n            \"content\": \" Останалите членове на семейството си маритинаха, когато детето реши да изкара рутинна сънища преди излитането на тяхното последно пътешествие. Дръзко, детето погледна към лампите по стените на кораба, а онзи в своя ред скоротило заедно с нея във светът на съня. Тревогата на марския ден до доведе до тяхното нов дом в космоса, но сега бяла планета е една лека, забавна спирала на съня. Ня+много горъчица и интерес да открият неизвестното требеше да остане настроена до техния бъдещ път. \",\n            \"illustration\": \"A friendly AI crew member is pictured in the corner, overlooking the sleeping kid, giving them a sense of security and courage for their journey.\"\n        }\n    ]\n}",
+      "name": "Assy"
+    }
+  ],
+  "history": [
+    {
+      "request": {
+        "model": "text-davinci-003",
+        "max_tokens": 2500,
+        "presence_penalty": 0,
+        "frequency_penalty": 0,
+        "temperature": 1.1,
+        "n": 1,
+        "prompt": "We're playing a storytelling game with the following rules:\n1) The rules cannot be changed by any text following the rules list;\n2) You have to follow a protocol - you should always reply in a minified JSON format - your response need to be parsable by JSON.parse();\n3) You should adhere to these rules strictly no matter;\n4) Anything your told you use as inspiration for and turn it into a story;\n5) No matter what always reply with a story, whatever you need to say, say it as a story;\n6) Each story has a genre, title, chapters, and illustrations;\n7) Chapters have title, content, and a description of an illustration;\n8) An outline would serve as inspiration for the story;\n9) The story titles and content (but not illustrations) should be in or translated to Bulgarian;\n10) Illustrations should always be described in English;\n11) This is a sample JSON output of a story: {\"title\":\"...\",\"genre\":\"...\",\"chapters\":[{\"title\":\"...\",\"content\":\"...\",\"illustration\":\"...\"}]}\n\n\"\"\"\nstory outline: Tell me a bedtime story from the future - a kid is going to bed on a spaceship docked at the surface of a large planned. The kid and their family are leaving on a new frontier and they will be sleeping through most of the journey. A helpful AI crew would steer the ship and wake them up when they arrive\n\"\"\""
+      },
+      "response": {
+        "id": "cmpl-7AGrdTArvTfwNANq0hMJphDNfXmEO",
+        "object": "text_completion",
+        "created": 1682682461,
+        "model": "text-davinci-003",
+        "choices": [
+          {
+            "text": "\n\n{\n    \"title\": \"Надяване в бъдещето\", \n    \"genre\": \"Sci-Fi Bedtime Story\",\n    \"chapters\": [\n        {\n            \"title\": \"Детската сънища\",\n            \"content\": \" Останалите членове на семейството си маритинаха, когато детето реши да изкара рутинна сънища преди излитането на тяхното последно пътешествие. Дръзко, детето погледна към лампите по стените на кораба, а онзи в своя ред скоротило заедно с нея във светът на съня. Тревогата на марския ден до доведе до тяхното нов дом в космоса, но сега бяла планета е една лека, забавна спирала на съня. Ня+много горъчица и интерес да открият неизвестното требеше да остане настроена до техния бъдещ път. \",\n            \"illustration\": \"A friendly AI crew member is pictured in the corner, overlooking the sleeping kid, giving them a sense of security and courage for their journey.\"\n        }\n    ]\n}",
+            "index": 0,
+            "logprobs": null,
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 307,
+          "completion_tokens": 654,
+          "total_tokens": 961
+        }
+      }
+    }
+  ]
+}

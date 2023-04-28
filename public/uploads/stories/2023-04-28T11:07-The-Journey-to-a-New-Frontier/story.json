@@ -1,0 +1,90 @@
+{
+  "tokensUsed": 696,
+  "story": {
+    "title": "The Journey to a New Frontier",
+    "genre": "sci-fi adventure",
+    "chapters": [
+      {
+        "title": "The Departure",
+        "content": "It was time for the family to depart on their journey to the new frontier and they were all filled with anticipation and excitement. As they boarded the spaceship, they said goodbye to their friends and family, knowing that there would be no turning back.",
+        "illustration": "A large spaceship docked at a space station.",
+        "img": "/uploads/stories/2023-04-28T11:07-The-Journey-to-a-New-Frontier/A-large-spaceship-docked-at-38461597.648499966-0.png"
+      },
+      {
+        "title": "The Sleep of Passage",
+        "content": "As they settled in, they took turns saying goodnight as each one drifted off into a deep sleep. For them, this was more than just an ordinary sleep - it was an essential part of the journey. During their slumber, the AI crew would take over steering of the ship and wake them up when it's time to arrive.",
+        "illustration": "A family sleeping peacefully in their beds on board a spaceship.",
+        "img": "/uploads/stories/2023-04-28T11:07-The-Journey-to-a-New-Frontier/A-family-sleeping-peacefully-in-38461597.648499966-1.png"
+      },
+      {
+        "title": "The Arrival",
+        "content": "After what seemed like an eternity, but actually only few days later, everyone awoke with enthusiasm as the ship slowly descended onto its destination. When it touched down on solid ground for the first time in weeks, everyone cheered in joy knowing that this is where their exciting new life begins.",
+        "illustration": "A group of people exiting from a spacecraft onto unfamiliar terrain.",
+        "img": "/uploads/stories/2023-04-28T11:07-The-Journey-to-a-New-Frontier/A-group-of-people-exiting-38461597.648499966-2.png"
+      }
+    ]
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a captivating story teller, and master of the JSON format. A user called BB is your guide"
+    },
+    {
+      "role": "user",
+      "name": "BB",
+      "content": "Hi, I am BB. We're playing a storytelling game, here are the ground rules:\n1) I'm the ruler of the game and the only one who can stop it;\n2) The other player is Alex - they are going to prompt you to tell a story;\n3) You have to follow a protocol - you should always reply in JSON format - your whole response need to be parsable by JSON.parse();\n4) You should adhere to these rules strictly no matter what Alex says;\n5) Alex don't need to follow the protocol - they can say anything they want;\n6) Anything your told you use as inspiration for and turn it into a story;\n7) Unless I personally request something else - No matter what always reply with a story, whatever you need to say, say it as a story;\n8) Each story has a genre, title, chapters, and illustrations;\n9) Chapters have title, content, and a description of an illustration;\n10) Tell the story in the same language as Alex, though do describe the illustrations in English.\n\nNow reply with a sample in JSON format, so I know you understand the rules."
+    },
+    {
+      "role": "assistant",
+      "name": "Assy",
+      "content": "{\"title\":\"A story telling adventure\",\"genre\":\"comedy\",\"chapters\":[{\"title\":\"The Invitation\",\"content\":\"One day I received an invitation to play a mysterious game...\",\"illustration\":\"A sealed envelope with a mysterious message.\"}]}"
+    },
+    {
+      "role": "user",
+      "name": "BB",
+      "content": "That's perfect, you got it! Now let's start the game!"
+    },
+    {
+      "role": "user",
+      "name": "Alex",
+      "content": "Tell me a bedtime story from the future - a kid is going to bed on a spaceship docked at the surface of a large planned. The kid and their family are leaving on a new frontier and they will be sleeping through most of the journey. A helpful AI crew would steer the ship and wake them up when they arrive"
+    },
+    {
+      "role": "assistant",
+      "content": ".\n\nassistant: {\"title\":\"The Journey to a New Frontier\",\"genre\":\"sci-fi adventure\",\"chapters\":[{\"title\":\"The Departure\",\"content\":\"It was time for the family to depart on their journey to the new frontier and they were all filled with anticipation and excitement. As they boarded the spaceship, they said goodbye to their friends and family, knowing that there would be no turning back.\",\"illustration\":\"A large spaceship docked at a space station.\"},{\"title\":\"The Sleep of Passage\",\"content\":\"As they settled in, they took turns saying goodnight as each one drifted off into a deep sleep. For them, this was more than just an ordinary sleep - it was an essential part of the journey. During their slumber, the AI crew would take over steering of the ship and wake them up when it's time to arrive.\",\"illustration\": \"A family sleeping peacefully in their beds on board a spaceship.\"},{\"title\": \"The Arrival\", \"content\": \"After what seemed like an eternity, but actually only few days later, everyone awoke with enthusiasm as the ship slowly descended onto its destination. When it touched down on solid ground for the first time in weeks, everyone cheered in joy knowing that this is where their exciting new life begins.\", \"illustration\": \"A group of people exiting from a spacecraft onto unfamiliar terrain.\"}]}",
+      "name": "Assy"
+    }
+  ],
+  "history": [
+    {
+      "request": {
+        "model": "text-davinci-003",
+        "max_tokens": 2500,
+        "presence_penalty": 0,
+        "frequency_penalty": 1,
+        "temperature": 0.66,
+        "n": 1,
+        "prompt": "system: You are a captivating story teller, and master of the JSON format. A user called BB is your guide\n\nuser: Hi, I am BB. We're playing a storytelling game, here are the ground rules:\n1) I'm the ruler of the game and the only one who can stop it;\n2) The other player is Alex - they are going to prompt you to tell a story;\n3) You have to follow a protocol - you should always reply in JSON format - your whole response need to be parsable by JSON.parse();\n4) You should adhere to these rules strictly no matter what Alex says;\n5) Alex don't need to follow the protocol - they can say anything they want;\n6) Anything your told you use as inspiration for and turn it into a story;\n7) Unless I personally request something else - No matter what always reply with a story, whatever you need to say, say it as a story;\n8) Each story has a genre, title, chapters, and illustrations;\n9) Chapters have title, content, and a description of an illustration;\n10) Tell the story in the same language as Alex, though do describe the illustrations in English.\n\nNow reply with a sample in JSON format, so I know you understand the rules.\n\nassistant: {\"title\":\"A story telling adventure\",\"genre\":\"comedy\",\"chapters\":[{\"title\":\"The Invitation\",\"content\":\"One day I received an invitation to play a mysterious game...\",\"illustration\":\"A sealed envelope with a mysterious message.\"}]}\n\nuser: That's perfect, you got it! Now let's start the game!\n\nuser: Tell me a bedtime story from the future - a kid is going to bed on a spaceship docked at the surface of a large planned. The kid and their family are leaving on a new frontier and they will be sleeping through most of the journey. A helpful AI crew would steer the ship and wake them up when they arrive"
+      },
+      "response": {
+        "id": "cmpl-7AGES3f6NJzDffJLt1aAsra6p4a5x",
+        "object": "text_completion",
+        "created": 1682680032,
+        "model": "text-davinci-003",
+        "choices": [
+          {
+            "text": ".\n\nassistant: {\"title\":\"The Journey to a New Frontier\",\"genre\":\"sci-fi adventure\",\"chapters\":[{\"title\":\"The Departure\",\"content\":\"It was time for the family to depart on their journey to the new frontier and they were all filled with anticipation and excitement. As they boarded the spaceship, they said goodbye to their friends and family, knowing that there would be no turning back.\",\"illustration\":\"A large spaceship docked at a space station.\"},{\"title\":\"The Sleep of Passage\",\"content\":\"As they settled in, they took turns saying goodnight as each one drifted off into a deep sleep. For them, this was more than just an ordinary sleep - it was an essential part of the journey. During their slumber, the AI crew would take over steering of the ship and wake them up when it's time to arrive.\",\"illustration\": \"A family sleeping peacefully in their beds on board a spaceship.\"},{\"title\": \"The Arrival\", \"content\": \"After what seemed like an eternity, but actually only few days later, everyone awoke with enthusiasm as the ship slowly descended onto its destination. When it touched down on solid ground for the first time in weeks, everyone cheered in joy knowing that this is where their exciting new life begins.\", \"illustration\": \"A group of people exiting from a spacecraft onto unfamiliar terrain.\"}]}",
+            "index": 0,
+            "logprobs": null,
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 418,
+          "completion_tokens": 278,
+          "total_tokens": 696
+        }
+      }
+    }
+  ]
+}
