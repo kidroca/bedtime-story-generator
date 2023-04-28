@@ -3,6 +3,13 @@ import {NextApiRequest, NextApiResponse} from 'next';
 import {commonErrorHandler, openai, saveStory, Story} from '@/pages/api/common';
 import {ChatCompletionRequestMessage, CreateChatCompletionRequest, CreateChatCompletionResponse} from 'openai';
 
+const MODEL = 'gpt-3.5-turbo';
+const MODEL_MAX_TOKENS = 4096;
+const MAX_TOKENS_RESPONSE = 2500;
+const PRESENCE_PENALTY = 0;
+const FREQUENCY_PENALTY = 1;
+const TEMPERATURE = 0.66;
+
 const apiRoute = nextConnect<NextApiRequest, NextApiResponse<Result | ErrorResult>>({
   // Handle any other HTTP method
   onNoMatch(req, res) {
@@ -47,11 +54,11 @@ const generateStory =
     iteration.messages.push(...messages);
 
     const request: CreateChatCompletionRequest = {
-      model: 'gpt-3.5-turbo',
-      max_tokens: 2500,
-      presence_penalty: 0,
-      frequency_penalty: 1,
-      temperature: 0.66,
+      model: MODEL,
+      max_tokens: MAX_TOKENS_RESPONSE,
+      presence_penalty: PRESENCE_PENALTY,
+      frequency_penalty: FREQUENCY_PENALTY,
+      temperature: TEMPERATURE,
       messages: iteration.messages,
     };
 
@@ -84,22 +91,28 @@ const generateStory =
       console.error(error);
       console.log('content: \n', content);
 
+      // Todo: this is just a prove of concept for the iterative approach
+      // we'll probably just let the user give feedback if a story should be regenerated with some more instructions on how to fix it
       // We'll try to recover for a few times
-      if (iteration.tokensUsed < 2000) {
-        return tryToRecover(iteration);
+      if (MODEL_MAX_TOKENS - iteration.tokensUsed - 35 < MAX_TOKENS_RESPONSE) {
+        return tryRegenerateAfterBadJSON(iteration);
+      } else {
+        console.log('Not enough tokens left for a retry. Giving up.');
+        await saveStory(iteration, `.failures/${Date.now()}.json`);
       }
 
       throw {
         originalError: (error as Error).message,
         generatedMessage: iteration.messages
           .filter(m => m.role === 'assistant')
+          .slice(1) // Ignore the first message as it's a sample
           .map(m => m.content)
           .join('\n'),
       }
     }
   };
 
-const tryToRecover = async (iteration: IterationResult) => {
+const tryRegenerateAfterBadJSON = async (iteration: IterationResult) => {
   console.log('Trying to generate a story again.');
   const nextMessages: ChatCompletionRequestMessage[] = [
     {
