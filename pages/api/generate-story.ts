@@ -5,7 +5,7 @@ import {ChatCompletionRequestMessage, CreateChatCompletionRequest, CreateChatCom
 
 const MODEL = 'gpt-3.5-turbo';
 const MODEL_MAX_TOKENS = 4096;
-const MAX_TOKENS_RESPONSE = 2500;
+const MAX_TOKENS_RESPONSE = 2000;
 const PRESENCE_PENALTY = 0;
 const FREQUENCY_PENALTY = 1;
 const TEMPERATURE = 0.88;
@@ -164,7 +164,7 @@ const getInitialGeneration = (): IterationResult => ({
           
           Here's a sample JSON schema you have to follow:
           """
-          {"title":"...","genre":"...","chapters":[{"title":"...","content":"...","illustration":"..."}]}
+          {"title":"...","genre":"...","language": "...","chapters":[{"title":"...","content":"...","illustration":"..."}]}
           """
           
           Now reply with a small sample in JSON format, so I know you understand the rules.`),
@@ -173,7 +173,7 @@ const getInitialGeneration = (): IterationResult => ({
       role: 'assistant',
       name: 'Assy',
       content: `
-      {"title":"A story telling adventure","genre":"comedy","chapters":[{"title":"The Invitation","content":"One day I received an invitation to play a mysterious game...","illustration":"A sealed envelope with a mysterious message."}]}
+      {"title":"A story telling adventure","genre":"comedy","language": "en", "chapters":[{"title":"The Invitation","content":"One day I received an invitation to play a mysterious game...","illustration":"A sealed envelope with a mysterious message."}]}
       `.trim(),
     },
     {
