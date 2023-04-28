@@ -9,7 +9,9 @@ interface StoryParams {
 
 export async function generateStaticParams(): Promise<StoryParams[]> {
   const dir = await readdir('./public/uploads/stories');
-  return dir.map(name => ({id: name}));
+  return dir
+    .filter(name => !name.startsWith('.'))
+    .map(name => ({id: name}));
 }
 
 const convertIdToFolder = (params: StoryParams) => {

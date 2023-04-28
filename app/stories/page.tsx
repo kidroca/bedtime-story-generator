@@ -8,7 +8,9 @@ interface StoryLink {
 
 async function getStoryLinks(): Promise<StoryLink[]> {
   const dir = await readdir('./public/uploads/stories');
-  return dir.map(dirName => ({
+  return dir
+    .filter(name => !name.startsWith('.')) // ignore hidden files
+    .map(dirName => ({
     name: dirName.substring(17), // removes the ISO date prefix
     href: '/stories/' + dirName,
   }))
