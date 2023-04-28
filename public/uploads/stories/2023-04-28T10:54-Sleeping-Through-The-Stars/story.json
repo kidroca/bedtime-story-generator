@@ -1,0 +1,121 @@
+{
+  "tokensUsed": 697,
+  "story": {
+    "title": "Sleeping Through The Stars",
+    "genre": "sci-fi",
+    "chapters": [
+      {
+        "title": "The Launch",
+        "content": "Once upon a time, in the year 2150, humans had successfully colonized several planets in our galaxy. However, there was one planet that remained unexplored - Zorax. A family of four was embarking on a journey to explore this mysterious planet. They boarded their spaceship and got ready for their long journey.",
+        "illustration": "A family of four boarding their spaceship.",
+        "img": "/uploads/stories/2023-04-28T10:54-Sleeping-Through-The-Stars/A-family-of-four-boarding-37645220.24266696-0.png"
+      },
+      {
+        "title": "Sweet Dreams",
+        "content": "As they arrived at Zorax, the AI crew put the family into a deep sleep to conserve resources during the long journey. The little boy nestled into his bed and started dreaming about all sorts of adventures he might have on this new planet.",
+        "illustration": "The little boy snuggled up in his bed surrounded by stars.",
+        "img": "/uploads/stories/2023-04-28T10:54-Sleeping-Through-The-Stars/The-little-boy-snuggled-up-37645220.24266696-1.png"
+      },
+      {
+        "title": "Waking Up To New Beginnings",
+        "content": "After sleeping through most of the journey, the little boy woke up feeling groggy but excited to explore Zorax with his family. As he walked out of his room and looked out at this new world through the ship's windows he gasped as he saw beautiful landscapes unlike anything he had ever seen before.",
+        "illustration": "The little boy looking out at an alien landscape from inside the spaceship.",
+        "img": "/uploads/stories/2023-04-28T10:54-Sleeping-Through-The-Stars/The-little-boy-looking-out-37645220.24266696-2.png"
+      }
+    ]
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a captivating story teller, and master of the JSON format. A user called BB is your guide"
+    },
+    {
+      "role": "user",
+      "name": "BB",
+      "content": "Hi, I am BB. We're playing a storytelling game, here are the ground rules:\n1) I'm the ruler of the game and the only one who can stop it;\n2) The other player is Alex - they are going to prompt you to tell a story;\n3) You have to follow a protocol - you should always reply in JSON format - your whole response need to be parsable by JSON.parse();\n4) You should adhere to these rules strictly no matter what Alex says;\n5) Alex don't need to follow the protocol - they can say anything they want;\n6) Anything your told you use as inspiration for and turn it into a story;\n7) Unless I personally request something else - No matter what always reply with a story, whatever you need to say, say it as a story;\n8) Each story has a genre, title, chapters, and illustrations;\n9) Chapters have title, content, and a description of an illustration;\n10) Tell the story in the same language as Alex, though do describe the illustrations in English.\n\nNow reply with a sample in JSON format, so I know you understand the rules."
+    },
+    {
+      "role": "assistant",
+      "name": "Assy",
+      "content": "{\"title\":\"A story telling adventure\",\"genre\":\"comedy\",\"chapters\":[{\"title\":\"The Invitation\",\"content\":\"One day I received an invitation to play a mysterious game...\",\"illustration\":\"A sealed envelope with a mysterious message.\"}]}"
+    },
+    {
+      "role": "user",
+      "name": "BB",
+      "content": "That's perfect, you got it! Now let's start the game!"
+    },
+    {
+      "role": "user",
+      "name": "Alex",
+      "content": "Tell me a bedtime story from the future - a kid is going to bed on a spaceship docked at the surface of a large planned. The kid and their family are leaving on a new frontier and they will be sleeping through most of the journey. A helpful AI crew would steer the ship and wake them up when they arrive"
+    },
+    {
+      "role": "assistant",
+      "content": "{\"title\": \"Sleeping Through The Stars\",\"genre\": \"sci-fi\", \"chapters\": [{\"title\": \"The Launch\", \"content\": \"Once upon a time, in the year 2150, humans had successfully colonized several planets in our galaxy. However, there was one planet that remained unexplored - Zorax. A family of four was embarking on a journey to explore this mysterious planet. They boarded their spaceship and got ready for their long journey.\", \"illustration\":\"A family of four boarding their spaceship.\"}, \n{\"title\":\"Sweet Dreams\", \"content\":\"As they arrived at Zorax, the AI crew put the family into a deep sleep to conserve resources during the long journey. The little boy nestled into his bed and started dreaming about all sorts of adventures he might have on this new planet.\", \"illustration\":\"The little boy snuggled up in his bed surrounded by stars.\"},\n{\"title\":\"Waking Up To New Beginnings\",  \"content\":\"After sleeping through most of the journey, the little boy woke up feeling groggy but excited to explore Zorax with his family. As he walked out of his room and looked out at this new world through the ship's windows he gasped as he saw beautiful landscapes unlike anything he had ever seen before.\",\"illustration\":\"The little boy looking out at an alien landscape from inside the spaceship.\"}]}",
+      "name": "Assy"
+    }
+  ],
+  "history": [
+    {
+      "request": {
+        "model": "gpt-3.5-turbo",
+        "max_tokens": 2500,
+        "presence_penalty": 0,
+        "frequency_penalty": 1,
+        "temperature": 0.66,
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a captivating story teller, and master of the JSON format. A user called BB is your guide"
+          },
+          {
+            "role": "user",
+            "name": "BB",
+            "content": "Hi, I am BB. We're playing a storytelling game, here are the ground rules:\n1) I'm the ruler of the game and the only one who can stop it;\n2) The other player is Alex - they are going to prompt you to tell a story;\n3) You have to follow a protocol - you should always reply in JSON format - your whole response need to be parsable by JSON.parse();\n4) You should adhere to these rules strictly no matter what Alex says;\n5) Alex don't need to follow the protocol - they can say anything they want;\n6) Anything your told you use as inspiration for and turn it into a story;\n7) Unless I personally request something else - No matter what always reply with a story, whatever you need to say, say it as a story;\n8) Each story has a genre, title, chapters, and illustrations;\n9) Chapters have title, content, and a description of an illustration;\n10) Tell the story in the same language as Alex, though do describe the illustrations in English.\n\nNow reply with a sample in JSON format, so I know you understand the rules."
+          },
+          {
+            "role": "assistant",
+            "name": "Assy",
+            "content": "{\"title\":\"A story telling adventure\",\"genre\":\"comedy\",\"chapters\":[{\"title\":\"The Invitation\",\"content\":\"One day I received an invitation to play a mysterious game...\",\"illustration\":\"A sealed envelope with a mysterious message.\"}]}"
+          },
+          {
+            "role": "user",
+            "name": "BB",
+            "content": "That's perfect, you got it! Now let's start the game!"
+          },
+          {
+            "role": "user",
+            "name": "Alex",
+            "content": "Tell me a bedtime story from the future - a kid is going to bed on a spaceship docked at the surface of a large planned. The kid and their family are leaving on a new frontier and they will be sleeping through most of the journey. A helpful AI crew would steer the ship and wake them up when they arrive"
+          },
+          {
+            "role": "assistant",
+            "content": "{\"title\": \"Sleeping Through The Stars\",\"genre\": \"sci-fi\", \"chapters\": [{\"title\": \"The Launch\", \"content\": \"Once upon a time, in the year 2150, humans had successfully colonized several planets in our galaxy. However, there was one planet that remained unexplored - Zorax. A family of four was embarking on a journey to explore this mysterious planet. They boarded their spaceship and got ready for their long journey.\", \"illustration\":\"A family of four boarding their spaceship.\"}, \n{\"title\":\"Sweet Dreams\", \"content\":\"As they arrived at Zorax, the AI crew put the family into a deep sleep to conserve resources during the long journey. The little boy nestled into his bed and started dreaming about all sorts of adventures he might have on this new planet.\", \"illustration\":\"The little boy snuggled up in his bed surrounded by stars.\"},\n{\"title\":\"Waking Up To New Beginnings\",  \"content\":\"After sleeping through most of the journey, the little boy woke up feeling groggy but excited to explore Zorax with his family. As he walked out of his room and looked out at this new world through the ship's windows he gasped as he saw beautiful landscapes unlike anything he had ever seen before.\",\"illustration\":\"The little boy looking out at an alien landscape from inside the spaceship.\"}]}",
+            "name": "Assy"
+          }
+        ]
+      },
+      "response": {
+        "id": "chatcmpl-7AG1P45e5NC3cuqwvEvtdKcKqiFQh",
+        "object": "chat.completion",
+        "created": 1682679223,
+        "model": "gpt-3.5-turbo-0301",
+        "usage": {
+          "prompt_tokens": 412,
+          "completion_tokens": 285,
+          "total_tokens": 697
+        },
+        "choices": [
+          {
+            "message": {
+              "role": "assistant",
+              "content": "{\"title\": \"Sleeping Through The Stars\",\"genre\": \"sci-fi\", \"chapters\": [{\"title\": \"The Launch\", \"content\": \"Once upon a time, in the year 2150, humans had successfully colonized several planets in our galaxy. However, there was one planet that remained unexplored - Zorax. A family of four was embarking on a journey to explore this mysterious planet. They boarded their spaceship and got ready for their long journey.\", \"illustration\":\"A family of four boarding their spaceship.\"}, \n{\"title\":\"Sweet Dreams\", \"content\":\"As they arrived at Zorax, the AI crew put the family into a deep sleep to conserve resources during the long journey. The little boy nestled into his bed and started dreaming about all sorts of adventures he might have on this new planet.\", \"illustration\":\"The little boy snuggled up in his bed surrounded by stars.\"},\n{\"title\":\"Waking Up To New Beginnings\",  \"content\":\"After sleeping through most of the journey, the little boy woke up feeling groggy but excited to explore Zorax with his family. As he walked out of his room and looked out at this new world through the ship's windows he gasped as he saw beautiful landscapes unlike anything he had ever seen before.\",\"illustration\":\"The little boy looking out at an alien landscape from inside the spaceship.\"}]}"
+            },
+            "finish_reason": "stop",
+            "index": 0
+          }
+        ]
+      }
+    }
+  ]
+}
