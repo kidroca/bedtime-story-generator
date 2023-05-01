@@ -35,6 +35,10 @@ const addImages = async (story: Story, storyId: string) => {
 
   const tasks = story.chapters.map(async (part, i) => {
     try {
+      if (!part.illustration) {
+        return Promise.resolve();
+      }
+      
       const prompt = `${part.illustration} A modern comic book illustration in color`;
       const response = await openai.createImage({
         prompt,

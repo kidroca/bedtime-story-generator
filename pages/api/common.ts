@@ -59,10 +59,11 @@ export interface Story {
   chapters: Array<{
     title: string;
     content: string;
-    illustration: string;
+    illustration?: string;
     illustrationPrompt?: string;
     img?: string;
   }>;
+  html?: string;
 }
 
 export interface StoryFile {
