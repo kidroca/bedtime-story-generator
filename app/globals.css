@@ -18,6 +18,10 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+html, body {
+    height: 100%;
+}
+
 button {
     color: #10a37f;
     border: 1px solid #10a37f;

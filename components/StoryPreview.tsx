@@ -6,7 +6,7 @@ import {useMutation} from 'react-query';
 
 interface StoryPreviewProps {
   story: Story;
-  id: string;
+  id?: string;
 }
 
 export default function StoryPreview ({ story, id }: StoryPreviewProps) {
@@ -47,28 +47,35 @@ export default function StoryPreview ({ story, id }: StoryPreviewProps) {
 
   return (
     <section className={styles.layout}>
-      <article className="flex flex-col gap-2 mt-2">
+      <article className="flex flex-col gap-2 mt-2 [&>*:nth-child(odd)]:flex-row-reverse">
         <h3>{finalStory.title}</h3>
         {finalStory.chapters.map((part, i: number) => (
-          <section key={i}>
-            <h4>{part.title}</h4>
-            <div className="flex">
-              <p className="flex-1">{part.content}</p>
-              {part.img && <Image src={part.img} alt={part.illustration} width={720} height={720} />}
+          <section className="flex justify-between flex-row flex-wrap" key={i}>
+            <h4 className="w-full">{part.title}</h4>
+
+            <div className="basis-5/12">
+              {part.content?.split(/\n+/).map((line, j) => (
+                <p className="my-4" key={j}>{line}</p>
+              ))}
             </div>
+
+            {part.img &&
+              <Image className="w-1/2 mt-4" src={part.img} alt={part.illustration!} width={720} height={720} />}
           </section>
         ))}
 
         <div className="flex gap-2 self-end">
-          <button
-            type="button"
-            disabled={images.isLoading}
-            onClick={() => images.mutate(id)}>
-            {images.isLoading && 'Generating Images...'}
-            {images.isError && 'Failed to generate images 😢'}
-            {images.isSuccess && 'Images Generated ✅'}
-            {!images.isLoading && !images.isError && !images.isSuccess && 'Generate Images'}
-          </button>
+          {id && (
+            <button
+              type="button"
+              disabled={images.isLoading}
+              onClick={() => images.mutate(id)}>
+              {images.isLoading && 'Generating Images...'}
+              {images.isError && 'Failed to generate images 😢'}
+              {images.isSuccess && 'Images Generated ✅'}
+              {!images.isLoading && !images.isError && !images.isSuccess && 'Generate Images'}
+            </button>
+          )}
           <button type="button" onClick={readStory}>Read 📖</button>
           <button type="button" onClick={() => speechSynthesis.pause()}>Pause ⏸️</button>
           <button type="button" onClick={() => speechSynthesis.resume()}>Resume ▶️</button>
