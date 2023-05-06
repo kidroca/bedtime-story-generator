@@ -86,13 +86,7 @@ const generateStory =
     console.log('generated content:\n\n', content);
 
     try {
-      const result = await createJsonFromContent(content);
-
-      iteration.story.html = result.html.contents;
-      iteration.story.title = result.frontmatter.title;
-      iteration.story.genre = result.frontmatter.genre;
-      iteration.story.language = result.frontmatter.language;
-
+      iteration.story = await createStoryFromMarkDownContent(content);
       return iteration;
     } catch (error) {
       console.warn('Failed to generate a story');
@@ -112,18 +106,46 @@ const generateStory =
     }
   };
 
-const createJsonFromContent = async (content: string) => {
+const createStoryFromMarkDownContent = async (content: string): Promise<Story> => {
   const md = new MarkdownFile(content);
   await md.process();
 
-  const matches = /# (?<title>.+)\n*(?<chapter>##(?<chapterTitle>.+)\n*(?<chapterContent>[^#]*)\n*(### Illustration\n(?<illustration>[^#]*))?)+/gm.exec(content);
+  const regex = /^# (?<title>.*)(?:\r?\n|\r)(?<chaptersContent>[\s\S]*?)(?=^Край|\Z)/gm;
+  const chapterRegex = /## (?<chapterTitle>.*)(?:\r?\n|\r)(?<chapterContent>(?:(?!###)[\s\S])*)(?:\r?\n|\r)### [^\r\n]*(?:\r?\n|\r)(?<illustration>.*)/gm;
 
-  console.log('matches: ', matches);
+  const result = regex.exec(content);
+  const title = result?.groups?.title;
+  if (!title) {
+    throw new Error('Failed to find a title in the generated content');
+  }
+
+  const chaptersContent = result?.groups!.chaptersContent;
+  if (!chaptersContent) {
+    throw new Error('Failed to find chapters in the generated content');
+  }
+
+  let chapter: RegExpExecArray | null;
+  const chapters: Story['chapters'] = [];
+
+  while ((chapter = chapterRegex.exec(chaptersContent)) !== null) {
+    if (!chapter.groups) {
+      throw new Error('Failed to parse a chapter');
+    }
+
+    chapters.push({
+      title: chapter.groups.chapterTitle,
+      content: chapter.groups.chapterContent.trim(),
+      illustration: chapter.groups.illustration,
+    });
+  }
 
   return {
-    frontmatter: md.frontmatter,
-    html: toHtml(md),
-  }
+    enTitle: md.frontmatter.title,
+    genre: md.frontmatter.genre,
+    language: md.frontmatter.language,
+    title,
+    chapters,
+  };
 }
 
 const tryRegenerateAfterBadJSON = async (iteration: IterationResult) => {
