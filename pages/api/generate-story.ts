@@ -3,14 +3,15 @@ import {NextApiRequest, NextApiResponse} from 'next';
 import {commonErrorHandler, openai, saveStory, Story} from '@/pages/api/common';
 import {ChatCompletionRequestMessage, CreateChatCompletionRequest, CreateChatCompletionResponse} from 'openai';
 import {MarkdownFile} from '@dimerapp/markdown';
-import {toHtml} from '@dimerapp/markdown/build/src/utils'
+// @ts-ignore // this is a valid import
+import {toHtml} from '@dimerapp/markdown/utils';
 
 const MODEL = 'gpt-3.5-turbo';
 const MODEL_MAX_TOKENS = 4096;
 const MAX_TOKENS_RESPONSE = 2500;
 const PRESENCE_PENALTY = 0;
 const FREQUENCY_PENALTY = 1;
-const TEMPERATURE = 0.5;
+const TEMPERATURE = 0.66;
 
 const apiRoute = nextConnect<NextApiRequest, NextApiResponse<Result | ErrorResult>>({
   // Handle any other HTTP method
@@ -82,7 +83,7 @@ const generateStory =
     });
 
     const content = firstChoice.message?.content || '';
-    console.log('generated content: \n\n', content);
+    console.log('generated content:\n\n', content);
 
     try {
       const result = await createJsonFromContent(content);
@@ -90,6 +91,7 @@ const generateStory =
       iteration.story.html = result.html.contents;
       iteration.story.title = result.frontmatter.title;
       iteration.story.genre = result.frontmatter.genre;
+      iteration.story.language = result.frontmatter.language;
 
       return iteration;
     } catch (error) {
@@ -114,12 +116,13 @@ const createJsonFromContent = async (content: string) => {
   const md = new MarkdownFile(content);
   await md.process();
 
-  console.log('md.toJSON().ast: \n', md.toJSON().ast);
-  const html = toHtml(md);
+  const matches = /# (?<title>.+)\n*(?<chapter>##(?<chapterTitle>.+)\n*(?<chapterContent>[^#]*)\n*(### Illustration\n(?<illustration>[^#]*))?)+/gm.exec(content);
+
+  console.log('matches: ', matches);
 
   return {
     frontmatter: md.frontmatter,
-    html,
+    html: toHtml(md),
   }
 }
 
@@ -151,6 +154,7 @@ const getInitialGeneration = (): IterationResult => ({
   story: {
     title: '',
     genre: '',
+    language: '',
     chapters: [],
     html: '',
   },
@@ -168,16 +172,19 @@ const getInitialGeneration = (): IterationResult => ({
 
         \`\`\`md
         ---
+        title: [Story Title in English]
         genre: [Story Genre in English (e.g. Fantasy, Sci-Fi, Romance)]
         language: [Story Language code (e.g. en, ru, de)]
         ---
         
-        # [Story Title]
+        # [Story Title in Alex's Language]
         
-        ## [Chapter Title]
+        ## [Chapter Title in Alex's Language]
         
-        [Multiple Lines of Chapter Content]
-        - Illustration: [Illustration Description]
+        [Multiple Lines of Chapter Content in Alex's Language]
+
+        ### Illustration
+        [Illustration description for the chapter in Alex's Language]
         
         ## [Next Chapter Title]
         ...

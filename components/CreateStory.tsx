@@ -2,7 +2,6 @@
 import {useMemo, useState} from 'react';
 import {useMutation} from 'react-query';
 import styles from './CreateStory.module.css';
-import Image from 'next/image';
 import {Story} from '@/pages/api/common';
 
 export default function CreateStory() {
@@ -198,15 +197,7 @@ export default function CreateStory() {
       {finalStory && (
         <article className="flex flex-col gap-2 mt-2">
           <h3>{finalStory.title}</h3>
-          {finalStory.chapters.map((part, i: number) => (
-            <section key={i}>
-              <h4>{part.title}</h4>
-              <div className="flex">
-                <p className="flex-1">{part.content}</p>
-                {part.img && <Image src={part.img} alt={part.illustration} width={720} height={720} />}
-              </div>
-            </section>
-          ))}
+          <section className="flex flex-col" dangerouslySetInnerHTML={{__html: finalStory.html || ''}} />
 
           <div className="flex gap-2 self-end">
             <button
