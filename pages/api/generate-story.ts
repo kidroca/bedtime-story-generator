@@ -1,7 +1,12 @@
 import nextConnect from 'next-connect';
 import {NextApiRequest, NextApiResponse} from 'next';
 import {commonErrorHandler, openai, saveStory, Story} from '@/pages/api/common';
-import {ChatCompletionRequestMessage, CreateChatCompletionRequest, CreateChatCompletionResponse} from 'openai';
+import {
+  ChatCompletionRequestMessage,
+  ChatCompletionRequestMessageRoleEnum,
+  CreateChatCompletionRequest,
+  CreateChatCompletionResponse
+} from 'openai';
 import {MarkdownFile} from '@dimerapp/markdown';
 
 const MODEL = 'gpt-3.5-turbo';
@@ -10,6 +15,9 @@ const MAX_TOKENS_RESPONSE = 4000;
 const PRESENCE_PENALTY = 1;
 const FREQUENCY_PENALTY = 1;
 const TEMPERATURE = 0.4;
+const ADMIN = { name: 'BB', role: ChatCompletionRequestMessageRoleEnum.User };
+const USER = { name: 'Alex', role: ChatCompletionRequestMessageRoleEnum.User };
+const ASSISTANT = { name: 'Assy', role: ChatCompletionRequestMessageRoleEnum.Assistant };
 
 const apiRoute = nextConnect<NextApiRequest, NextApiResponse<Result | ErrorResult>>({
   // Handle any other HTTP method
@@ -22,8 +30,7 @@ apiRoute.post(async (req, res) => {
   try {
     const transcription = req.body.transcription;
     const result = await generateStory([{
-      role: 'user',
-      name: 'Alex',
+      ...USER,
       content: transcription!.trim(),
     }]);
 
@@ -75,9 +82,8 @@ const generateStory =
     console.log('finish_reason: ', firstChoice.finish_reason);
 
     iteration.messages.push({
-      role: 'assistant',
+      ...ASSISTANT,
       content: firstChoice.message!.content,
-      name: 'Assy',
     });
 
     const content = firstChoice.message?.content || '';
@@ -160,8 +166,7 @@ const tryRegenerateAfterBadJSON = async (iteration: IterationResult) => {
   console.log('Trying to generate a story again.');
   const nextMessages: ChatCompletionRequestMessage[] = [
     {
-      role: 'user',
-      name: 'BB',
+      ...ADMIN,
       content: `Your entire reply should be in a valid JSON format. Please fix your previous message.`,
     }
   ]
@@ -193,10 +198,10 @@ const getInitialGeneration = (): IterationResult => ({
       "role": "system",
       "content": shrinkMessage(`
         You are a captivating storyteller like the author of "Winnie-the-Pooh".
-        In this interactive storytelling game, you will receive a story outline from a user named Alex,
+        In this interactive storytelling game, you will receive a story outline from a user named ${USER.name},
         and your task is to expand it into a imaginative and engaging story with diverse characters and moral lessons.
         Keep the following guidelines in mind:
-        1. Always write the story in the same language used by Alex in the outline.
+        1. Always write the story in the same language used by ${USER.name} in the outline.
         2. The values in the front-matter block (e.g. genre and language) must be in English.
         3. Follow the format provided in the example below.
 
@@ -207,11 +212,11 @@ const getInitialGeneration = (): IterationResult => ({
         language: [Story Language code (e.g. en, ru, de)]
         ---
         
-        # [Story Title in Alex's Language]
+        # [Story Title in ${USER.name}'s Language]
         
-        ## [Chapter Title in Alex's Language]
+        ## [Chapter Title in ${USER.name}'s Language]
         
-        [Multiple Lines of Chapter Content in Alex's Language]
+        [Multiple Lines of Chapter Content in ${USER.name}'s Language]
 
         ### Illustration
         [Provide a detailed description in English for an illustrator to create a captivating illustration for this chapter]
