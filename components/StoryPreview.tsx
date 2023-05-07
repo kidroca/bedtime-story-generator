@@ -3,6 +3,7 @@ import {Story} from '@/pages/api/common';
 import styles from '@/components/CreateStory.module.css';
 import Image from 'next/image';
 import {useMutation} from 'react-query';
+import {useEffect, useState} from 'react';
 
 interface StoryPreviewProps {
   story: Story;
@@ -10,6 +11,7 @@ interface StoryPreviewProps {
 }
 
 export default function StoryPreview ({ story, id }: StoryPreviewProps) {
+  const [revisions, setRevisions] = useState<Story[]>([story]);
   const images = useMutation(
     async (storyId: string) => {
       const result: { story: Story } = await fetch('/api/generate-images', {
@@ -20,19 +22,33 @@ export default function StoryPreview ({ story, id }: StoryPreviewProps) {
         }
       }).then(response => response.json());
 
+      setRevisions(current => [...current, result.story]);
+
       return result.story;
     });
 
-  const finalStory = images.data || story;
+  useEffect(() => {
+    setRevisions(current => {
+      if (current.includes(story)) {
+        return current;
+      }
+
+      return [...current, story];
+    });
+  }, [story]);
+
+  console.log('revisions count: ', revisions.length);
+
+  const latestStory = revisions[revisions.length - 1];
 
   const readStory = () => {
-    const utterance = new SpeechSynthesisUtterance('Приказка: ' + finalStory.title);
+    const utterance = new SpeechSynthesisUtterance('Приказка: ' + latestStory.title);
     utterance.lang = 'bg-BG';
     utterance.rate = 0.88;
     // utterance.pitch = 0.8;
     speechSynthesis.speak(utterance);
 
-    finalStory.chapters.forEach((part, i) => {
+    latestStory.chapters.forEach((part, i) => {
       const content = new SpeechSynthesisUtterance(part.content);
       content.lang = 'bg-BG';
       content.rate = 0.91;
@@ -48,8 +64,8 @@ export default function StoryPreview ({ story, id }: StoryPreviewProps) {
   return (
     <section className={styles.layout}>
       <article className="flex flex-col gap-2 mt-2 [&>*:nth-child(odd)]:flex-row-reverse">
-        <h3>{finalStory.title}</h3>
-        {finalStory.chapters.map((part, i: number) => (
+        <h3>{latestStory.title}</h3>
+        {latestStory.chapters.map((part, i: number) => (
           <section className="flex justify-between flex-row flex-wrap" key={i}>
             <h4 className="w-full">{part.title}</h4>
 
