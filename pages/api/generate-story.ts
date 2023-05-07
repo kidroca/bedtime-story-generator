@@ -8,6 +8,7 @@ import {
   CreateChatCompletionResponse
 } from 'openai';
 import {MarkdownFile} from '@dimerapp/markdown';
+import { performance } from 'perf_hooks';
 
 const MODEL = 'gpt-3.5-turbo';
 const MODEL_MAX_TOKENS = 8000;
@@ -28,11 +29,15 @@ const apiRoute = nextConnect<NextApiRequest, NextApiResponse<Result | ErrorResul
 
 apiRoute.post(async (req, res) => {
   try {
+    performance.mark('generateStory-start');
     const transcription = req.body.transcription;
     const result = await generateStory([{
       ...USER,
       content: transcription!.trim(),
     }]);
+    performance.mark('generateStory-end');
+    result.transcription = transcription;
+    result.timeToGenerateStory = performance.measure('generateStory', 'generateStory-start', 'generateStory-end').duration;
 
     const id = await saveFile(result);
 
@@ -186,6 +191,9 @@ const tryRegenerateAfterBadJSON = async (iteration: IterationResult) => {
  */
 const getInitialGeneration = (): IterationResult => ({
   tokensUsed: 0,
+  timeToGenerateStory: 0,
+  timeToGenerateImages: 0,
+  transcription: '',
   story: {
     title: '',
     genre: '',
@@ -267,6 +275,9 @@ interface IterationResult {
   messages: ChatCompletionRequestMessage[];
   // A sum of all iterations
   tokensUsed: number;
+  transcription?: string;
+  timeToGenerateStory?: number;
+  timeToGenerateImages?: number;
 }
 
 interface ErrorResult {

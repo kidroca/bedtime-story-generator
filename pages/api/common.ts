@@ -70,5 +70,6 @@ export interface Story {
 
 export interface StoryFile {
   transcription: string;
+  timeToGenerateImages?: number;
   story: Story;
 }
