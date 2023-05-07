@@ -10,12 +10,13 @@ import {
 import {MarkdownFile} from '@dimerapp/markdown';
 import { performance } from 'perf_hooks';
 
-const MODEL = 'gpt-3.5-turbo';
+const MODEL = 'gpt-4';
 const MODEL_MAX_TOKENS = 8000;
 const MAX_TOKENS_RESPONSE = 4000;
 const PRESENCE_PENALTY = 1;
 const FREQUENCY_PENALTY = 1;
-const TEMPERATURE = 0.4;
+const TEMPERATURE = 1;
+const TOP_P = 1;
 const ADMIN = { name: 'BB', role: ChatCompletionRequestMessageRoleEnum.User };
 const USER = { name: 'Alex', role: ChatCompletionRequestMessageRoleEnum.User };
 const ASSISTANT = { name: 'Assy', role: ChatCompletionRequestMessageRoleEnum.Assistant };
@@ -72,6 +73,7 @@ const generateStory =
       presence_penalty: PRESENCE_PENALTY,
       frequency_penalty: FREQUENCY_PENALTY,
       temperature: TEMPERATURE,
+      top_p: TOP_P,
       messages: iteration.messages.slice(),
     };
 
