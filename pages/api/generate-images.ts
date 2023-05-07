@@ -38,8 +38,8 @@ const addImages = async (story: Story, storyId: string) => {
       if (!part.illustration) {
         return Promise.resolve();
       }
-      
-      const prompt = `${part.illustration} A modern comic book illustration in color`;
+
+      const prompt = part.illustration;
       const response = await openai.createImage({
         prompt,
         n: 1,

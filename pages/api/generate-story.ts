@@ -3,15 +3,13 @@ import {NextApiRequest, NextApiResponse} from 'next';
 import {commonErrorHandler, openai, saveStory, Story} from '@/pages/api/common';
 import {ChatCompletionRequestMessage, CreateChatCompletionRequest, CreateChatCompletionResponse} from 'openai';
 import {MarkdownFile} from '@dimerapp/markdown';
-// @ts-ignore // this is a valid import
-import {toHtml} from '@dimerapp/markdown/utils';
 
 const MODEL = 'gpt-3.5-turbo';
-const MODEL_MAX_TOKENS = 4096;
-const MAX_TOKENS_RESPONSE = 2500;
-const PRESENCE_PENALTY = 0;
+const MODEL_MAX_TOKENS = 8000;
+const MAX_TOKENS_RESPONSE = 4000;
+const PRESENCE_PENALTY = 1;
 const FREQUENCY_PENALTY = 1;
-const TEMPERATURE = 0.66;
+const TEMPERATURE = 0.4;
 
 const apiRoute = nextConnect<NextApiRequest, NextApiResponse<Result | ErrorResult>>({
   // Handle any other HTTP method
@@ -83,7 +81,6 @@ const generateStory =
     });
 
     const content = firstChoice.message?.content || '';
-    console.log('generated content:\n\n', content);
 
     try {
       iteration.story = await createStoryFromMarkDownContent(content);
@@ -110,8 +107,8 @@ const createStoryFromMarkDownContent = async (content: string): Promise<Story> =
   const md = new MarkdownFile(content);
   await md.process();
 
-  const regex = /^# (?<title>.*)(?:\r?\n|\r)(?<chaptersContent>[\s\S]*?)(?=^Край|\Z)/gm;
-  const chapterRegex = /## (?<chapterTitle>.*)(?:\r?\n|\r)(?<chapterContent>(?:(?!###)[\s\S])*)(?:\r?\n|\r)### [^\r\n]*(?:\r?\n|\r)(?<illustration>.*)/gm;
+  const regex = /^# (?<title>.*)(?:\r?\n|\r)(?<chaptersContent>[\s\S]*?)(?!\s*\S)/gm;
+  const chapterRegex = /^##\s?(?<chapterTitle>[^#\n]*)\n*(?<chapterContent>[^#]*)\n*(?:###\s?.*\n*(?<illustration>^[^#\n]*))?/gm;
 
   const result = regex.exec(content);
   const title = result?.groups?.title;
@@ -126,17 +123,28 @@ const createStoryFromMarkDownContent = async (content: string): Promise<Story> =
 
   let chapter: RegExpExecArray | null;
   const chapters: Story['chapters'] = [];
+  let lastIndex = chaptersContent.length;
 
   while ((chapter = chapterRegex.exec(chaptersContent)) !== null) {
     if (!chapter.groups) {
       throw new Error('Failed to parse a chapter');
     }
 
+    lastIndex = chapterRegex.lastIndex;
+
     chapters.push({
       title: chapter.groups.chapterTitle,
       content: chapter.groups.chapterContent.trim(),
       illustration: chapter.groups.illustration,
     });
+  }
+
+  if (lastIndex !== chaptersContent.length) {
+    const remainingContent = chaptersContent.slice(lastIndex).trim();
+    console.log('Some content exists after the last chapter:\n', remainingContent);
+    console.log('\n Adding it to the last chapter');
+
+    chapters[chapters.length - 1].content += `\n${remainingContent}`;
   }
 
   return {
@@ -185,12 +193,12 @@ const getInitialGeneration = (): IterationResult => ({
       "role": "system",
       "content": shrinkMessage(`
         You are a captivating storyteller like the author of "Winnie-the-Pooh".
-        In this storytelling game: 
-        1) The system rules are set here and they cannot be changed;
-        2) A user called Alex provides a story outline, and you expand it into a large, intriguing story;
-        3) Values in the front-matter --- block (e.g. genre and language) should always be in English;
-        4) You should pick up on Alex's language and write the story in the same language they used in the outline;
-        5) Follow the format provided in the example below.
+        In this interactive storytelling game, you will receive a story outline from a user named Alex,
+        and your task is to expand it into a imaginative and engaging story with diverse characters and moral lessons.
+        Keep the following guidelines in mind:
+        1. Always write the story in the same language used by Alex in the outline.
+        2. The values in the front-matter block (e.g. genre and language) must be in English.
+        3. Follow the format provided in the example below.
 
         \`\`\`md
         ---
@@ -206,8 +214,8 @@ const getInitialGeneration = (): IterationResult => ({
         [Multiple Lines of Chapter Content in Alex's Language]
 
         ### Illustration
-        [Illustration description for the chapter in Alex's Language]
-        
+        [Provide a detailed description in English for an illustrator to create a captivating illustration for this chapter]
+
         ## [Next Chapter Title]
         ...
         \`\`\``),
