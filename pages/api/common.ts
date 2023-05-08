@@ -55,17 +55,21 @@ const STORIES_FS_PATH = './public/uploads/stories';
 
 export interface Story {
   title: string;
+  enTitle?: string;
   genre: string;
+  language: string;
   chapters: Array<{
     title: string;
     content: string;
-    illustration: string;
+    illustration?: string;
     illustrationPrompt?: string;
     img?: string;
   }>;
+  html?: string;
 }
 
 export interface StoryFile {
   transcription: string;
+  timeToGenerateImages?: number;
   story: Story;
 }

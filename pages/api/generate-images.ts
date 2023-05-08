@@ -1,8 +1,8 @@
 import nextConnect from 'next-connect';
 import {NextApiRequest, NextApiResponse} from 'next';
-import * as fs from 'fs/promises';
-import {openai, saveFile, commonErrorHandler, Story, saveStory, readStory} from './common';
 import path from 'path';
+import {performance} from 'perf_hooks';
+import {openai, saveFile, commonErrorHandler, Story, saveStory, readStory} from './common';
 
 const apiRoute = nextConnect<NextApiRequest, NextApiResponse>({
   // Handle any other HTTP method
@@ -16,6 +16,10 @@ apiRoute.post(async (req, res) => {
     const storyId = req.body.storyId;
     const file = await readStory(storyId);
     await addImages(file.story, storyId);
+
+    performance.mark('addImages-end');
+    file.timeToGenerateImages =performance.measure('addImages', 'addImages-start', 'addImages-end').duration;
+
     await saveStory(file, storyId);
 
     return res.json(file);
@@ -31,11 +35,15 @@ apiRoute.post(async (req, res) => {
  * @param storyId
  */
 const addImages = async (story: Story, storyId: string) => {
-  const mark = performance.mark('addImages');
+  const startMark = performance.mark('addImages-start');
 
   const tasks = story.chapters.map(async (part, i) => {
     try {
-      const prompt = `${part.illustration} A modern comic book illustration in color`;
+      if (!part.illustration) {
+        return Promise.resolve();
+      }
+
+      const prompt = part.illustration;
       const response = await openai.createImage({
         prompt,
         n: 1,
@@ -56,7 +64,7 @@ const addImages = async (story: Story, storyId: string) => {
             .replace(/[^\p{L}]/gu, '-')
             .replace(/-{2,}/g, '-')
             .split('-').slice(0, 5).join('-');
-          const partImageUrl = `/uploads/stories/${storyDir}/${name}-${mark.startTime}-${i}.png`;
+          const partImageUrl = `/uploads/stories/${storyDir}/${name}-${startMark.startTime}-${i}.png`;
           part.img = partImageUrl;
           part.illustrationPrompt = prompt;
 
@@ -70,10 +78,7 @@ const addImages = async (story: Story, storyId: string) => {
     }
   });
 
-  await Promise.all(tasks);
-
-  const measure = performance.measure('addImages', mark);
-  console.log('Generating and saving images took: ', `${(measure.duration / 1000).toFixed(3)}ms`);
+  return Promise.all(tasks);
 }
 
 export default apiRoute;

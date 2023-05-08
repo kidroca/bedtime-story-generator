@@ -2,8 +2,8 @@
 import {useMemo, useState} from 'react';
 import {useMutation} from 'react-query';
 import styles from './CreateStory.module.css';
-import Image from 'next/image';
 import {Story} from '@/pages/api/common';
+import StoryPreview from './StoryPreview';
 
 export default function CreateStory() {
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder>();
@@ -94,47 +94,10 @@ export default function CreateStory() {
       return result;
     });
 
-  const images = useMutation(
-    async (storyId: string) => {
-      const result: { story: Story } = await fetch('/api/generate-images', {
-        method: 'POST',
-        body: JSON.stringify({storyId}),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(response => response.json());
-
-      setFinalStory(result.story);
-
-      return result;
-    });
-
   const stopRecording = () => {
     mediaRecorder?.stop();
     setMediaRecorder(undefined);
   };
-
-  const readStory = () => {
-    if (!story.data) return;
-
-    const utterance = new SpeechSynthesisUtterance('Приказка: ' + story.data.story.title);
-    utterance.lang = 'bg-BG';
-    utterance.rate = 0.88;
-    // utterance.pitch = 0.8;
-    speechSynthesis.speak(utterance);
-
-    story.data.story.chapters.forEach((part, i) => {
-      const content = new SpeechSynthesisUtterance(part.content);
-      content.lang = 'bg-BG';
-      content.rate = 0.91;
-      const title = new SpeechSynthesisUtterance(`част ${i + 1}: ${part.title}`);
-      title.lang = 'bg-BG';
-      title.rate = 0.88;
-      // utterance.pitch = 0.8;
-      speechSynthesis.speak(title);
-      speechSynthesis.speak(content);
-    });
-  }
 
   return (
     <section className={styles.layout}>
@@ -195,36 +158,7 @@ export default function CreateStory() {
         </article>
       )}
 
-      {finalStory && (
-        <article className="flex flex-col gap-2 mt-2">
-          <h3>{finalStory.title}</h3>
-          {finalStory.chapters.map((part, i: number) => (
-            <section key={i}>
-              <h4>{part.title}</h4>
-              <div className="flex">
-                <p className="flex-1">{part.content}</p>
-                {part.img && <Image src={part.img} alt={part.illustration} width={720} height={720} />}
-              </div>
-            </section>
-          ))}
-
-          <div className="flex gap-2 self-end">
-            <button
-              type="button"
-              disabled={!story.data || images.isLoading}
-              onClick={() => story.data && images.mutate(story.data.id)}>
-              {images.isLoading && 'Generating Images...'}
-              {images.isError && 'Failed to generate images 😢'}
-              {images.isSuccess && 'Images Generated ✅'}
-              {!images.isLoading && !images.isError && !images.isSuccess && 'Generate Images'}
-            </button>
-            <button type="button" onClick={readStory}>Read 📖</button>
-            <button type="button" onClick={() => speechSynthesis.pause()}>Pause ⏸️</button>
-            <button type="button" onClick={() => speechSynthesis.resume()}>Resume ▶️</button>
-            <button type="button" onClick={() => speechSynthesis.cancel()}>Cancel ❌</button>
-          </div>
-        </article>
-      )}
+      {finalStory && <StoryPreview story={finalStory} id={story.data?.id} />}
     </section>
   );
 }
