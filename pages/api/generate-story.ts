@@ -31,14 +31,11 @@ const apiRoute = nextConnect<NextApiRequest, NextApiResponse<Result | ErrorResul
 apiRoute.post(async (req, res) => {
   try {
     performance.mark('generateStory-start');
-    const transcription = req.body.transcription;
-    const result = await generateStory([{
-      ...USER,
-      content: transcription!.trim(),
-    }]);
+    const transcription = req.body.transcription?.trim();
+    const result = await generateStory({ transcription });
     performance.mark('generateStory-end');
     result.transcription = transcription;
-    result.timeToGenerateStory = performance.measure('generateStory', 'generateStory-start', 'generateStory-end').duration;
+    result.timing.story = performance.measure('generateStory', 'generateStory-start', 'generateStory-end').duration;
 
     const id = await saveFile(result);
 
@@ -55,17 +52,16 @@ apiRoute.post(async (req, res) => {
 });
 
 /**
- * Generates a story based on user messages.
- * @param messages
- * @param iteration - we can try to generate a story multiple times if the first attempt is not satisfactory
- * This parameter is used to pass the previous generation result to the next attempt.
- * See {@link getInitialGeneration} for the initial prompt content.
+ * Generates a story based on user transcript.
  */
 const generateStory =
-  async (messages: ChatCompletionRequestMessage[], iteration = getInitialGeneration()):
-    Promise<IterationResult> => {
+  async ({ transcription }: { transcription: string }) => {
 
-    iteration.messages.push(...messages);
+    const result = createResultObject();
+    result.messages.push({
+    ...USER,
+      content: transcription,
+    });
 
     const request: CreateChatCompletionRequest = {
       model: MODEL,
@@ -74,13 +70,15 @@ const generateStory =
       frequency_penalty: FREQUENCY_PENALTY,
       temperature: TEMPERATURE,
       top_p: TOP_P,
-      messages: iteration.messages.slice(),
+      messages: result.messages.slice(),
     };
+
+    result.request = request;
 
     const completion = await openai.createChatCompletion(request);
 
-    iteration.history.push({request, response: completion.data});
-    iteration.tokensUsed += completion.data.usage?.total_tokens ?? 0;
+    result.response = completion.data;
+    result.usage = completion.data.usage;
 
     // Todo: better logging
     console.log('completion.usage: ', completion.data.usage);
@@ -88,27 +86,28 @@ const generateStory =
     const firstChoice = completion.data.choices[0];
     console.log('finish_reason: ', firstChoice.finish_reason);
 
-    iteration.messages.push({
+    result.messages.push({
       ...ASSISTANT,
       content: firstChoice.message!.content,
     });
 
     const content = firstChoice.message?.content || '';
+    result.rawContent = content;
 
     try {
-      iteration.story = await createStoryFromMarkDownContent(content);
-      return iteration;
+      result.story = await createStoryFromMarkDownContent(content);
+      return result;
     } catch (error) {
       console.warn('Failed to generate a story');
       console.error(error);
 
       // Todo: this is just a prove of concept for the iterative approach
       // we'll probably just let the user give feedback if a story should be regenerated with some more instructions on how to fix it
-      await saveStory(iteration, `.failures/${Date.now()}.json`);
+      await saveStory(result, `.failures/${Date.now()}.json`);
 
       throw {
         originalError: (error as Error).message,
-        generatedMessage: iteration.messages
+        generatedMessage: result.messages
           .filter(m => m.role === 'assistant')
           .map(m => m.content)
           .join('\n'),
@@ -172,10 +171,9 @@ const createStoryFromMarkDownContent = async (content: string): Promise<Story> =
 /**
  * Configure the initial parameters for the prompt.
  */
-const getInitialGeneration = (): IterationResult => ({
-  tokensUsed: 0,
-  timeToGenerateStory: 0,
-  timeToGenerateImages: 0,
+const createResultObject = (): StoryGeneration => ({
+  usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
+  timing: { story: 0, images: 0 },
   transcription: '',
   story: {
     title: '',
@@ -184,13 +182,14 @@ const getInitialGeneration = (): IterationResult => ({
     chapters: [],
     html: '',
   },
+  rawContent: '',
   messages: [
     {
       "role": "system",
       "content": shrinkMessage(`
         You are a captivating storyteller like the author of "Winnie-the-Pooh".
         In this interactive storytelling game, you will receive a story outline from a user named ${USER.name},
-        and your task is to expand it into a imaginative and engaging story with diverse characters and moral lessons.
+        and your task is to expand it into a imaginative and engaging story with diverse characters.
         Keep the following guidelines in mind:
         1. Always write the story in the same language used by ${USER.name} in the outline.
         2. The values in the front-matter block (e.g. genre and language) must be in English.
@@ -217,7 +216,6 @@ const getInitialGeneration = (): IterationResult => ({
         \`\`\``),
     },
   ],
-  history: [],
 });
 
 /**
@@ -235,7 +233,7 @@ const shrinkMessage = (text: string) => text.trim()
   .replace(/ {2,}/g, ' ')
   .replace(/\n{3,}/g, '\n\n');
 
-const saveFile = async (result: IterationResult) => {
+const saveFile = async (result: StoryGeneration) => {
   const date = new Date().toISOString().substring(0, 16);
   const title = result.story.title.replace(/[^\p{L}]/gu, '-');
   const filename = `${date}-${title}/story.json`;
@@ -249,18 +247,20 @@ interface Result {
   story: Story;
 }
 
-interface IterationResult {
+interface StoryGeneration {
   story: Story;
-  history: Array<{
-    request: CreateChatCompletionRequest;
-    response: CreateChatCompletionResponse;
-  }>;
+  request?: CreateChatCompletionRequest;
+  response?: CreateChatCompletionResponse;
   messages: ChatCompletionRequestMessage[];
-  // A sum of all iterations
-  tokensUsed: number;
+  // Tokens usage
+  usage?: { prompt_tokens: number, completion_tokens: number, total_tokens: number };
+  rawContent: string;
   transcription?: string;
-  timeToGenerateStory?: number;
-  timeToGenerateImages?: number;
+  // Time it took to generate responses
+  timing: {
+    story: number;
+    images: number;
+  };
 }
 
 interface ErrorResult {
