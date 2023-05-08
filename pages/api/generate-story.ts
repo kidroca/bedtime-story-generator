@@ -169,25 +169,6 @@ const createStoryFromMarkDownContent = async (content: string): Promise<Story> =
   };
 }
 
-const tryRegenerateAfterBadJSON = async (iteration: IterationResult) => {
-  console.log('Trying to generate a story again.');
-  const nextMessages: ChatCompletionRequestMessage[] = [
-    {
-      ...ADMIN,
-      content: `Your entire reply should be in a valid JSON format. Please fix your previous message.`,
-    }
-  ]
-
-  const result = await generateStory(nextMessages, iteration);
-  // If we succeeded, we remove the original `firstChoice` with the invalid JSON and the conversation about fixing it
-  const correctedMessage = result.messages.pop();
-  // The 2 message before the fix are the original message and the message asking to fix it
-  // We remove them and add back the corrected message
-  result.messages = result.messages.slice(0, -2).concat(correctedMessage as ChatCompletionRequestMessage);
-
-  return result;
-}
-
 /**
  * Configure the initial parameters for the prompt.
  */
