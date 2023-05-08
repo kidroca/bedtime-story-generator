@@ -37,8 +37,6 @@ export default function StoryPreview ({ story, id }: StoryPreviewProps) {
     });
   }, [story]);
 
-  console.log('revisions count: ', revisions.length);
-
   const latestStory = revisions[revisions.length - 1];
 
   const readStory = () => {

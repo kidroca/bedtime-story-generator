@@ -7,8 +7,8 @@ import {
   CreateChatCompletionRequest,
   CreateChatCompletionResponse
 } from 'openai';
-import {MarkdownFile} from '@dimerapp/markdown';
 import { performance } from 'perf_hooks';
+import matter from 'gray-matter';
 
 const MODEL = 'gpt-4';
 const MODEL_MAX_TOKENS = 8000;
@@ -116,13 +116,13 @@ const generateStory =
   };
 
 const createStoryFromMarkDownContent = async (content: string): Promise<Story> => {
-  const md = new MarkdownFile(content);
-  await md.process();
+
+  const frontMatter = matter(content);
 
   const regex = /^# (?<title>.*)(?:\r?\n|\r)(?<chaptersContent>[\s\S]*?)(?!\s*\S)/gm;
   const chapterRegex = /^##\s?(?<chapterTitle>[^#\n]*)\n*(?<chapterContent>[^#]*)\n*(?:###\s?.*\n*(?<illustration>^[^#\n]*))?/gm;
 
-  const result = regex.exec(content);
+  const result = regex.exec(frontMatter.content);
   const title = result?.groups?.title;
   if (!title) {
     throw new Error('Failed to find a title in the generated content');
@@ -160,9 +160,9 @@ const createStoryFromMarkDownContent = async (content: string): Promise<Story> =
   }
 
   return {
-    enTitle: md.frontmatter.title,
-    genre: md.frontmatter.genre,
-    language: md.frontmatter.language,
+    enTitle: frontMatter.data.title || '',
+    genre: frontMatter.data.genre || '',
+    language: frontMatter.data.language || '',
     title,
     chapters,
   };
