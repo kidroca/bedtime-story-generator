@@ -61,10 +61,10 @@ export default function StoryPreview ({ story, id }: StoryPreviewProps) {
 
   return (
     <section className={styles.layout}>
-      <article className="flex flex-col gap-2 mt-2 [&>*:nth-child(odd)]:flex-row-reverse">
+      <article className="flex flex-col gap-2 mt-2">
         <h3>{latestStory.title}</h3>
         {latestStory.chapters.map((part, i: number) => (
-          <section className="flex justify-between flex-row flex-wrap" key={i}>
+          <section className="flex justify-between p-4 flex-row odd:flex-row-reverse flex-wrap bg-yellow-100 odd:bg-orange-100 bg-opacity-50" key={i}>
             <h4 className="w-full">{part.title}</h4>
 
             <div className="basis-5/12">
