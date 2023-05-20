@@ -1,7 +1,8 @@
 import {readdir, readFile} from 'fs/promises';
 import {Story} from '@/pages/api/common';
-import StoryPreview from '@/components/StoryPreview';
+import StoryContent from '@/components/StoryContent';
 import Providers from '@/components/Providers';
+import { PageTitle } from '@/components/AppShell';
 
 interface StoryParams {
   id: string;
@@ -32,7 +33,8 @@ export default async function StoryPage({params}: { params: StoryParams }) {
   return (
     <>
       <Providers>
-        <StoryPreview story={story} id={`${folder}/story.json`} />
+        <PageTitle>{story.title}</PageTitle>
+        <StoryContent story={story} id={`${folder}/story.json`} />
       </Providers>
     </>
   );

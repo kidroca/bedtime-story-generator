@@ -26,7 +26,7 @@ export default async function Stories() {
       <PageTitle>Stories - The Index</PageTitle>
 
       <PageContent>
-        <ul className="flex flex-wrap justify-between p-2 text-blue-900 underline">
+        <ul className="flex flex-wrap justify-between text-blue-900 underline">
           {links.map((link, i) => (
             <li key={link.href} className="w-5/12 m-1">
               <Link href={link.href} className="visited:text-blue-700">{i + 1}. {link.name}</Link>

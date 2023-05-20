@@ -1,4 +1,4 @@
-import CreateStory from '@/components/CreateStory';
+import CreateStory from '@/components/CreateStory/CreateStory';
 import Providers from '@/components/Providers';
 import {PageContent, PageTitle} from '@/components/AppShell';
 
