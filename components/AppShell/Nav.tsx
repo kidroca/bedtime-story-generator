@@ -3,6 +3,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import {usePathname} from 'next/navigation';
+import Wrapper from './Wrapper';
 
 const user = {
   name: 'Random Guy',
@@ -36,7 +37,7 @@ export default function Nav() {
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Wrapper>
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
@@ -126,7 +127,7 @@ export default function Nav() {
                 </Disclosure.Button>
               </div>
             </div>
-          </div>
+          </Wrapper>
 
           <Disclosure.Panel className="md:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">

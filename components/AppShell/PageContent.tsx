@@ -1,8 +1,9 @@
 import {ReactNode} from 'react';
+import Wrapper from '@/components/AppShell/Wrapper';
 
 const PageContent = ({children}: { children: ReactNode }) => (
   <main>
-      <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">{children}</div>
+    <Wrapper className="py-6">{children}</Wrapper>
   </main>
 );
 
