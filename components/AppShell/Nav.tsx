@@ -12,8 +12,8 @@ const user = {
 }
 
 const navigation = [
-  {name: 'Index', href: '/stories'},
-  {name: 'Create', href: '/stories/generate'},
+  {name: 'Home', href: '/stories'},
+  {name: 'Create', href: '/stories/create'},
   {name: 'Recent', href: '#'},
   {name: 'Top', href: '#'},
   {name: 'Chat', href: '#'},
