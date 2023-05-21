@@ -1,5 +1,5 @@
 import React, { Fragment, useMemo, useState } from 'react';
-import { OptionButton } from '@/components/CreateStory/Actions';
+import { Button, OptionButton } from '@/components/CreateStory/Actions';
 import { useMutation } from 'react-query';
 import { useForm } from 'react-hook-form';
 import {
@@ -19,12 +19,15 @@ import { extractErrorMessage } from '@/utils/errors';
 
 interface BlockEditorProps {
   onSubmit: (text: string) => Promise<void>;
-  label: string;
+  label?: string;
   placeholder?: string;
   submitLabel?: string;
   defaultValue?: string;
   maxLength?: number;
   id?: string;
+  autoFocus?: boolean;
+  className?: string;
+  onCancel?: () => void;
 }
 
 let nextId = 1;
@@ -39,6 +42,9 @@ export default function BlockEditor({
   maxLength = 500,
   id = `block-editor-${nextId++}`,
   onSubmit,
+  autoFocus = false,
+  className = '',
+  onCancel,
 }: BlockEditorProps) {
   const {
     handleSubmit,
@@ -64,10 +70,12 @@ export default function BlockEditor({
   );
 
   return (
-    <form className="w-full" onSubmit={submit}>
-      <label htmlFor={id} className="text-lg font-semibold">
-        {label}
-      </label>
+    <form className={`w-full ${className}`} onSubmit={submit}>
+      {label && (
+        <label htmlFor={id} className="text-lg font-semibold">
+          {label}
+        </label>
+      )}
       <div className="w-full mb-2 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
         {/*Controls*/}
         <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
@@ -105,6 +113,7 @@ export default function BlockEditor({
         {/*Text Content*/}
         <div className="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
           <textarea
+            autoFocus={autoFocus}
             id={id}
             rows={8}
             className="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
@@ -117,21 +126,26 @@ export default function BlockEditor({
           />
         </div>
       </div>
-      <button
-        type="submit"
-        disabled={submitDisabled}
-        className={`inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg 
-        focus:ring-4 focus:ring-blue-200dark:focus:ring-blue-900 hover:bg-blue-800 disabled:opacity-60 disabled:hover:bg-blue-700`}>
-        {submitLabel}
-        {isSubmitting && <ArrowPathIcon className="w-5 h-5 ml-2 animate-spin" />}
-        {isSubmitSuccessful && <DocumentCheckIcon className="w-5 h-5 ml-2" />}
-      </button>
+
+      <section className="flex">
+        <Button type="submit" variant="primary" disabled={submitDisabled}>
+          {submitLabel}
+          {isSubmitting && <ArrowPathIcon className="w-5 h-5 ml-2 animate-spin" />}
+          {isSubmitSuccessful && <DocumentCheckIcon className="w-5 h-5 ml-2" />}
+        </Button>
+
+        {onCancel && (
+          <Button onClick={onCancel} className="ml-2">
+            Cancel
+          </Button>
+        )}
+      </section>
 
       {Boolean(errors.root?.serverError) && (
-        <article className="flex flex-col gap-2 mt-2">
+        <section className="flex flex-col gap-2 mt-2">
           <h3 className="text-red-500">Error</h3>
           <p>{errors.root!.serverError.message}</p>
-        </article>
+        </section>
       )}
     </form>
   );

@@ -18,6 +18,7 @@ export default function CreateStory() {
   const reviseStory = useCallback(
     async (title: string) => {
       const updatedStory = await updateStory(result!.id, result!.story, { title });
+      // @ts-ignore
       setResult(updatedStory);
     },
     [result]

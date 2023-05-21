@@ -76,6 +76,7 @@ interface ButtonProps {
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   disabled?: boolean;
   title?: string;
+  variant?: 'primary' | 'secondary';
 }
 
 export const Button = ({
@@ -85,18 +86,28 @@ export const Button = ({
   type = 'button',
   disabled = false,
   title,
-}: ButtonProps) => (
-  <button
-    type={type}
-    onClick={onClick}
-    disabled={disabled}
-    title={title}
-    className={`inline-flex items-center justify-between rounded-md bg-white px-3 py-2 
-    text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
-    hover:enabled:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed ${className}`}>
-    {children}
-  </button>
-);
+  variant = 'secondary',
+}: ButtonProps) => {
+  let classes = `px-5 py-2 inline-flex items-center justify-between text-sm font-semibold 
+  shadow-sm rounded-lg ring-1 disabled:opacity-60 disabled:cursor-not-allowed`;
+
+  if (variant === 'primary') {
+    classes += ' text-white bg-blue-700 focus:ring-blue-200 dark:focus:ring-blue-900 hover:enabled:bg-blue-800';
+  } else {
+    classes += ' text-gray-900 bg-white ring-gray-300 hover:enabled:bg-gray-50';
+  }
+
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      title={title}
+      className={`${classes} ${className}`}>
+      {children}
+    </button>
+  );
+};
 
 interface ButtonIconProps {
   children: ReactNode;

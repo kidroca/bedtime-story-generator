@@ -9,6 +9,7 @@ import Wrapper from '@/components/AppShell/Wrapper';
 import { createPortal } from 'react-dom';
 import EditableChapterTitle from '@/components/CreateStory/EditableChapterTitle';
 import { generateImages, updateStory } from '@/utils/client';
+import EditableChapterContent from '@/components/CreateStory/EditableChapterContent';
 
 interface StoryPreviewProps {
   story: Story;
@@ -85,13 +86,20 @@ export default function StoryContent({ story, id }: StoryPreviewProps) {
                 }}
               />
 
-              <div className="basis-5/12 text-lg">
-                {part.content?.split(/\n+/).map((line, j) => (
-                  <p className="my-4" key={j}>
-                    {line}
-                  </p>
-                ))}
-              </div>
+              <EditableChapterContent
+                className="mb-2"
+                content={part.content}
+                onUpdate={async (content) => {
+                  const chapters: Array<Partial<StoryChapter>> = [];
+                  chapters[i] = { content };
+                  await updateStory(id!, latestStory, { chapters });
+                  setRevisions((current) => {
+                    const updated = [...current];
+                    updated[updated.length - 1].chapters[i].content = content;
+                    return updated;
+                  });
+                }}
+              />
 
               {part.img && (
                 <Image
