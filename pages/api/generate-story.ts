@@ -1,6 +1,6 @@
 import nextConnect from 'next-connect';
 import {NextApiRequest, NextApiResponse} from 'next';
-import { commonErrorHandler, openai, saveStory, Story, StoryFile } from '@/pages/api/common';
+import { commonErrorHandler, openai, saveStory, StoryFile } from '@/pages/api/common';
 import {
   ChatCompletionRequestMessage,
   ChatCompletionRequestMessageRoleEnum,
@@ -9,6 +9,7 @@ import {
 } from 'openai';
 import { performance } from 'perf_hooks';
 import matter from 'gray-matter';
+import { Story } from '@/utils/stories';
 
 const MODEL = 'gpt-4';
 const MODEL_MAX_TOKENS = 8000;

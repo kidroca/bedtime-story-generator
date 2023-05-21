@@ -1,11 +1,11 @@
 'use client';
 import { useCallback, useState } from 'react';
-import { Story } from '@/pages/api/common';
 import StoryContent from '../StoryContent';
 import Wrapper from '@/components/AppShell/Wrapper';
 import BlockEditor from '@/components/TextEditing/BlockEditor';
 import InputGroup from '@/components/TextEditing/InputGroup';
 import { generateStory, updateStory } from '@/utils/client';
+import { Story } from '@/utils/stories';
 
 export default function CreateStory() {
   const [result, setResult] = useState<{ story: Story; id: string }>();

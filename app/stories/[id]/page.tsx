@@ -1,8 +1,8 @@
 import {readdir, readFile} from 'fs/promises';
-import {Story} from '@/pages/api/common';
 import StoryContent from '@/components/StoryContent';
 import Providers from '@/components/Providers';
 import { PageTitle } from '@/components/AppShell';
+import { Story } from '@/utils/stories';
 
 interface StoryParams {
   id: string;

@@ -1,4 +1,5 @@
-import { Story, StoryChapter, StoryRevision } from '@/pages/api/common';
+
+import { Story, StoryChapter, StoryRevision } from '@/utils/stories';
 
 export const generateStory = (transcription: string) =>
   makeRequest<{ story: Story; id: string }>('/api/generate-story', {

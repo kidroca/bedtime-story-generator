@@ -4,6 +4,7 @@ import { NextApiResponse } from 'next';
 import { AxiosError } from 'axios';
 import path from 'path';
 import { Stream } from 'node:stream';
+import { Story, StoryRevision } from '@/utils/stories';
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -51,27 +52,6 @@ export const saveFile = async (filePath: string, content: Writable, options?: an
 };
 
 const STORIES_FS_PATH = './public/uploads/stories';
-
-export interface Story {
-  title: string;
-  enTitle?: string;
-  genre: string;
-  language: string;
-  chapters: StoryChapter[];
-}
-
-export interface StoryRevision extends Partial<Omit<Story, 'chapters'>> {
-  date: string;
-  chapters?: Array<Partial<StoryChapter>>;
-}
-
-export interface StoryChapter {
-  title: string;
-  content: string;
-  illustration?: string;
-  illustrationPrompt?: string;
-  img?: string;
-}
 
 export interface StoryFile {
   story: Story;

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import * as fs from 'fs/promises';
-import { readStory, saveStory, StoryChapter, StoryFile } from '@/pages/api/common';
+import { readStory, saveStory, StoryFile } from '@/pages/api/common';
+import { StoryChapter } from '@/utils/stories';
 
 export async function PUT(req: NextRequest) {
   const data = await req.json();

@@ -1,5 +1,4 @@
 'use client';
-import { Story, StoryChapter } from '@/pages/api/common';
 import Image from 'next/image';
 import { useMutation } from 'react-query';
 import { useEffect, useState } from 'react';
@@ -10,6 +9,7 @@ import { createPortal } from 'react-dom';
 import EditableChapterTitle from '@/components/CreateStory/EditableChapterTitle';
 import { generateImages, updateStory } from '@/utils/client';
 import EditableChapterContent from '@/components/CreateStory/EditableChapterContent';
+import { Story, StoryChapter } from '@/utils/stories';
 
 interface StoryPreviewProps {
   story: Story;

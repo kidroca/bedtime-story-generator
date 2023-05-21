@@ -2,7 +2,8 @@ import nextConnect from 'next-connect';
 import {NextApiRequest, NextApiResponse} from 'next';
 import path from 'path';
 import {performance} from 'perf_hooks';
-import {openai, saveFile, commonErrorHandler, Story, saveStory, readStory} from './common';
+import {openai, saveFile, commonErrorHandler, saveStory, readStory} from './common';
+import { Story } from '@/utils/stories';
 
 const apiRoute = nextConnect<NextApiRequest, NextApiResponse>({
   // Handle any other HTTP method
