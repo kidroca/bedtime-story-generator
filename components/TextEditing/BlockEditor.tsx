@@ -1,6 +1,7 @@
-import React, { FormEvent, Fragment, useCallback, useMemo, useState } from 'react';
+import React, { Fragment, useMemo, useState } from 'react';
 import { OptionButton } from '@/components/CreateStory/Actions';
 import { useMutation } from 'react-query';
+import { useForm } from 'react-hook-form';
 import {
   ArrowPathIcon,
   ArrowsPointingOutIcon,
@@ -16,39 +17,62 @@ import {
 import { Popover, Transition } from '@headlessui/react';
 
 interface BlockEditorProps {
-  onSubmit: (text: string) => void;
+  onSubmit: (text: string) => Promise<void>;
   label: string;
   placeholder?: string;
   submitLabel?: string;
   defaultValue?: string;
+  maxLength?: number;
+  id?: string;
 }
+
+let nextId = 1;
 
 export default function BlockEditor({
   label,
   placeholder = 'Write something...',
   submitLabel = 'Save',
-  defaultValue,
+  defaultValue = '',
+  maxLength = 500,
+  id = `block-editor-${nextId++}`,
   onSubmit,
 }: BlockEditorProps) {
-  const [text, setText] = useState(defaultValue ?? '');
-
-  const submit = useCallback(
-    (e: FormEvent) => {
-      e.preventDefault();
-      const text = (e.target as HTMLFormElement).elements.namedItem(
-        'text-block'
-      ) as HTMLTextAreaElement;
-      onSubmit(text.value);
+  const {
+    handleSubmit,
+    register,
+    reset,
+    watch,
+    setValue,
+    setError,
+    formState: { isValid, isSubmitting, isSubmitSuccessful, isDirty, errors },
+  } = useForm({
+    defaultValues: {
+      textBlock: defaultValue,
     },
-    [onSubmit]
-  );
+  });
+
+  const text = watch('textBlock');
+  const submitDisabled = !isValid || isSubmitting || !isDirty;
+
+  const submit = handleSubmit((data) => {
+    return onSubmit(data.textBlock).catch((error: any) => {
+      let message = 'Unknown Error';
+      if (error.message) {
+        message = error.message;
+      } else if (error.error) {
+        message = error.error;
+      }
+
+      setError('root.serverError', { message });
+    });
+  });
 
   return (
     <form className="w-full" onSubmit={submit}>
-      <label htmlFor="editor" className="text-lg font-semibold">
+      <label htmlFor={id} className="text-lg font-semibold">
         {label}
       </label>
-      <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+      <div className="w-full mb-2 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
         {/*Controls*/}
         <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
           <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
@@ -57,11 +81,11 @@ export default function BlockEditor({
               <EditorIconButton label="Add emoji" icon={FaceSmileIcon} onClick={() => {}} />
             </div>
             <div className="flex flex-wrap items-center space-x-1 sm:px-4">
-              <EditorIconButton icon={TrashIcon} label="Clear" onClick={() => setText('')} />
+              <EditorIconButton icon={TrashIcon} label="Clear" onClick={() => reset()} />
             </div>
             <div className="flex flex-wrap items-center space-x-1 sm:pl-4">
               <DictationControls
-                applyTranscription={(transcription) => setText(transcription)}
+                applyTranscription={(transcription) => setValue('textBlock', transcription)}
                 current={text}
               />
             </div>
@@ -85,23 +109,34 @@ export default function BlockEditor({
         {/*Text Content*/}
         <div className="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
           <textarea
-            id="editor"
+            id={id}
             rows={8}
-            name="text-block"
             className="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
             placeholder={placeholder}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            required
+            {...register('textBlock', {
+              required: true,
+              maxLength,
+              minLength: 10,
+            })}
           />
         </div>
       </div>
       <button
         type="submit"
-        disabled={text.length === 0 || text === defaultValue}
-        className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+        disabled={submitDisabled}
+        className={`inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg 
+        focus:ring-4 focus:ring-blue-200dark:focus:ring-blue-900 hover:bg-blue-800 disabled:opacity-50 disabled:hover:bg-blue-700`}>
         {submitLabel}
+        {isSubmitting && <ArrowPathIcon className="w-5 h-5 ml-2 animate-spin" />}
+        {isSubmitSuccessful && <DocumentCheckIcon className="w-5 h-5 ml-2" />}
       </button>
+
+      {errors.root?.serverError && (
+        <article className="flex flex-col gap-2 mt-2">
+          <h3 className="text-red-500">Error</h3>
+          <p>{errors.root.serverError.message}</p>
+        </article>
+      )}
     </form>
   );
 }
@@ -111,6 +146,7 @@ interface EditorButtonProps {
   icon: typeof ArrowPathIcon;
   onClick?: () => void;
   className?: string;
+  iconClassName?: string;
   disabled?: boolean;
 }
 
@@ -120,6 +156,7 @@ const EditorIconButton = ({
   onClick,
   disabled,
   className = '',
+  iconClassName = '',
 }: EditorButtonProps) => {
   return (
     <button
@@ -128,7 +165,7 @@ const EditorIconButton = ({
       disabled={disabled}
       className={`p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 
         dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 ${className}`}>
-      <Icon aria-hidden="true" className="w-5 h-5" />
+      <Icon aria-hidden="true" className={`w-5 h-5 ${iconClassName}`} />
       <span className="sr-only">{label}</span>
     </button>
   );
@@ -197,7 +234,12 @@ const DictationControls = ({ applyTranscription, current }: DictationControlsPro
   return (
     <>
       <Popover className="relative">
-        <Popover.Button as={EditorIconButton} icon={MicrophoneIcon} label="Record Narrative" />
+        <Popover.Button
+          as={EditorIconButton}
+          icon={MicrophoneIcon}
+          iconClassName={recordAudio.isLoading ? 'text-red-400 animate-pulse' : ''}
+          label="Record Narrative"
+        />
 
         <Transition
           as={Fragment}
