@@ -15,6 +15,7 @@ import {
   TrashIcon,
 } from '@heroicons/react/24/solid';
 import { Popover, Transition } from '@headlessui/react';
+import { extractErrorMessage } from '@/utils/errors';
 
 interface BlockEditorProps {
   onSubmit: (text: string) => Promise<void>;
@@ -54,18 +55,11 @@ export default function BlockEditor({
   const text = watch('textBlock');
   const submitDisabled = !isValid || isSubmitting || !isDirty;
 
-  const submit = handleSubmit((data) => {
-    return onSubmit(data.textBlock).catch((error: any) => {
-      let message = 'Unknown Error';
-      if (error.message) {
-        message = error.message;
-      } else if (error.error) {
-        message = error.error;
-      }
-
-      setError('root.serverError', { message });
-    });
-  });
+  const submit = handleSubmit((data) =>
+    onSubmit(data.textBlock).catch((error: any) => {
+      setError('root.serverError', { message: extractErrorMessage(error) });
+    })
+  );
 
   return (
     <form className="w-full" onSubmit={submit}>
