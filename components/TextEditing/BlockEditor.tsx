@@ -1,4 +1,4 @@
-import React, { Fragment, useMemo, useState } from 'react';
+import React, { forwardRef, Fragment, useMemo, useState } from 'react';
 import { Button, OptionButton } from '@/components/CreateStory/Actions';
 import { useMutation } from 'react-query';
 import { useForm } from 'react-hook-form';
@@ -160,26 +160,27 @@ interface EditorButtonProps {
   disabled?: boolean;
 }
 
-const EditorIconButton = ({
-  icon: Icon,
-  label,
-  onClick,
-  disabled,
-  className = '',
-  iconClassName = '',
-}: EditorButtonProps) => {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className={`p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 
+const EditorIconButton = forwardRef(
+  (
+    { onClick, disabled, className = '', iconClassName = '', icon: Icon, label }: EditorButtonProps,
+    ref: any
+  ) => {
+    return (
+      <button
+        ref={ref}
+        type="button"
+        onClick={onClick}
+        disabled={disabled}
+        className={`p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 
         dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 ${className}`}>
-      <Icon aria-hidden="true" className={`w-5 h-5 ${iconClassName}`} />
-      <span className="sr-only">{label}</span>
-    </button>
-  );
-};
+        <Icon aria-hidden="true" className={`w-5 h-5 ${iconClassName}`} />
+        <span className="sr-only">{label}</span>
+      </button>
+    );
+  }
+);
+
+EditorIconButton.displayName = 'EditorIconButton';
 
 interface DictationControlsProps {
   applyTranscription: (transcription: string) => void;

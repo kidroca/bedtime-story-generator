@@ -26,6 +26,7 @@ export default function EditableChapterContent({
         defaultValue={content}
         submitLabel="Update Chapter"
         className={classes}
+        maxLength={1000}
         onSubmit={async (newTitle) => {
           await onUpdate(newTitle);
           setEditMode(false);
