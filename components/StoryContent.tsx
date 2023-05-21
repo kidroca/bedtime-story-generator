@@ -45,19 +45,19 @@ export default function StoryContent({ story, id }: StoryPreviewProps) {
 
   const readStory = () => {
     const utterance = new SpeechSynthesisUtterance('Приказка: ' + latestStory.title);
-    utterance.lang = 'bg-BG';
-    utterance.rate = 0.88;
-    // utterance.pitch = 0.8;
+    utterance.lang = story.language;
+    utterance.rate = 0.77;
+    utterance.pitch = 0.88;
     speechSynthesis.speak(utterance);
 
     latestStory.chapters.forEach((part, i) => {
       const content = new SpeechSynthesisUtterance(part.content);
-      content.lang = 'bg-BG';
-      content.rate = 0.91;
-      const title = new SpeechSynthesisUtterance(`част ${i + 1}: ${part.title}`);
-      title.lang = 'bg-BG';
-      title.rate = 0.88;
-      // utterance.pitch = 0.8;
+      content.lang = story.language;
+      content.rate = 0.85;
+      const title = new SpeechSynthesisUtterance(part.title);
+      title.lang = story.language;
+      title.rate = 0.8;
+      utterance.pitch = 0.88;
       speechSynthesis.speak(title);
       speechSynthesis.speak(content);
     });
