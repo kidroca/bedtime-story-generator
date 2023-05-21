@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as fs from 'fs/promises';
-import { readStory, saveStory, StoryFile } from '@/pages/api/common';
+import { readStory, saveStory, StoryChapter, StoryFile } from '@/pages/api/common';
 
 export async function PUT(req: NextRequest) {
   const data = await req.json();
@@ -17,7 +17,6 @@ export async function PUT(req: NextRequest) {
   }
 
   let file: StoryFile;
-  const filePath = `./public/uploads/stories/${data.id}/story.json`;
 
   try {
     file = await readStory(data.id);
@@ -26,7 +25,7 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json({ error: { message: 'Story not found' } }, { status: 404 });
   }
 
-  const revision: typeof file.revisions[0] = { date: new Date().toISOString() };
+  const revision: (typeof file.revisions)[0] = { date: new Date().toISOString() };
 
   for (const key in data.story) {
     switch (key) {
@@ -43,10 +42,34 @@ export async function PUT(req: NextRequest) {
         revision.language = data.story.language;
         break;
       case 'chapters':
+        for (let i = 0; i < data.story.chapters; i++) {
+          const chapter = data.story.chapters[i];
+          if (chapter && revision.chapters && revision.chapters[i]) {
+            for (const chapterKey in chapter as StoryChapter) {
+              switch (chapterKey) {
+                case 'title':
+                case 'content':
+                case 'illustration':
+                case 'illustrationPrompt':
+                case 'img':
+                  break;
+                default:
+                  return NextResponse.json(
+                    { error: { message: `Invalid property: chapters[${i}]['${key}']` } },
+                    { status: 400 }
+                  );
+              }
+            }
+          }
+        }
+
         revision.chapters = data.story.chapters;
         break;
       default:
-        return NextResponse.json({ error: { message: `Invalid property: ${key}` } }, { status: 400 });
+        return NextResponse.json(
+          { error: { message: `Invalid property: ${key}` } },
+          { status: 400 }
+        );
     }
   }
 
@@ -54,8 +77,7 @@ export async function PUT(req: NextRequest) {
     file.revisions.push(revision);
     await saveStory(file, data.id);
     return NextResponse.json({ message: `Saved story revision N${file.revisions.length}}` });
-  }
-  catch (err) {
+  } catch (err) {
     return NextResponse.json({ error: { message: 'Could not save the story' } }, { status: 500 });
   }
 }

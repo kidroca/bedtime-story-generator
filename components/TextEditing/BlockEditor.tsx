@@ -29,6 +29,8 @@ interface BlockEditorProps {
 
 let nextId = 1;
 
+// Todo: add translation action
+
 export default function BlockEditor({
   label,
   placeholder = 'Write something...',
