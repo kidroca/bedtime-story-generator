@@ -63,7 +63,7 @@ export default function CreateStory() {
   );
 
   return (
-    <section className="w-full flex flex-col items-center p-2">
+    <section className="w-full flex flex-col items-center">
       <Wrapper className="flex flex-col my-2">
         <BlockEditor label="Narrative" submitLabel="Generate" onSubmit={generateStory} />
 

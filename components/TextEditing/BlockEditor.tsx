@@ -119,16 +119,16 @@ export default function BlockEditor({
         type="submit"
         disabled={submitDisabled}
         className={`inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg 
-        focus:ring-4 focus:ring-blue-200dark:focus:ring-blue-900 hover:bg-blue-800 disabled:opacity-50 disabled:hover:bg-blue-700`}>
+        focus:ring-4 focus:ring-blue-200dark:focus:ring-blue-900 hover:bg-blue-800 disabled:opacity-60 disabled:hover:bg-blue-700`}>
         {submitLabel}
         {isSubmitting && <ArrowPathIcon className="w-5 h-5 ml-2 animate-spin" />}
         {isSubmitSuccessful && <DocumentCheckIcon className="w-5 h-5 ml-2" />}
       </button>
 
-      {errors.root?.serverError && (
+      {Boolean(errors.root?.serverError) && (
         <article className="flex flex-col gap-2 mt-2">
           <h3 className="text-red-500">Error</h3>
-          <p>{errors.root.serverError.message}</p>
+          <p>{errors.root!.serverError.message}</p>
         </article>
       )}
     </form>
