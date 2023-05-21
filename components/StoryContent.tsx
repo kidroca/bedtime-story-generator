@@ -1,5 +1,5 @@
 'use client';
-import { Story } from '@/pages/api/common';
+import { Story, StoryChapter } from '@/pages/api/common';
 import Image from 'next/image';
 import { useMutation } from 'react-query';
 import { useEffect, useState } from 'react';
@@ -7,6 +7,8 @@ import { PlayIcon, PauseIcon, StopIcon } from '@heroicons/react/24/solid';
 import { Button } from '@/components/CreateStory/Actions';
 import Wrapper from '@/components/AppShell/Wrapper';
 import { createPortal } from 'react-dom';
+import EditableChapterTitle from '@/components/CreateStory/EditableChapterTitle';
+import { generateImages, updateStory } from '@/utils/client';
 
 interface StoryPreviewProps {
   story: Story;
@@ -16,17 +18,9 @@ interface StoryPreviewProps {
 export default function StoryContent({ story, id }: StoryPreviewProps) {
   const [revisions, setRevisions] = useState<Story[]>([story]);
   const images = useMutation(async (storyId: string) => {
-    const result: { story: Story } = await fetch('/api/generate-images', {
-      method: 'POST',
-      body: JSON.stringify({ storyId }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((response) => response.json());
-
-    setRevisions((current) => [...current, result.story]);
-
-    return result.story;
+    const revisedStory = await generateImages(storyId);
+    setRevisions((current) => [...current, revisedStory]);
+    return revisedStory;
   });
 
   useEffect(() => {
@@ -76,7 +70,20 @@ export default function StoryContent({ story, id }: StoryPreviewProps) {
             key={i}
             className="[&>*]:odd:flex-row-reverse bg-yellow-100 odd:bg-orange-100 bg-opacity-50">
             <Wrapper className="flex flex-row flex-wrap justify-between">
-              <h4 className="w-full text-3xl font-serif pt-4">{part.title}</h4>
+              <EditableChapterTitle
+                className="w-full"
+                title={part.title}
+                onUpdate={async (title) => {
+                  const chapters: Array<Partial<StoryChapter>> = [];
+                  chapters[i] = { title };
+                  await updateStory(id!, latestStory, { chapters });
+                  setRevisions((current) => {
+                    const updated = [...current];
+                    updated[updated.length - 1].chapters[i].title = title;
+                    return updated;
+                  });
+                }}
+              />
 
               <div className="basis-5/12 text-lg">
                 {part.content?.split(/\n+/).map((line, j) => (
