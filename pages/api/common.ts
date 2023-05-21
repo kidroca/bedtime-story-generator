@@ -26,13 +26,13 @@ export const commonErrorHandler = (err: unknown, res: NextApiResponse) => {
 }
 
 export const readStory = (filename: string): Promise<StoryFile> => {
-  return fs.readFile(`${STORIES_FS_PATH}/${filename}`)
+  return fs.readFile(`${STORIES_FS_PATH}/${filename}/story.json`)
     .then((data) => JSON.parse(data.toString()));
 }
 
 export const saveStory = async (body: object, filename: string) =>
   saveFile(
-    `${STORIES_FS_PATH}/${filename}`,
+    `${STORIES_FS_PATH}/${filename}/story.json`,
     JSON.stringify(body, null, 2),
     {encoding: 'utf-8'}
   );

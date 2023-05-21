@@ -34,7 +34,7 @@ export default async function StoryPage({params}: { params: StoryParams }) {
     <>
       <Providers>
         <PageTitle>{story.title}</PageTitle>
-        <StoryContent story={story} id={`${folder}/story.json`} />
+        <StoryContent story={story} id={folder} />
       </Providers>
     </>
   );

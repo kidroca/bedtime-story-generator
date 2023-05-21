@@ -101,9 +101,7 @@ const generateStory =
       console.warn('Failed to generate a story');
       console.error(error);
 
-      // Todo: this is just a prove of concept for the iterative approach
-      // we'll probably just let the user give feedback if a story should be regenerated with some more instructions on how to fix it
-      await saveStory(result, `.failures/${Date.now()}.json`);
+      await saveStory(result, `.failures/${Date.now()}`);
 
       throw {
         originalError: (error as Error).message,
@@ -237,10 +235,10 @@ const shrinkMessage = (text: string) => text.trim()
 const saveFile = async (result: StoryGeneration) => {
   const date = new Date().toISOString().substring(0, 16);
   const title = result.story.title.replace(/[^\p{L}]/gu, '-');
-  const filename = `${date}-${title}/story.json`;
-  await saveStory(result, `${date}-${title}/story.json`);
+  const id = `${date}-${title}`;
+  await saveStory(result, id);
 
-  return filename;
+  return id;
 }
 
 interface Result {

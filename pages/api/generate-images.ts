@@ -18,7 +18,7 @@ apiRoute.post(async (req, res) => {
     await addImages(file.story, storyId);
 
     performance.mark('addImages-end');
-    file.timeToGenerateImages =performance.measure('addImages', 'addImages-start', 'addImages-end').duration;
+    file.timing.images = performance.measure('addImages', 'addImages-start', 'addImages-end').duration;
 
     await saveStory(file, storyId);
 
