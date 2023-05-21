@@ -93,7 +93,7 @@ export const Button = ({
     title={title}
     className={`inline-flex items-center justify-between rounded-md bg-white px-3 py-2 
     text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
-    hover:bg-gray-50 ${className}`}>
+    hover:enabled:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed ${className}`}>
     {children}
   </button>
 );
