@@ -111,12 +111,12 @@ export default function BlockEditor({
         </div>
 
         {/*Text Content*/}
-        <div className="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
+        <div className="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800 focus-within:ring-2 focus-within:ring-blue-500 ring-inset">
           <textarea
             autoFocus={autoFocus}
             id={id}
             rows={8}
-            className="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+            className="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400 focus:outline-none"
             placeholder={placeholder}
             {...register('textBlock', {
               required: true,

@@ -1,4 +1,4 @@
-export function mergeStoryRevisions(story: Story, revisions: StoryRevision[]) {
+export function mergeStoryRevisions(story: Story, revisions: StoryRevision[] = []) {
   const mergedStory: Story = JSON.parse(JSON.stringify(story));
 
   for (const revision of revisions) {
