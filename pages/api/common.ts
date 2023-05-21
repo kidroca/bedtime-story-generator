@@ -65,11 +65,14 @@ export interface Story {
     illustrationPrompt?: string;
     img?: string;
   }>;
-  html?: string;
 }
 
 export interface StoryFile {
-  transcription: string;
-  timeToGenerateImages?: number;
   story: Story;
+  // Time it took to generate responses
+  timing: {
+    story: number;
+    images: number;
+  };
+  revisions?: Array<Partial<Story> & { date: string; }>;
 }

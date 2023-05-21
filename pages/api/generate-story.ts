@@ -1,6 +1,6 @@
 import nextConnect from 'next-connect';
 import {NextApiRequest, NextApiResponse} from 'next';
-import {commonErrorHandler, openai, saveStory, Story} from '@/pages/api/common';
+import { commonErrorHandler, openai, saveStory, Story, StoryFile } from '@/pages/api/common';
 import {
   ChatCompletionRequestMessage,
   ChatCompletionRequestMessageRoleEnum,
@@ -175,12 +175,12 @@ const createResultObject = (): StoryGeneration => ({
   usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
   timing: { story: 0, images: 0 },
   transcription: '',
+  date: new Date().toISOString(),
   story: {
     title: '',
     genre: '',
     language: '',
     chapters: [],
-    html: '',
   },
   rawContent: '',
   messages: [
@@ -216,6 +216,7 @@ const createResultObject = (): StoryGeneration => ({
         \`\`\``),
     },
   ],
+  revisions: [],
 });
 
 /**
@@ -247,8 +248,9 @@ interface Result {
   story: Story;
 }
 
-interface StoryGeneration {
+interface StoryGeneration extends StoryFile {
   story: Story;
+  date: string;
   request?: CreateChatCompletionRequest;
   response?: CreateChatCompletionResponse;
   messages: ChatCompletionRequestMessage[];
@@ -256,11 +258,6 @@ interface StoryGeneration {
   usage?: { prompt_tokens: number, completion_tokens: number, total_tokens: number };
   rawContent: string;
   transcription?: string;
-  // Time it took to generate responses
-  timing: {
-    story: number;
-    images: number;
-  };
 }
 
 interface ErrorResult {
