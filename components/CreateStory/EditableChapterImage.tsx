@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+  ArrowPathIcon,
   PencilSquareIcon,
   TrashIcon,
   DocumentCheckIcon,
@@ -8,6 +9,11 @@ import {
 import BlockEditor from '@/components/TextEditing/BlockEditor';
 import Image from 'next/image';
 import InputGroup from '@/components/TextEditing/InputGroup';
+import { generateImage } from '@/utils/client';
+import { useMutation } from 'react-query';
+
+// Todo: display multiple pictures per chapter
+// Todo: generate a few images and let the user choose
 
 interface EditableChapterImageProps {
   img?: string;
@@ -27,6 +33,11 @@ export default function EditableChapterImage({
   const [mode, setMode] = useState(defaultMode);
   const [newIllustration, setNewIllustration] = useState(illustration);
   const [newImage, setNewImage] = useState('');
+
+  const update = useMutation(async (data: { img: string; illustration: string }) => {
+    await onUpdate(data);
+    return data;
+  });
 
   const classes = `pt-4 ${className}`;
 
@@ -54,14 +65,22 @@ export default function EditableChapterImage({
             <span className="sr-only">Reset</span>
           </button>
         )}
-        {Boolean(mode !== 'preview' && newImage) && (
+        {Boolean((mode !== 'preview' && newImage) || update.isLoading) && (
           <button
             className="p-1"
+            disabled={update.isLoading || update.isSuccess}
             onClick={async () => {
-              await onUpdate({ img: newImage, illustration: newIllustration });
+              await update.mutateAsync({ img: newImage, illustration: newIllustration });
               setMode('preview');
             }}>
-            <DocumentCheckIcon className="w-7 h-7" aria-hidden={true} />
+            {update.isLoading ? (
+              <ArrowPathIcon className="w-7 h-7 animate-spin" aria-hidden={true} />
+            ) : (
+              <DocumentCheckIcon
+                className={`w-7 h-7 ${update.isSuccess ? 'text-green-400' : ''}`}
+                aria-hidden={true}
+              />
+            )}
             <span className="sr-only">Save</span>
           </button>
         )}
@@ -71,10 +90,13 @@ export default function EditableChapterImage({
           autoFocus
           rows={3}
           className="mt-1"
+          submitLabel="Generate"
           defaultValue={newIllustration}
-          onSubmit={() => {
-            // Prompt to generate new image
-            return Promise.resolve();
+          onSubmit={async (text) => {
+            const url = await generateImage(text);
+            setNewImage(url);
+            setNewIllustration(text);
+            update.reset();
           }}
           onCancel={() => setMode('preview')}
         />
@@ -86,7 +108,7 @@ export default function EditableChapterImage({
           defaultValue={newImage || img || ''}
           onSubmit={(url) => {
             setNewImage(url);
-            setMode('preview');
+            update.reset();
           }}
           onCancel={() => setMode('preview')}
         />

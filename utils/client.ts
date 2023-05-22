@@ -31,6 +31,15 @@ export const generateImages = async (storyId: string) => {
   return result.story;
 };
 
+export const generateImage = async (prompt: string) => {
+  const result: { url: string } = await makeRequest('/api/generate-image', {
+    method: 'POST',
+    body: { prompt },
+  });
+
+  return result.url;
+}
+
 async function makeRequest<ReturnValue>(url: string, { body, ...options }: RequestInput) {
   const response = await fetch(url, {
     ...options,

@@ -10,6 +10,7 @@ import EditableChapterTitle from '@/components/CreateStory/EditableChapterTitle'
 import { generateImages, updateStory } from '@/utils/client';
 import EditableChapterContent from '@/components/CreateStory/EditableChapterContent';
 import { Story, StoryChapter } from '@/utils/stories';
+import EditableChapterImage from '@/components/CreateStory/EditableChapterImage';
 
 interface StoryPreviewProps {
   story: Story;
@@ -101,15 +102,21 @@ export default function StoryContent({ story, id }: StoryPreviewProps) {
                 }}
               />
 
-              {part.img && (
-                <Image
-                  className="w-1/2 mt-4"
-                  src={part.img}
-                  alt={part.illustration!}
-                  width={720}
-                  height={720}
-                />
-              )}
+              <EditableChapterImage
+                img={part.img}
+                illustration={part.illustration}
+                className="w-1/2 mt-4"
+                onUpdate={async (image) => {
+                  const chapters: Array<Partial<StoryChapter>> = [];
+                  chapters[i] = { ...image };
+                  await updateStory(id!, latestStory, { chapters });
+                  setRevisions((current) => {
+                    const updated = [...current];
+                    updated[updated.length - 1].chapters[i].img = image.img;
+                    return updated;
+                  });
+                }}
+              />
             </Wrapper>
           </div>
         ))}
