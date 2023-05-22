@@ -32,16 +32,7 @@ apiRoute.post(async (req, res) => {
  * @param prompt
  */
 const generateImage = async (prompt: string) => {
-  const name =
-    `${prompt
-      .trim()
-      .replace(/[^\p{L}]/gu, '-')
-      .replace(/-{2,}/g, '-')
-      .toLowerCase()
-      .split('-')
-      .slice(0, 5)
-      .join('-')}-ID-${nanoId.nanoid(8)}`;
-
+  const name = await generateFilename(prompt);
   const aiResponse = await openai.createImage({
     prompt,
     n: 1,
@@ -62,5 +53,27 @@ const generateImage = async (prompt: string) => {
   await saveFile(savePath, image);
   return publicUrl;
 };
+
+const generateFilename = async (prompt: string) => {
+  const completion = await openai.createChatCompletion({
+    model: 'gpt-3.5-turbo',
+    max_tokens: 24,
+    temperature: 1.2,
+    messages: [
+      {
+        role: 'user',
+        content: `Prompt: Generate a filename (slug) (no extension) for an image description. Description: ${prompt}. Filename: `
+      }
+    ]
+  });
+
+  // Todo: better logging
+  console.log('Filename completion.usage: ', completion.data.usage);
+
+  const firstChoice = completion.data.choices[0];
+  const text = firstChoice.message?.content.trim() ?? 'unavailable';
+  console.log('Generated name: ', text);
+  return `${text}-ID-${nanoId.nanoid(8)}.png`;
+}
 
 export default apiRoute;
