@@ -24,6 +24,7 @@ interface BlockEditorProps {
   submitLabel?: string;
   defaultValue?: string;
   maxLength?: number;
+  rows?: number;
   id?: string;
   autoFocus?: boolean;
   className?: string;
@@ -45,6 +46,7 @@ export default function BlockEditor({
   autoFocus = false,
   className = '',
   onCancel,
+  rows = 5,
 }: BlockEditorProps) {
   const {
     handleSubmit,
@@ -115,7 +117,7 @@ export default function BlockEditor({
           <textarea
             autoFocus={autoFocus}
             id={id}
-            rows={8}
+            rows={rows}
             className="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400 focus:outline-none"
             placeholder={placeholder}
             {...register('textBlock', {
