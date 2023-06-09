@@ -27,7 +27,8 @@
     "react-hook-form": "^7.43.9",
     "react-query": "^3.39.3",
     "tailwindcss": "^3.3.2",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "@types/multer": "^1.4.7",
