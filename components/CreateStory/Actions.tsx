@@ -92,7 +92,8 @@ export const Button = ({
   shadow-sm rounded-lg ring-1 disabled:opacity-60 disabled:cursor-not-allowed`;
 
   if (variant === 'primary') {
-    classes += ' text-white bg-blue-700 focus:ring-blue-200 dark:focus:ring-blue-900 hover:enabled:bg-blue-800';
+    classes +=
+      ' text-white bg-blue-700 focus:ring-blue-200 dark:focus:ring-blue-900 hover:enabled:bg-blue-800';
   } else {
     classes += ' text-gray-900 bg-white ring-gray-300 hover:enabled:bg-gray-50';
   }

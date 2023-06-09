@@ -9,7 +9,12 @@ interface EditableChapterTitleProps {
   className?: string;
 }
 
-export default function EditableChapterTitle({ title, onUpdate, className = '', defaultEdit = false }: EditableChapterTitleProps) {
+export default function EditableChapterTitle({
+  title,
+  onUpdate,
+  className = '',
+  defaultEdit = false,
+}: EditableChapterTitleProps) {
   const [editMode, setEditMode] = useState(defaultEdit);
 
   const classes = `pt-4 ${className}`;
