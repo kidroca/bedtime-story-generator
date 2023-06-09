@@ -4,6 +4,7 @@ import multer from 'multer';
 import nextConnect from 'next-connect';
 import * as fs from 'fs';
 import {commonErrorHandler, openai} from './common';
+import logger from '@/utils/logger';
 
 let fileId = 1;
 
@@ -57,7 +58,7 @@ const getTranscription = async (file: { path: string }) => {
     'bg',
   );
 
-  console.log('transcription.data: ', transcription.data);
+  logger.info(`transcription.data: ${transcription.data}`);
 
   return transcription.data.text;
 };

@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
 import nanoId from 'nanoid';
 import { openai, saveFile, commonErrorHandler } from './common';
+import logger from '@/utils/logger';
 
 const apiRoute = nextConnect<NextApiRequest, NextApiResponse>({
   // Handle any other HTTP method
@@ -44,7 +45,7 @@ const generateImage = async (prompt: string) => {
   const publicUrl = `/uploads/img/${name}.png`;
   const savePath = path.join('./public', publicUrl);
 
-  console.log('fetching image from url: ', remoteUrl);
+  logger.info(`fetching image from url: ${remoteUrl}`);
   const response = await fetch(remoteUrl);
 
   const ab = await response.arrayBuffer();
@@ -67,12 +68,11 @@ const generateFilename = async (prompt: string) => {
     ]
   });
 
-  // Todo: better logging
-  console.log('Filename completion.usage: ', completion.data.usage);
+  logger.info(`Filename completion.usage: ${completion.data.usage}`);
 
   const firstChoice = completion.data.choices[0];
   const text = firstChoice.message?.content.trim() ?? 'unavailable';
-  console.log('Generated name: ', text);
+  logger.info(`Generated name: "${text}"`);
   return `${text}-ID-${nanoId.nanoid(8)}.png`;
 }
 
