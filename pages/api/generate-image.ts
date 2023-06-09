@@ -32,7 +32,7 @@ apiRoute.post(async (req, res) => {
  * Returns the URL of the image
  * @param prompt
  */
-const generateImage = async (prompt: string) => {
+export const generateImage = async (prompt: string) => {
   const name = await generateFilename(prompt);
   const aiResponse = await openai.createImage({
     prompt,
