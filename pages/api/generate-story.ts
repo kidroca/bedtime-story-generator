@@ -1,22 +1,25 @@
 import nextConnect from 'next-connect';
-import {NextApiRequest, NextApiResponse} from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { commonErrorHandler, openai, saveStory, StoryFile } from '@/pages/api/common';
 import {
   ChatCompletionRequestMessage,
   ChatCompletionRequestMessageRoleEnum,
   CreateChatCompletionRequest,
-  CreateChatCompletionResponse
+  CreateChatCompletionResponse,
 } from 'openai';
 import { performance } from 'perf_hooks';
 import matter from 'gray-matter';
 import { Story } from '@/utils/stories';
+import logger, { enableFileLogging } from '@/utils/logger';
+
+enableFileLogging();
 
 const MODEL = 'gpt-4';
 const MODEL_MAX_TOKENS = 8000;
 const MAX_TOKENS_RESPONSE = 4000;
 const PRESENCE_PENALTY = 1;
 const FREQUENCY_PENALTY = 1;
-const TEMPERATURE = 0.65;
+const TEMPERATURE = 0.56;
 const TOP_P = 1;
 const ADMIN = { name: 'BB', role: ChatCompletionRequestMessageRoleEnum.User };
 const USER = { name: 'Alex', role: ChatCompletionRequestMessageRoleEnum.User };
@@ -25,7 +28,7 @@ const ASSISTANT = { name: 'Assy', role: ChatCompletionRequestMessageRoleEnum.Ass
 const apiRoute = nextConnect<NextApiRequest, NextApiResponse<Result | ErrorResult>>({
   // Handle any other HTTP method
   onNoMatch(req, res) {
-    res.status(405).json({error: `Method '${req.method}' Not Allowed`});
+    res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
   },
 });
 
@@ -36,11 +39,15 @@ apiRoute.post(async (req, res) => {
     const result = await generateStory({ transcription });
     performance.mark('generateStory-end');
     result.transcription = transcription;
-    result.timing.story = performance.measure('generateStory', 'generateStory-start', 'generateStory-end').duration;
+    result.timing.story = performance.measure(
+      'generateStory',
+      'generateStory-start',
+      'generateStory-end'
+    ).duration;
 
     const id = await saveFile(result);
 
-    return res.json({story: result.story, id});
+    return res.json({ story: result.story, id });
   } catch (error) {
     if ((error as any)?.generatedMessage) {
       return res.status(400).json({
@@ -55,71 +62,68 @@ apiRoute.post(async (req, res) => {
 /**
  * Generates a story based on user transcript.
  */
-const generateStory =
-  async ({ transcription }: { transcription: string }) => {
-
-    const result = createResultObject();
-    result.messages.push({
+const generateStory = async ({ transcription }: { transcription: string }) => {
+  const result = createResultObject();
+  result.messages.push({
     ...USER,
-      content: transcription,
-    });
+    content: transcription,
+  });
 
-    const request: CreateChatCompletionRequest = {
-      model: MODEL,
-      // max_tokens: MAX_TOKENS_RESPONSE,
-      presence_penalty: PRESENCE_PENALTY,
-      frequency_penalty: FREQUENCY_PENALTY,
-      temperature: TEMPERATURE,
-      top_p: TOP_P,
-      messages: result.messages.slice(),
-    };
-
-    result.request = request;
-
-    const completion = await openai.createChatCompletion(request);
-
-    result.response = completion.data;
-    result.usage = completion.data.usage;
-
-    // Todo: better logging
-    console.log('completion.usage: ', completion.data.usage);
-
-    const firstChoice = completion.data.choices[0];
-    console.log('finish_reason: ', firstChoice.finish_reason);
-
-    result.messages.push({
-      ...ASSISTANT,
-      content: firstChoice.message!.content,
-    });
-
-    const content = firstChoice.message?.content || '';
-    result.rawContent = content;
-
-    try {
-      result.story = await createStoryFromMarkDownContent(content);
-      return result;
-    } catch (error) {
-      console.warn('Failed to generate a story');
-      console.error(error);
-
-      await saveStory(result, `.failures/${Date.now()}`);
-
-      throw {
-        originalError: (error as Error).message,
-        generatedMessage: result.messages
-          .filter(m => m.role === 'assistant')
-          .map(m => m.content)
-          .join('\n'),
-      }
-    }
+  const request: CreateChatCompletionRequest = {
+    model: MODEL,
+    // max_tokens: MAX_TOKENS_RESPONSE,
+    presence_penalty: PRESENCE_PENALTY,
+    frequency_penalty: FREQUENCY_PENALTY,
+    temperature: TEMPERATURE,
+    top_p: TOP_P,
+    messages: result.messages.slice(),
   };
 
-const createStoryFromMarkDownContent = async (content: string): Promise<Story> => {
+  result.request = request;
 
+  const completion = await openai.createChatCompletion(request);
+
+  result.response = completion.data;
+  result.usage = completion.data.usage;
+
+  logger.info(`completion.usage: ${completion.data.usage}`);
+
+  const firstChoice = completion.data.choices[0];
+  logger.info(`finish_reason: ${firstChoice.finish_reason}`);
+
+  result.messages.push({
+    ...ASSISTANT,
+    content: firstChoice.message!.content,
+  });
+
+  const content = firstChoice.message?.content || '';
+  result.rawContent = content;
+
+  try {
+    result.story = await createStoryFromMarkDownContent(content);
+    return result;
+  } catch (error) {
+    logger.warn('Failed to generate a story');
+    logger.error(error);
+
+    await saveStory(result, `.failures/${Date.now()}`);
+
+    throw {
+      originalError: (error as Error).message,
+      generatedMessage: result.messages
+        .filter((m) => m.role === 'assistant')
+        .map((m) => m.content)
+        .join('\n'),
+    };
+  }
+};
+
+const createStoryFromMarkDownContent = async (content: string): Promise<Story> => {
   const frontMatter = matter(content);
 
   const regex = /^# (?<title>.*)(?:\r?\n|\r)(?<chaptersContent>[\s\S]*?)(?!\s*\S)/gm;
-  const chapterRegex = /^##\s?(?<chapterTitle>[^#\n]*)\n*(?<chapterContent>[^#]*)\n*(?:###\s?.*\n*(?<illustration>^[^#\n]*))?/gm;
+  const chapterRegex =
+    /^##\s?(?<chapterTitle>[^#\n]*)\n*(?<chapterContent>[^#]*)\n*(?:###\s?.*\n*(?<illustration>^[^#\n]*))?/gm;
 
   const result = regex.exec(frontMatter.content);
   const title = result?.groups?.title;
@@ -152,8 +156,9 @@ const createStoryFromMarkDownContent = async (content: string): Promise<Story> =
 
   if (lastIndex !== chaptersContent.length) {
     const remainingContent = chaptersContent.slice(lastIndex).trim();
-    console.log('Some content exists after the last chapter:\n', remainingContent);
-    console.log('\n Adding it to the last chapter');
+    logger.info(
+      `Some content exists after the last chapter:\n\n${remainingContent}\nAdding it to the last chapter`
+    );
 
     chapters[chapters.length - 1].content += `\n${remainingContent}`;
   }
@@ -165,7 +170,7 @@ const createStoryFromMarkDownContent = async (content: string): Promise<Story> =
     title,
     chapters,
   };
-}
+};
 
 /**
  * Configure the initial parameters for the prompt.
@@ -184,8 +189,8 @@ const createResultObject = (): StoryGeneration => ({
   rawContent: '',
   messages: [
     {
-      "role": "system",
-      "content": shrinkMessage(`
+      role: 'system',
+      content: shrinkMessage(`
         You are a captivating storyteller like the author of "Winnie-the-Pooh".
         In this interactive storytelling game, you will receive a story outline from a user named ${USER.name},
         and your task is to expand it into a imaginative and engaging story with diverse characters.
@@ -228,10 +233,12 @@ const createResultObject = (): StoryGeneration => ({
  * Note: we're not using this function everywhere to preserve the original formatting
  * @param text
  */
-const shrinkMessage = (text: string) => text.trim()
-  .replace(/(^ +)|( +$)/gm, '')
-  .replace(/ {2,}/g, ' ')
-  .replace(/\n{3,}/g, '\n\n');
+const shrinkMessage = (text: string) =>
+  text
+    .trim()
+    .replace(/(^ +)|( +$)/gm, '')
+    .replace(/ {2,}/g, ' ')
+    .replace(/\n{3,}/g, '\n\n');
 
 const saveFile = async (result: StoryGeneration) => {
   const date = new Date().toISOString().substring(0, 16);
@@ -240,10 +247,10 @@ const saveFile = async (result: StoryGeneration) => {
   await saveStory(result, id);
 
   return id;
-}
+};
 
 interface Result {
-  id: string,
+  id: string;
   story: Story;
 }
 
@@ -254,7 +261,7 @@ interface StoryGeneration extends StoryFile {
   response?: CreateChatCompletionResponse;
   messages: ChatCompletionRequestMessage[];
   // Tokens usage
-  usage?: { prompt_tokens: number, completion_tokens: number, total_tokens: number };
+  usage?: { prompt_tokens: number; completion_tokens: number; total_tokens: number };
   rawContent: string;
   transcription?: string;
 }
@@ -264,3 +271,5 @@ interface ErrorResult {
 }
 
 export default apiRoute;
+
+logger.info('Generate Story API route loaded');
