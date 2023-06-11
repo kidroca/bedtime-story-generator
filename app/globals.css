@@ -16,16 +16,3 @@ body {
 html, body {
     height: 100%;
 }
-
-button {
-    color: #10a37f;
-    border: 1px solid #10a37f;
-    border-radius: 4px;
-    padding: 0.5rem;
-    line-height: 1.2;
-}
-
-button:disabled {
-    color: #8e8ea0;
-    border: 1px solid #8e8ea0;
-}

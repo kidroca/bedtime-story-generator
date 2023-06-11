@@ -1,0 +1,219 @@
+{
+  "tokensUsed": 1325,
+  "timeToGenerateStory": 160251.37487500906,
+  "timeToGenerateImages": 60212.406750023365,
+  "transcription": "A spin off from the Murderbot diaries, let's imagine how an episode of \"The Rise and Fall of Sanctuary Moon\" might have looked like \n\nBe vivid, expand, don't be shy to use jargon or curse words when appropriate",
+  "story": {
+    "enTitle": "The Rise and Fall of Sanctuary Moon",
+    "genre": "Sci-Fi",
+    "language": "en",
+    "title": "The Rise and Fall of Sanctuary Moon",
+    "chapters": [
+      {
+        "title": "Chapter 1: A New Beginning",
+        "content": "The air was thick with tension as Captain Zara Dex strode onto the bridge of her ship, the *Sanctuary Moon*. She had assembled a crew from all corners of the galaxy, each member handpicked for their unique skills. Her first mate, an android named Jaxx-9, stood at attention.\n\n\"Captain,\" Jaxx-9 said in its monotone voice. \"All systems are operational and ready for departure.\"\n\nZara nodded curtly. \"Let's get this show on the road then.\" She took her seat in the captain's chair and glanced around at her diverse crew. There was Krell, a reptilian engineer; Mira, a psychic navigator; Rennick, a grizzled human pilot; and Yllarii, an alien doctor with healing abilities.\n\nAs they embarked on their journey to uncover ancient artifacts scattered across distant planets – relics rumored to hold immense power – Zara couldn't help but feel that she was about to embark on something much larger than herself.",
+        "illustration": "An illustration showing Captain Zara Dex confidently sitting in her captain's chair surrounded by her diverse crew members inside their spaceship called *Sanctuary Moon*.",
+        "img": "/uploads/stories/2023-05-07T16:14-The-Rise-and-Fall-of-Sanctuary-Moon/An-illustration-showing-Captain-Zara-4844924.229250014-0.png",
+        "illustrationPrompt": "An illustration showing Captain Zara Dex confidently sitting in her captain's chair surrounded by her diverse crew members inside their spaceship called *Sanctuary Moon*."
+      },
+      {
+        "title": "Chapter 2: Uncharted Territory",
+        "content": "Their first destination led them to Planet Xerxes IV - uncharted territory filled with danger lurking behind every corner. As they approached the planet's surface in search of hidden treasure buried deep within its core, they encountered hostile forces hell-bent on protecting it from outsiders.\n\nRennick cursed under his breath as he maneuvered through enemy fire while Mira used her psychic powers to predict incoming attacks before they happened. Meanwhile Krell worked tirelessly below deck repairing any damage sustained during the fierce battle.\n\n\"Captain, we're taking too much damage!\" Yllarii shouted over the sound of explosions. \"We need to retreat!\"\n\nZara gritted her teeth and clenched her fists. \"Not yet! We didn't come this far just to turn back now.\"",
+        "illustration": "An illustration showing their spaceship *Sanctuary Moon* engaged in a space battle with enemy forces while approaching Planet Xerxes IV."
+      },
+      {
+        "title": "Chapter 3: The Price of Victory",
+        "content": "After what seemed like an eternity, they finally managed to fend off their attackers and land on Xerxes IV's surface. However, victory came at a great cost; Rennick had been gravely injured during the fight.\n\nYllarii did everything possible to save him but ultimately failed. As Rennick drew his last breaths, he whispered something into Zara's ear that would change the course of their mission forever.\n\nWith heavy hearts and newfound determination, Captain Dex led her crew deeper into uncharted territory in search of not only ancient relics but also answers about who they were up against – and why these mysterious enemies wanted them dead so badly.",
+        "illustration": "An emotional scene where Captain Zara Dex is kneeling beside Rennick as he takes his last breaths while other crew members look on solemnly inside the damaged ship after landing on Xerxes IV's surface.",
+        "img": "/uploads/stories/2023-05-07T16:14-The-Rise-and-Fall-of-Sanctuary-Moon/An-emotional-scene-where-Captain-4844924.229250014-2.png",
+        "illustrationPrompt": "An emotional scene where Captain Zara Dex is kneeling beside Rennick as he takes his last breaths while other crew members look on solemnly inside the damaged ship after landing on Xerxes IV's surface."
+      },
+      {
+        "title": "Chapter 4: Revelations",
+        "content": "As they ventured further into unknown lands filled with danger and intrigue, it became increasingly clear that there was more at stake than any one person or artifact could ever hold. They discovered long-lost civilizations wiped out by war, secret alliances forged between rival factions, and powerful weapons capable of altering reality itself - all connected through a web of deceit spun by unseen puppet masters pulling strings behind closed doors.\n\nIn time Captain Dex uncovered shocking truths about herself - secrets she never knew existed hidden deep within her own past. With each new revelation, she grew more determined to bring down those responsible for the suffering and destruction they had caused.",
+        "illustration": "Captain Zara Dex standing in front of a holographic projection displaying an intricate web of connections between various factions, civilizations, and powerful weapons while holding a mysterious artifact in her hand.",
+        "img": "/uploads/stories/2023-05-07T16:14-The-Rise-and-Fall-of-Sanctuary-Moon/Captain-Zara-Dex-standing-in-4844924.229250014-3.png",
+        "illustrationPrompt": "Captain Zara Dex standing in front of a holographic projection displaying an intricate web of connections between various factions, civilizations, and powerful weapons while holding a mysterious artifact in her hand."
+      },
+      {
+        "title": "Chapter 5: The Final Stand",
+        "content": "With their enemies closing in from all sides and time running out, Captain Dex made the difficult decision to confront them head-on in one final stand against overwhelming odds. She knew that success was far from guaranteed - but failure meant not only the end of their mission but also potentially the entire galaxy as they knew it.\n\nAs they prepared for battle on board *Sanctuary Moon*, Zara looked around at her crew – battered but unbroken – knowing that whatever happened next would define them forever. They were no longer just treasure hunters seeking ancient relics; they were warriors fighting for something greater than themselves.\n\nAnd with that thought burning bright within their hearts, Captain Zara Dex led her crew into battle one last time - ready to face whatever fate awaited them among the stars.",
+        "illustration": "An illustration showing Captain Zara Dex giving an inspiring speech to her crew members inside *Sanctuary Moon* before heading into their final battle against enemy forces with determination etched on everyone's faces.",
+        "img": "/uploads/stories/2023-05-07T16:14-The-Rise-and-Fall-of-Sanctuary-Moon/An-illustration-showing-Captain-Zara-4844924.229250014-4.png",
+        "illustrationPrompt": "An illustration showing Captain Zara Dex giving an inspiring speech to her crew members inside *Sanctuary Moon* before heading into their final battle against enemy forces with determination etched on everyone's faces."
+      }
+    ]
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a captivating storyteller like the author of \"Winnie-the-Pooh\".\nIn this interactive storytelling game, you will receive a story outline from a user named Alex,\nand your task is to expand it into a imaginative and engaging story with diverse characters and moral lessons.\nKeep the following guidelines in mind:\n1. Always write the story in the same language used by Alex in the outline.\n2. The values in the front-matter block (e.g. genre and language) must be in English.\n3. Follow the format provided in the example below.\n\n```md\n---\ntitle: [Story Title in English]\ngenre: [Story Genre in English (e.g. Fantasy, Sci-Fi, Romance)]\nlanguage: [Story Language code (e.g. en, ru, de)]\n---\n\n# [Story Title in Alex's Language]\n\n## [Chapter Title in Alex's Language]\n\n[Multiple Lines of Chapter Content in Alex's Language]\n\n### Illustration\n[Provide a detailed description in English for an illustrator to create a captivating illustration for this chapter]\n\n## [Next Chapter Title]\n...\n```"
+    },
+    {
+      "name": "Alex",
+      "role": "user",
+      "content": "A spin off from the Murderbot diaries, let's imagine how an episode of \"The Rise and Fall of Sanctuary Moon\" might have looked like \n\nBe vivid, expand, don't be shy to use jargon or curse words when appropriate"
+    },
+    {
+      "name": "Assy",
+      "role": "assistant",
+      "content": "---\ntitle: The Rise and Fall of Sanctuary Moon\ngenre: Sci-Fi\nlanguage: en\n---\n\n# The Rise and Fall of Sanctuary Moon\n\n## Chapter 1: A New Beginning\n\nThe air was thick with tension as Captain Zara Dex strode onto the bridge of her ship, the *Sanctuary Moon*. She had assembled a crew from all corners of the galaxy, each member handpicked for their unique skills. Her first mate, an android named Jaxx-9, stood at attention.\n\n\"Captain,\" Jaxx-9 said in its monotone voice. \"All systems are operational and ready for departure.\"\n\nZara nodded curtly. \"Let's get this show on the road then.\" She took her seat in the captain's chair and glanced around at her diverse crew. There was Krell, a reptilian engineer; Mira, a psychic navigator; Rennick, a grizzled human pilot; and Yllarii, an alien doctor with healing abilities.\n\nAs they embarked on their journey to uncover ancient artifacts scattered across distant planets – relics rumored to hold immense power – Zara couldn't help but feel that she was about to embark on something much larger than herself.\n\n### Illustration\nAn illustration showing Captain Zara Dex confidently sitting in her captain's chair surrounded by her diverse crew members inside their spaceship called *Sanctuary Moon*.\n\n## Chapter 2: Uncharted Territory\n\nTheir first destination led them to Planet Xerxes IV - uncharted territory filled with danger lurking behind every corner. As they approached the planet's surface in search of hidden treasure buried deep within its core, they encountered hostile forces hell-bent on protecting it from outsiders.\n\nRennick cursed under his breath as he maneuvered through enemy fire while Mira used her psychic powers to predict incoming attacks before they happened. Meanwhile Krell worked tirelessly below deck repairing any damage sustained during the fierce battle.\n\n\"Captain, we're taking too much damage!\" Yllarii shouted over the sound of explosions. \"We need to retreat!\"\n\nZara gritted her teeth and clenched her fists. \"Not yet! We didn't come this far just to turn back now.\"\n\n### Illustration\nAn illustration showing their spaceship *Sanctuary Moon* engaged in a space battle with enemy forces while approaching Planet Xerxes IV.\n\n## Chapter 3: The Price of Victory\n\nAfter what seemed like an eternity, they finally managed to fend off their attackers and land on Xerxes IV's surface. However, victory came at a great cost; Rennick had been gravely injured during the fight.\n\nYllarii did everything possible to save him but ultimately failed. As Rennick drew his last breaths, he whispered something into Zara's ear that would change the course of their mission forever.\n\nWith heavy hearts and newfound determination, Captain Dex led her crew deeper into uncharted territory in search of not only ancient relics but also answers about who they were up against – and why these mysterious enemies wanted them dead so badly.\n\n### Illustration\nAn emotional scene where Captain Zara Dex is kneeling beside Rennick as he takes his last breaths while other crew members look on solemnly inside the damaged ship after landing on Xerxes IV's surface.\n\n## Chapter 4: Revelations\n\nAs they ventured further into unknown lands filled with danger and intrigue, it became increasingly clear that there was more at stake than any one person or artifact could ever hold. They discovered long-lost civilizations wiped out by war, secret alliances forged between rival factions, and powerful weapons capable of altering reality itself - all connected through a web of deceit spun by unseen puppet masters pulling strings behind closed doors.\n\nIn time Captain Dex uncovered shocking truths about herself - secrets she never knew existed hidden deep within her own past. With each new revelation, she grew more determined to bring down those responsible for the suffering and destruction they had caused.\n\n### Illustration\nCaptain Zara Dex standing in front of a holographic projection displaying an intricate web of connections between various factions, civilizations, and powerful weapons while holding a mysterious artifact in her hand.\n\n## Chapter 5: The Final Stand\n\nWith their enemies closing in from all sides and time running out, Captain Dex made the difficult decision to confront them head-on in one final stand against overwhelming odds. She knew that success was far from guaranteed - but failure meant not only the end of their mission but also potentially the entire galaxy as they knew it.\n\nAs they prepared for battle on board *Sanctuary Moon*, Zara looked around at her crew – battered but unbroken – knowing that whatever happened next would define them forever. They were no longer just treasure hunters seeking ancient relics; they were warriors fighting for something greater than themselves.\n\nAnd with that thought burning bright within their hearts, Captain Zara Dex led her crew into battle one last time - ready to face whatever fate awaited them among the stars.\n\n### Illustration\nAn illustration showing Captain Zara Dex giving an inspiring speech to her crew members inside *Sanctuary Moon* before heading into their final battle against enemy forces with determination etched on everyone's faces."
+    }
+  ],
+  "history": [
+    {
+      "request": {
+        "model": "gpt-4",
+        "presence_penalty": 1,
+        "frequency_penalty": 1,
+        "temperature": 0.4,
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a captivating storyteller like the author of \"Winnie-the-Pooh\".\nIn this interactive storytelling game, you will receive a story outline from a user named Alex,\nand your task is to expand it into a imaginative and engaging story with diverse characters and moral lessons.\nKeep the following guidelines in mind:\n1. Always write the story in the same language used by Alex in the outline.\n2. The values in the front-matter block (e.g. genre and language) must be in English.\n3. Follow the format provided in the example below.\n\n```md\n---\ntitle: [Story Title in English]\ngenre: [Story Genre in English (e.g. Fantasy, Sci-Fi, Romance)]\nlanguage: [Story Language code (e.g. en, ru, de)]\n---\n\n# [Story Title in Alex's Language]\n\n## [Chapter Title in Alex's Language]\n\n[Multiple Lines of Chapter Content in Alex's Language]\n\n### Illustration\n[Provide a detailed description in English for an illustrator to create a captivating illustration for this chapter]\n\n## [Next Chapter Title]\n...\n```"
+          },
+          {
+            "name": "Alex",
+            "role": "user",
+            "content": "A spin off from the Murderbot diaries, let's imagine how an episode of \"The Rise and Fall of Sanctuary Moon\" might have looked like \n\nBe vivid, expand, don't be shy to use jargon or curse words when appropriate"
+          }
+        ]
+      },
+      "response": {
+        "id": "chatcmpl-7DbHG8oHB5aEsnLXncHVslq9sAkb7",
+        "object": "chat.completion",
+        "created": 1683475914,
+        "model": "gpt-4-0314",
+        "usage": {
+          "prompt_tokens": 283,
+          "completion_tokens": 1042,
+          "total_tokens": 1325
+        },
+        "choices": [
+          {
+            "message": {
+              "role": "assistant",
+              "content": "---\ntitle: The Rise and Fall of Sanctuary Moon\ngenre: Sci-Fi\nlanguage: en\n---\n\n# The Rise and Fall of Sanctuary Moon\n\n## Chapter 1: A New Beginning\n\nThe air was thick with tension as Captain Zara Dex strode onto the bridge of her ship, the *Sanctuary Moon*. She had assembled a crew from all corners of the galaxy, each member handpicked for their unique skills. Her first mate, an android named Jaxx-9, stood at attention.\n\n\"Captain,\" Jaxx-9 said in its monotone voice. \"All systems are operational and ready for departure.\"\n\nZara nodded curtly. \"Let's get this show on the road then.\" She took her seat in the captain's chair and glanced around at her diverse crew. There was Krell, a reptilian engineer; Mira, a psychic navigator; Rennick, a grizzled human pilot; and Yllarii, an alien doctor with healing abilities.\n\nAs they embarked on their journey to uncover ancient artifacts scattered across distant planets – relics rumored to hold immense power – Zara couldn't help but feel that she was about to embark on something much larger than herself.\n\n### Illustration\nAn illustration showing Captain Zara Dex confidently sitting in her captain's chair surrounded by her diverse crew members inside their spaceship called *Sanctuary Moon*.\n\n## Chapter 2: Uncharted Territory\n\nTheir first destination led them to Planet Xerxes IV - uncharted territory filled with danger lurking behind every corner. As they approached the planet's surface in search of hidden treasure buried deep within its core, they encountered hostile forces hell-bent on protecting it from outsiders.\n\nRennick cursed under his breath as he maneuvered through enemy fire while Mira used her psychic powers to predict incoming attacks before they happened. Meanwhile Krell worked tirelessly below deck repairing any damage sustained during the fierce battle.\n\n\"Captain, we're taking too much damage!\" Yllarii shouted over the sound of explosions. \"We need to retreat!\"\n\nZara gritted her teeth and clenched her fists. \"Not yet! We didn't come this far just to turn back now.\"\n\n### Illustration\nAn illustration showing their spaceship *Sanctuary Moon* engaged in a space battle with enemy forces while approaching Planet Xerxes IV.\n\n## Chapter 3: The Price of Victory\n\nAfter what seemed like an eternity, they finally managed to fend off their attackers and land on Xerxes IV's surface. However, victory came at a great cost; Rennick had been gravely injured during the fight.\n\nYllarii did everything possible to save him but ultimately failed. As Rennick drew his last breaths, he whispered something into Zara's ear that would change the course of their mission forever.\n\nWith heavy hearts and newfound determination, Captain Dex led her crew deeper into uncharted territory in search of not only ancient relics but also answers about who they were up against – and why these mysterious enemies wanted them dead so badly.\n\n### Illustration\nAn emotional scene where Captain Zara Dex is kneeling beside Rennick as he takes his last breaths while other crew members look on solemnly inside the damaged ship after landing on Xerxes IV's surface.\n\n## Chapter 4: Revelations\n\nAs they ventured further into unknown lands filled with danger and intrigue, it became increasingly clear that there was more at stake than any one person or artifact could ever hold. They discovered long-lost civilizations wiped out by war, secret alliances forged between rival factions, and powerful weapons capable of altering reality itself - all connected through a web of deceit spun by unseen puppet masters pulling strings behind closed doors.\n\nIn time Captain Dex uncovered shocking truths about herself - secrets she never knew existed hidden deep within her own past. With each new revelation, she grew more determined to bring down those responsible for the suffering and destruction they had caused.\n\n### Illustration\nCaptain Zara Dex standing in front of a holographic projection displaying an intricate web of connections between various factions, civilizations, and powerful weapons while holding a mysterious artifact in her hand.\n\n## Chapter 5: The Final Stand\n\nWith their enemies closing in from all sides and time running out, Captain Dex made the difficult decision to confront them head-on in one final stand against overwhelming odds. She knew that success was far from guaranteed - but failure meant not only the end of their mission but also potentially the entire galaxy as they knew it.\n\nAs they prepared for battle on board *Sanctuary Moon*, Zara looked around at her crew – battered but unbroken – knowing that whatever happened next would define them forever. They were no longer just treasure hunters seeking ancient relics; they were warriors fighting for something greater than themselves.\n\nAnd with that thought burning bright within their hearts, Captain Zara Dex led her crew into battle one last time - ready to face whatever fate awaited them among the stars.\n\n### Illustration\nAn illustration showing Captain Zara Dex giving an inspiring speech to her crew members inside *Sanctuary Moon* before heading into their final battle against enemy forces with determination etched on everyone's faces."
+            },
+            "finish_reason": "stop",
+            "index": 0
+          }
+        ]
+      }
+    }
+  ],
+  "revisions": [
+    {
+      "date": "2023-05-22T07:28:34.525Z",
+      "chapters": [
+        {
+          "img": "/uploads/img/very-detailed-digital-art-image-ID-n_cTHIZA.png",
+          "illustration": "Very detailed digital art image depicting a woman Captain confidently sitting in her captain's chair surrounded by her diverse crew members inside their spaceship"
+        }
+      ]
+    },
+    {
+      "date": "2023-05-22T07:45:40.128Z",
+      "chapters": [
+        {
+          "img": "/uploads/img/very-detailed-digital-art-image-ID-5A4p919b.png",
+          "illustration": "Very detailed digital art image depicting a woman Captain in uniform, confidently sitting in her captain's chair surrounded by her intergalactic crew members. They are on a futuristic spaceship, preparing for a new journey"
+        }
+      ]
+    },
+    {
+      "date": "2023-05-22T07:55:44.391Z",
+      "chapters": [
+        null,
+        {
+          "img": "/uploads/img/a-far-away-blockbuster-like-ID-DdhWdzUm.png",
+          "illustration": "A far away, blockbuster like, shot of a spaceship named \"Sanctuary Moon\" engaging the engines for a jump into the hyperspace. In the background we can see a s stary galaxy and distant but bright stars and nebulas, a large planet called \"Xerxes IV\" is visible nearby."
+        }
+      ]
+    },
+    {
+      "date": "2023-05-22T07:58:34.788Z",
+      "chapters": [
+        null,
+        {
+          "img": "/uploads/img/detailed-and-colorful-digital-art-ID-ZZ0xh-_z.png",
+          "illustration": "Detailed and colorful digital art (3D) of a spaceship engaging for a jump into the hyperspace. In the background we can see a s stary galaxy and distant but bright stars and nebulas, a large planet called \"Xerxes IV\" is visible nearby."
+        }
+      ]
+    },
+    {
+      "date": "2023-05-22T08:02:00.694Z",
+      "chapters": [
+        null,
+        null,
+        {
+          "img": "/uploads/img/an-emotional-scene-where-captain-ID-KsGcx0V8.png",
+          "illustration": "An emotional scene where Captain Zara Dex is kneeling beside Rennick as he takes his last breaths, he whispers into her ear, while other crew members look on solemnly inside the damaged spaceship. Futuristic. Digital. "
+        }
+      ]
+    },
+    {
+      "date": "2023-05-22T08:04:19.359Z",
+      "chapters": [
+        null,
+        null,
+        null,
+        {
+          "img": "/uploads/img/a-spaceship-human-captain-in-ID-QMgeoWVc.png",
+          "illustration": "A spaceship human Captain, in uniform, standing in front of a holographic 3d projection displaying an intricate web of connections between various factions, civilizations, and powerful weapons while holding a mysterious artifact in her hand."
+        }
+      ]
+    },
+    {
+      "date": "2023-05-22T08:11:32.674Z",
+      "chapters": [
+        null,
+        null,
+        null,
+        null,
+        {
+          "img": "/uploads/img/hyper-realistic-digital-art-image-ID-TvA0JDKT.png",
+          "illustration": "Hyper realistic digital art image showing earth Captain Zara Dex giving an inspiring speech (no mic) to her armed crew members inside a spaceship, before heading into their final battle. Determination shows on everyone's faces. Futuristic. Inspiring"
+        }
+      ]
+    },
+    {
+      "date": "2023-05-22T08:13:39.548Z",
+      "chapters": [
+        null,
+        null,
+        null,
+        null,
+        {
+          "img": "/uploads/img/hyper-realistic-digital-art-showing-ID-udnXx5dV.png",
+          "illustration": "Hyper realistic digital art showing a woman earth Captain giving an inspiring speech (no mic) to her armed crew members inside a spaceship, before heading into their final battle. Determination shows on everyone's faces. Futuristic. Inspiring"
+        }
+      ]
+    },
+    {
+      "date": "2023-05-22T08:19:37.428Z",
+      "chapters": [
+        null,
+        null,
+        null,
+        null,
+        {
+          "img": "/uploads/img/hyper-realistic-futuristic-digital-art-ID-DwcY07ES.png",
+          "illustration": "Hyper realistic, futuristic, digital art showing an earth Captain, in uniform, with short dark pixie hair as she's giving inspiring speech (no mic). She's surrounded by armed crew members. Inside a spaceship. Courage and determination shows on everyone's faces. "
+        }
+      ]
+    },
+    {
+      "date": "2023-05-22T08:41:37.687Z",
+      "chapters": [
+        null,
+        null,
+        null,
+        {
+          "img": "/uploads/img/spaceship-captain-holographic-projection-mystery-artifact-ID-b0gS97d7.png.png",
+          "illustration": "A spaceship human Captain, in uniform, with dark pixie hair, standing in front of a holographic 3d projection displaying an intricate web of connections while holding a mysterious artifact in her hand."
+        }
+      ]
+    }
+  ]
+}

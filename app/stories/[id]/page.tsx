@@ -1,7 +1,9 @@
 import {readdir, readFile} from 'fs/promises';
-import {Story} from '@/pages/api/common';
-import StoryPreview from '@/components/StoryPreview';
+import StoryContent from '@/components/StoryContent';
 import Providers from '@/components/Providers';
+import { PageTitle } from '@/components/AppShell';
+import { mergeStoryRevisions, Story } from '@/utils/stories';
+import { StoryFile } from '@/pages/api/common';
 
 interface StoryParams {
   id: string;
@@ -21,8 +23,8 @@ const convertIdToFolder = (params: StoryParams) => {
 
 async function getStory(folder: string): Promise<Story> {
   const file = await readFile(`./public/uploads/stories/${folder}/story.json`, 'utf-8');
-  const json = JSON.parse(file);
-  return json.story;
+  const json = JSON.parse(file) as StoryFile;
+  return mergeStoryRevisions(json.story, json.revisions);
 }
 
 export default async function StoryPage({params}: { params: StoryParams }) {
@@ -32,7 +34,8 @@ export default async function StoryPage({params}: { params: StoryParams }) {
   return (
     <>
       <Providers>
-        <StoryPreview story={story} id={`${folder}/story.json`} />
+        <PageTitle>{story.title}</PageTitle>
+        <StoryContent story={story} id={folder} />
       </Providers>
     </>
   );
