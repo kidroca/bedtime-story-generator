@@ -1,5 +1,5 @@
 
-import { Story, StoryChapter, StoryRevision } from '@/utils/stories';
+import { Story, StoryRevision } from '@/utils/stories';
 
 export const generateStory = (transcription: string) =>
   makeRequest<{ story: Story; id: string }>('/api/generate-story', {
@@ -38,6 +38,15 @@ export const generateImage = async (prompt: string) => {
   });
 
   return result.url;
+}
+
+export const textTranslate = async ({ text = '', toLanguage = '' }) => {
+  const result: { result: string } = await makeRequest('/api/text-translate', {
+    method: 'POST',
+    body: { text, toLanguage },
+  });
+
+  return result.result;
 }
 
 async function makeRequest<ReturnValue>(url: string, { body, ...options }: RequestInput) {

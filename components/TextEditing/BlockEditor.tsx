@@ -13,9 +13,11 @@ import {
   SpeakerWaveIcon,
   StopIcon,
   TrashIcon,
+  LanguageIcon,
 } from '@heroicons/react/24/solid';
 import { Popover, Transition } from '@headlessui/react';
 import { extractErrorMessage } from '@/utils/errors';
+import { textTranslate } from '@/utils/client';
 
 interface BlockEditorProps {
   onSubmit: (text: string) => Promise<void>;
@@ -65,6 +67,8 @@ export default function BlockEditor({
   const text = watch('textBlock');
   const submitDisabled = !isValid || isSubmitting || !isDirty;
 
+  const translate = useMutation(textTranslate);
+
   const submit = handleSubmit((data) =>
     onSubmit(data.textBlock).catch((error: any) => {
       setError('root.serverError', { message: extractErrorMessage(error) });
@@ -93,6 +97,17 @@ export default function BlockEditor({
               <DictationControls
                 applyTranscription={(transcription) => setValue('textBlock', transcription)}
                 current={text}
+              />
+              <EditorIconButton
+                label="Translate"
+                icon={LanguageIcon}
+                iconClassName={translate.isLoading ? 'animate-pulse' : undefined}
+                disabled={!text || translate.isLoading}
+                onClick={() => {
+                  const toLanguage =
+                    window.prompt('Enter language code to translate to', 'en') || 'en';
+                  translate.mutate({ text, toLanguage });
+                }}
               />
             </div>
           </div>
@@ -142,6 +157,24 @@ export default function BlockEditor({
           </Button>
         )}
       </section>
+
+      {Boolean(translate.data) && (
+        <section className="flex flex-col items-start gap-2 mt-2">
+          <h3 className="text-gray-800">Translation</h3>
+          <p className="w-full p-2 text-sm text-gray-700 bg-white dark:bg-gray-700 dark:text-white rounded">
+            {translate.data}
+          </p>
+
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setValue('textBlock', translate.data!);
+              translate.reset();
+            }}>
+            Use translation
+          </Button>
+        </section>
+      )}
 
       {Boolean(errors.root?.serverError) && (
         <section className="flex flex-col gap-2 mt-2">

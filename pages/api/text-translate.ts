@@ -11,9 +11,9 @@ import logger, { enableFileLogging } from '@/utils/logger';
 enableFileLogging();
 
 const MODEL = 'gpt-3.5-turbo';
-const PRESENCE_PENALTY = 1;
+const PRESENCE_PENALTY = 2;
 const FREQUENCY_PENALTY = 1;
-const TEMPERATURE = 0.56;
+const TEMPERATURE = 0.15;
 const TOP_P = 1;
 
 const apiRoute = nextConnect<NextApiRequest, NextApiResponse>({
