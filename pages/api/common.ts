@@ -51,6 +51,23 @@ export const saveFile = async (filePath: string, content: Writable, options?: an
   return fs.writeFile(filePath, content, { encoding: 'binary', ...options });
 };
 
+/**
+ * Remove extra spaces
+ * Blank spaces at the start or end of each line are removed
+ * Multiple spaces excluding line breaks are replaced by a single space
+ * Multiple line breaks are replaced by a single line break
+ * Allow a blank line between paragraphs
+ *
+ * Note: we're not using this function everywhere to preserve the original formatting
+ * @param text
+ */
+export const shrinkMessage = (text: string) =>
+  text
+    .trim()
+    .replace(/(^ +)|( +$)/gm, '')
+    .replace(/ {2,}/g, ' ')
+    .replace(/\n{3,}/g, '\n\n');
+
 const STORIES_FS_PATH = './public/uploads/stories';
 
 export interface StoryFile {

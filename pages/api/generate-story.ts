@@ -1,6 +1,12 @@
 import nextConnect from 'next-connect';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { commonErrorHandler, openai, saveStory, StoryFile } from '@/pages/api/common';
+import {
+  commonErrorHandler,
+  openai,
+  saveStory,
+  shrinkMessage,
+  StoryFile,
+} from '@/pages/api/common';
 import {
   ChatCompletionRequestMessage,
   ChatCompletionRequestMessageRoleEnum,
@@ -224,23 +230,6 @@ const createResultObject = (): StoryGeneration => ({
   ],
   revisions: [],
 });
-
-/**
- * Remove extra spaces
- * Blank spaces at the start or end of each line are removed
- * Multiple spaces excluding line breaks are replaced by a single space
- * Multiple line breaks are replaced by a single line break
- * Allow a blank line between paragraphs
- *
- * Note: we're not using this function everywhere to preserve the original formatting
- * @param text
- */
-const shrinkMessage = (text: string) =>
-  text
-    .trim()
-    .replace(/(^ +)|( +$)/gm, '')
-    .replace(/ {2,}/g, ' ')
-    .replace(/\n{3,}/g, '\n\n');
 
 const saveFile = async (result: StoryGeneration) => {
   const date = new Date().toISOString().substring(0, 16);
