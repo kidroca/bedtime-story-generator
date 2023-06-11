@@ -39,11 +39,13 @@ apiRoute.post(async (req, res) => {
     const result = await generateStory({ transcription });
     performance.mark('generateStory-end');
     result.transcription = transcription;
-    result.timing.story = performance.measure(
+    const measure = performance.measure(
       'generateStory',
       'generateStory-start',
       'generateStory-end'
-    ).duration;
+    );
+    result.timing.story = measure.duration;
+    logger.info(`generateStory took: ${measure.duration}ms`);
 
     const id = await saveFile(result);
 
