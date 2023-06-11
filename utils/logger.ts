@@ -2,7 +2,7 @@
  * @fileOverview
  * Logging utilities
  */
-import winston from 'winston';
+import winston, { format } from 'winston';
 
 const scriptName = process.argv[1].replace(/\.[^/.]+$/, '');
 
@@ -10,7 +10,19 @@ export const logger = winston.createLogger({
   level: 'info',
   transports: [
     new winston.transports.Console({
-      format: winston.format.combine(winston.format.colorize()),
+      format: format.combine(
+        format.colorize(),
+        format.timestamp({
+          format: 'YYYY-MM-DD HH:mm:ss'
+        }),
+        format.printf((info) => {
+          const { timestamp, level, message, ...args } = info;
+
+          return `${timestamp} ${level}: ${message} ${
+            Object.keys(args).length ? JSON.stringify(args, null, 2) : ''
+          }`;
+        })
+      ),
     }),
   ],
 });

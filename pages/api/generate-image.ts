@@ -68,7 +68,7 @@ const generateFilename = async (prompt: string) => {
     ]
   });
 
-  logger.info(`Filename completion.usage: ${completion.data.usage}`);
+  logger.info('Filename completion.usage', completion.data.usage);
 
   const firstChoice = completion.data.choices[0];
   const text = firstChoice.message?.content.trim() ?? 'unavailable';

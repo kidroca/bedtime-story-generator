@@ -58,7 +58,7 @@ const getTranscription = async (file: { path: string }) => {
     'bg',
   );
 
-  logger.info(`transcription.data: ${transcription.data}`);
+  logger.info('transcription.data: ', transcription.data);
 
   return transcription.data.text;
 };

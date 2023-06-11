@@ -76,10 +76,10 @@ const translateText = async ({ text, toLanguage }: TranslationInput) => {
     ],
   });
 
-  logger.info(`translate completion.usage: ${completion.data.usage}`);
+  logger.info('Translate completion.usage', completion.data.usage);
 
   const firstChoice = completion.data.choices[0];
-  logger.info(`translate finish_reason: ${firstChoice.finish_reason}`);
+  logger.info(`Translate finish_reason: ${firstChoice.finish_reason}`);
 
   return firstChoice.message?.content || '';
 };

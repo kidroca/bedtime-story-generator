@@ -94,7 +94,7 @@ const generateStory = async ({ transcription }: { transcription: string }) => {
   result.response = completion.data;
   result.usage = completion.data.usage;
 
-  logger.info(`completion.usage: ${completion.data.usage}`);
+  logger.info('Story completion.usage', completion.data.usage);
 
   const firstChoice = completion.data.choices[0];
   logger.info(`finish_reason: ${firstChoice.finish_reason}`);
